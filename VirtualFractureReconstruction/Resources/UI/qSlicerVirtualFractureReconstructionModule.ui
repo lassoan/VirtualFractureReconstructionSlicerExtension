@@ -1,0 +1,2687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>qSlicerVirtualFractureReconstructionModule</class>
+ <widget class="qSlicerWidget" name="qSlicerVirtualFractureReconstructionModule">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>503</width>
+    <height>1214</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>1500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>488</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Fracture reconstruction</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="0">
+       <widget class="QTabWidget" name="ReconstructionTab">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="ReferenceDataTab">
+         <attribute name="title">
+          <string>Input data</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QTextBrowser" name="InputDescription">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>110</height>
+             </size>
+            </property>
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>113</red>
+                  <green>113</green>
+                  <blue>113</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>113</red>
+                  <green>113</green>
+                  <blue>113</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>9</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Choose preset:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="PresetBox"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="ReferenceImageLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Reference image:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="qMRMLNodeComboBox" name="ReferenceImageComboBox"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="ReferenceLabelmapLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Reference labelmap:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="qMRMLNodeComboBox" name="ReferenceLabelmapComboBox"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="FragmentImageLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Fragment image:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="qMRMLNodeComboBox" name="FragmentImageComboBox"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="DataLabelRef">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Fragment labelmaps:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="qMRMLTreeView" name="InputDataTree">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>160</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+            <property name="nodeTypes">
+             <stringlist>
+              <string>vtkMRMLTransformableNode</string>
+             </stringlist>
+            </property>
+            <property name="fitSizeToVisibleIndexes">
+             <bool>true</bool>
+            </property>
+            <property name="showRootNode">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="AddFragmentButton">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Initialize reconstruction</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="InputDataTab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <attribute name="title">
+          <string>Fragment models</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="5" column="0">
+           <widget class="qMRMLTreeView" name="FragmentModelsTree">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>160</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+            <property name="sceneModelType">
+             <string>ModelHierarchy</string>
+            </property>
+            <property name="nodeTypes">
+             <stringlist>
+              <string>vtkMRMLModelNode</string>
+              <string>vtkMRMLModelHierarchyNode</string>
+             </stringlist>
+            </property>
+            <property name="fitSizeToVisibleIndexes">
+             <bool>true</bool>
+            </property>
+            <property name="showScene">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QPushButton" name="StartButton1">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="acceptDrops">
+             <bool>false</bool>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Start fragment alignment</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="FragmentLabelmapsLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Fragment models:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QPushButton" name="BackToTab1Button">
+            <property name="text">
+             <string>Back to previous step</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QTextBrowser" name="Step1Description">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="RegistrationStep1Tab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <attribute name="title">
+          <string>Result Step 1</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QTextBrowser" name="Step2Description">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>177</green>
+                  <blue>177</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Midlight">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>147</red>
+                  <green>147</green>
+                  <blue>147</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Dark">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Mid">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>78</red>
+                  <green>78</green>
+                  <blue>78</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="BrightText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>59</red>
+                  <green>59</green>
+                  <blue>59</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Shadow">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="AlternateBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>118</red>
+                  <green>118</green>
+                  <blue>118</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipBase">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>220</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="ToolTipText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="AlignmentToggleButton">
+            <property name="text">
+             <string>Toggle aligned &lt;--&gt; unaligned</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="ResultModels1Label">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Aligned fragments:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="qMRMLTreeView" name="ResultModelsTree1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>160</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::StrongFocus</enum>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+            <property name="nodeTypes">
+             <stringlist>
+              <string>vtkMRMLModelNode</string>
+              <string>vtkMRMLModelHierarchyNode</string>
+             </stringlist>
+            </property>
+            <property name="fitSizeToVisibleIndexes">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="AcceptResultButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>13500</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="text">
+             <string>Accept registration</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="StartButton2">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="text">
+             <string>Start fine tuning</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="BackToTab2Button">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>13500</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Back to previous step</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="RegistrationStep2Tab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <attribute name="title">
+          <string>Result Step 2</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QRadioButton" name="AlignmentToggleButton2">
+            <property name="text">
+             <string>Toggle aligned &lt;--&gt; unaligned</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="ResultLabelmaps2Label">
+            <property name="text">
+             <string>Registered fragments after step 2:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="qMRMLTreeView" name="ResultModelsTree2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>160</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+            <property name="nodeTypes">
+             <stringlist>
+              <string>vtkMRMLModelNode</string>
+              <string>vtkMRMLModelHierarchyNode</string>
+             </stringlist>
+            </property>
+            <property name="fitSizeToVisibleIndexes">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="AcceptResultButton2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::StrongFocus</enum>
+            </property>
+            <property name="text">
+             <string>Accept registration</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="BackToTab3Button">
+            <property name="text">
+             <string>Back to previous step</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="ParameterSettings">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Parameter settings</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <property name="collapsedHeight">
+      <number>0</number>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="0">
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>TransformSliders</string>
+         </attribute>
+         <widget class="qSlicerWidget" name="TransformTab">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>490</width>
+            <height>401</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="ctkCollapsibleButton" name="TransformSliders">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>340</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>TransformSliders</string>
+             </property>
+             <property name="collapsed">
+              <bool>false</bool>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <widget class="qMRMLTransformSliders" name="MRMLRotationSliders">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="Title">
+                 <string>Rotation</string>
+                </property>
+                <property name="TypeOfTransform">
+                 <enum>qMRMLTransformSliders::ROTATION</enum>
+                </property>
+                <property name="ISLabel">
+                 <string notr="true">IS</string>
+                </property>
+                <property name="SingleStep">
+                 <double>0.500000000000000</double>
+                </property>
+                <property name="minimum">
+                 <double>-180.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>180.000000000000000</double>
+                </property>
+                <property name="minMaxVisible">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="qMRMLTransformSliders" name="MRMLTranslationSliders">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="Title">
+                 <string>Translation</string>
+                </property>
+                <property name="SingleStep">
+                 <double>0.100000000000000</double>
+                </property>
+                <property name="minimum">
+                 <double>-500.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>500.000000000000000</double>
+                </property>
+                <property name="minMaxVisible">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ResetManualTransformButton">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Reset manual transform</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="ParametersStep1">
+         <attribute name="title">
+          <string>Parameter settings for step 1</string>
+         </attribute>
+         <widget class="qSlicerWidget" name="ParameterSettings1Tab">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>461</width>
+            <height>219</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <strikeout>false</strikeout>
+           </font>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="1" column="4">
+            <widget class="QCheckBox" name="UseCurvatureCB">
+             <property name="toolTip">
+              <string>Use curvature to select points for registration </string>
+             </property>
+             <property name="text">
+              <string>Curvature</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QDoubleSpinBox" name="SigmaFactor">
+             <property name="toolTip">
+              <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
+             </property>
+             <property name="minimum">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.001000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.990000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="PointPerctEMLabel">
+             <property name="toolTip">
+              <string>Percentage of points used during EM-ICP registration</string>
+             </property>
+             <property name="text">
+              <string>Point perct. :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QDoubleSpinBox" name="HistogramBins">
+             <property name="toolTip">
+              <string>Specifies the number of histogram bins that shall be used for the calculation of the Haralick texture features</string>
+             </property>
+             <property name="minimum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>5000.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>15.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="RegistrationMethodLabel">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Registration method:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3" colspan="2">
+            <widget class="QCheckBox" name="UsePrecompReferenceCB">
+             <property name="toolTip">
+              <string>Use ICP algorithm for registration (faster than EM-ICP,  but less accurate)</string>
+             </property>
+             <property name="text">
+              <string>Use pre-comp reference</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="SigmaInfLabel">
+             <property name="toolTip">
+              <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
+             </property>
+             <property name="text">
+              <string>Sigma- inf. value:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QDoubleSpinBox" name="EMPointPercentage">
+             <property name="toolTip">
+              <string>Percentage of points used during EM-ICP registration</string>
+             </property>
+             <property name="maximum">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>25.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="UseCoordinatesCB">
+             <property name="maximumSize">
+              <size>
+               <width>1100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Use coordinates to select points for registration (should not be checked when no manual pre alignment was performed)</string>
+             </property>
+             <property name="text">
+              <string>Coordinates</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="UseNormalsCB">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Use normals to select points for registration </string>
+             </property>
+             <property name="text">
+              <string> Normals</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2" colspan="2">
+            <widget class="QLabel" name="CylinderRadiusLabel">
+             <property name="toolTip">
+              <string>Determines radius of cylindric VOID that will be used to compute texture features for surface points</string>
+             </property>
+             <property name="text">
+              <string>Cylinder radius:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2" colspan="2">
+            <widget class="QLabel" name="HistogramBinsLabel">
+             <property name="toolTip">
+              <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
+             </property>
+             <property name="text">
+              <string>Histogram bins:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="UseEMICP">
+             <property name="toolTip">
+              <string>Use EM-ICP algorithm for registration (slower than ICP, but more accurate)</string>
+             </property>
+             <property name="text">
+              <string>Use EM-ICP                                                        </string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="4">
+            <widget class="QDoubleSpinBox" name="CylinderAxisLength">
+             <property name="toolTip">
+              <string>Determines length of the cylinric VOI that will be used to compute texture features for each surface point</string>
+             </property>
+             <property name="minimum">
+              <double>2.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>4.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2" colspan="3">
+            <widget class="QLabel" name="TextureParametersLabel">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Paramters for texture features:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="PointDecimationLabel">
+             <property name="toolTip">
+              <string>Portion of surface points used for feature calculation </string>
+             </property>
+             <property name="text">
+              <string>Point decimation factor: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="EMICPParametersLabel">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Parameters for EMICP:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QDoubleSpinBox" name="SigmaInf">
+             <property name="toolTip">
+              <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="FeaturesLabel">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Before aligning frgment to reference bone, candidate points on the reference bone that will be used for the registration will be selected. Here you can choose what features will be used for this selection</string>
+             </property>
+             <property name="text">
+              <string>Features to use for point selection:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="4">
+            <widget class="QDoubleSpinBox" name="CylinderRadius">
+             <property name="toolTip">
+              <string>Determines radius of cylindric VOID that will be used to compute texture features for surface points</string>
+             </property>
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>2.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
+            <widget class="QCheckBox" name="UseICPCB">
+             <property name="toolTip">
+              <string>Use ICP algorithm for registration (faster than EM-ICP,  but less accurate)</string>
+             </property>
+             <property name="text">
+              <string>Use ICP (less accurate)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QDoubleSpinBox" name="PointDecimation">
+             <property name="toolTip">
+              <string>Portion of surface points used for feature calculation </string>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.050000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.400000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="SigmaFactoLabel">
+             <property name="toolTip">
+              <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
+             </property>
+             <property name="text">
+              <string>Sigma factor:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2" colspan="2">
+            <widget class="QLabel" name="CylinderAxisLengthLabel">
+             <property name="toolTip">
+              <string>Determines length of the cylinric VOI that will be used to compute texture features for each surface point</string>
+             </property>
+             <property name="text">
+              <string>Cylinder length:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2" colspan="2">
+            <widget class="QCheckBox" name="UseTextureCB">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Use texture features to select points for registration </string>
+             </property>
+             <property name="text">
+              <string>Texture           </string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="ParametersFineTuning">
+         <attribute name="title">
+          <string>Parameters for fine tuning step</string>
+         </attribute>
+         <widget class="qSlicerWidget" name="SlicerWidgetFT">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>491</width>
+            <height>191</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="5" column="0" rowspan="2">
+            <widget class="QLabel" name="SigmaIniLabel_FT">
+             <property name="toolTip">
+              <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
+             </property>
+             <property name="text">
+              <string>Initial sigma value:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="CrestPointSelectionParaLabelFT">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Settings for EM-ICP during fine tuning</string>
+             </property>
+             <property name="text">
+              <string>Parameters for crest point selection:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QLabel" name="EMICPFTLabel">
+             <property name="text">
+              <string>Max. point distance between fracture surfaces:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="SigmaFactoLabel_FT">
+             <property name="toolTip">
+              <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
+             </property>
+             <property name="text">
+              <string>Sigma factor:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" rowspan="2">
+            <widget class="QDoubleSpinBox" name="SigmaIni_FT">
+             <property name="toolTip">
+              <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QDoubleSpinBox" name="SigmaInf_FT">
+             <property name="toolTip">
+              <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QDoubleSpinBox" name="CrestCurvatureFT">
+             <property name="toolTip">
+              <string>Curvature values that dtermines if point is likely to be on the fracture crest. Pointswith higher value are likely to be not part of the fracture crest</string>
+             </property>
+             <property name="minimum">
+              <double>-0.500000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>-0.100000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QLabel" name="CrestCurvatureFTLabel">
+             <property name="toolTip">
+              <string>Curvature values that dtermines if point is likely to be on the fracture crest. Pointswith higher value are likely to be not part of the fracture crest</string>
+             </property>
+             <property name="text">
+              <string>Max. mean curvature for crest points: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox">
+             <property name="toolTip">
+              <string>Determines the maximum distance between the fracture srufaces of two pre-aligned fragements. Points with larger distance will not be used for fine tuning registration</string>
+             </property>
+             <property name="minimum">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>20.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="value">
+              <double>5.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QDoubleSpinBox" name="SigmaFactor_FT">
+             <property name="minimum">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.001000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.990000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="SigmaInfLabel_FT">
+             <property name="toolTip">
+              <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
+             </property>
+             <property name="text">
+              <string>Sigma- inf. value:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="EMICPParametersLabelFT">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Settings for EM-ICP during fine tuning</string>
+             </property>
+             <property name="text">
+              <string>EM-ICP settings:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLTransformSliders</class>
+   <extends>QWidget</extends>
+   <header>qMRMLTransformSliders.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLTreeView</class>
+   <extends>QTreeView</extends>
+   <header>qMRMLTreeView.h</header>
+   <slots>
+    <slot>setSceneModel(int)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>qSlicerWidget</class>
+   <extends>QWidget</extends>
+   <header>qSlicerWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleButton</class>
+   <extends>QWidget</extends>
+   <header>ctkCollapsibleButton.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>FragmentModelsTree</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ResultModelsTree1</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ReferenceImageComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ReferenceLabelmapComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>158</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>FragmentImageComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>208</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ResultModelsTree2</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerVirtualFractureReconstructionModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>InputDataTree</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>497</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

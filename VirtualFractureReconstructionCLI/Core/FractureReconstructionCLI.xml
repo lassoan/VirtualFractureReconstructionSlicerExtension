@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<executable>
+  <category>Work in Progress</category>
+  <index>1</index>
+  <title>Fracture reconstruction SL </title>
+  <description><![CDATA[TODO: provide description]]></description>
+  <version>0.1.0.</version>
+  <documentation-url>TODO: provide docu URL</documentation-url>
+  <license/>
+  <contributor>Karl D. Fritscher</contributor>
+  <acknowledgements><![CDATA[funded by Austrian Science Fund]]></acknowledgements>
+
+  <parameters>
+    <label>I/O section</label>
+    <description><![CDATA[Input/output parameters]]></description>
+    <image>
+      <name>referenceLabelMap</name>
+      <longflag>--referenceLabelMap</longflag>
+      <label>Reference labelmap</label>
+      <channel>input</channel>
+      <description><![CDATA[Reference labelmap]]></description>
+    </image>
+    <image>
+      <name>referenceImage</name>
+      <longflag>--referenceImage</longflag>
+      <label>Reference image</label>
+      <channel>input</channel>
+      <description><![CDATA[Reference greyscale image]]></description>
+    </image>
+    <image>
+      <name>fragmentLabelMap</name>
+      <longflag>--fragmentLabelMap</longflag>
+      <label>Fragment labelmap</label>
+      <channel>input</channel>
+      <description><![CDATA[Input fragment labelmap]]></description>
+    </image>
+    <image>
+      <name>fragmentImage</name>
+      <longflag>--fragmentImage</longflag>
+      <label>Fragment greyscale image</label>
+      <channel>input</channel>
+      <description><![CDATA[Input fragment image]]></description>
+    </image>
+    <image>
+      <name>outputFragment</name>
+      <longflag>--outputFragment</longflag>
+      <label>Aligned Output Fragment</label>
+      <channel>output</channel>
+      <description><![CDATA[Aligned fragment]]></description>
+    </image>
+
+    <string-vector>
+      <name>fragmentModelFineTuning</name>
+      <longflag>--fragmentModelFineTuning</longflag>
+      <label>Fragment model for fine tuning</label>
+      <channel>input</channel>
+      <description>Set fragment models for fine tuning</description>
+    </string-vector>
+    </parameters>
+    <parameters>
+    <label>Advanced I/O paramters</label>
+    <boolean>
+        <name>UseReference</name>
+        <longflag>--useReference</longflag>
+        <label>Use predefined reference polydata file (optional)</label>
+        <description>If you have a predefined reference polydata file containing metadata like curvature and texture information computation will be faster</description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+
+    <string>
+        <name>TempFilePath</name>
+        <longflag>--slicerTempPath</longflag>
+        <label>Path to folder in which temp files are stored </label>
+        <description>You can provide a path in which some advanced parameters can be predefined</description>
+    </string>
+
+
+    <string>
+        <name>SettingsFileName</name>
+        <longflag>--settingsFileName</longflag>
+        <label>Name of file containing parameter settings </label>
+        <description>You can provide a file in which some advanced parameters can be predefined</description>
+        <default></default>
+    </string>
+
+    <string>
+        <name>InitialTransformName</name>
+        <longflag>--initialTransformName</longflag>
+        <label>Predefined Transform (optional):</label>
+        <description>You can use a predefined transform to used initially to pre-align a fragment to the reference label </description>
+        <default></default>
+    </string>
+
+
+    <string>
+        <name>OutputDirectory</name>
+        <longflag>--OutputDirectory</longflag>
+        <label>Predefined output directory for debugging purposes (optional):</label>
+        <description>Here you can specify a directory where output files for debugging purposes will be stored</description>
+        <default></default>
+    </string>
+
+    <string>
+        <name>outputSuffix</name>
+        <longflag>--outputSuffix</longflag>
+        <label>Output filename suffix (optional):</label>
+        <description>Here you can specify a special suffix for output files that are stored for debugging purposes will be stored </description>
+        <default>suff</default>
+    </string>
+
+    <transform fileExtensions=".txt" reference="outputFragment">
+      <name>inputTransform</name>
+      <longflag>--inputTransform</longflag>
+      <description>Optional input transform(e.g. from manual initialization)></description>
+      <label>Input transform</label>
+      <channel>input</channel>
+    </transform>
+    <string-vector>
+      <name>fineTuningInputTransforms</name>
+      <longflag>--fineTuningInputTransforms</longflag>
+      <label>Input transforms for fine tuning step</label>
+      <description>Input transforms for fine tuning step</description>
+    </string-vector>
+
+    <transform fileExtensions=".txt" reference="outputFragment">
+      <name>outputTransform</name>
+      <longflag>--outputTransform</longflag>
+      <description><![CDATA[Transform that aligns fragment to reference]]></description>
+      <label>Output transform</label>
+      <channel>output</channel>
+    </transform>
+    <string-vector>
+      <name>fineTuningOutputTransforms</name>
+      <longflag>--fineTuningOutputTransforms</longflag>
+      <label>Transform outputs after fine tuning step</label>
+      <description>Transform outputs after fine tuning step</description>
+    </string-vector>
+    <geometry type="model">
+        <name>referenceModelInput</name>
+        <longflag>--referenceModelInput</longflag>
+        <label>Input reference model (optional)</label>
+        <description>Reference model including calculated attributes(curvature, normals, texture features). Can be used for further runs, so that features do not have to be calculated from scratch</description>
+        <channel>input</channel>
+    </geometry>
+
+    <geometry type="model">
+        <name>candidateModelInput</name>
+        <longflag>--candidateModelInput</longflag>
+        <label>Input candidate model(optional)</label>
+        <description>Optional candidate model including calculated attributes(curvature, normals, texture features). Can be used for further runs, so that features do not have to be calculated from scratch</description>
+        <channel>input</channel>
+    </geometry>
+    <geometry type="model">
+        <name>referenceModelOutput</name>
+        <longflag>--referenceModelOutput</longflag>
+        <label>Output reference model</label>
+        <description>Reference model including calculated attributes(curvature, normals, texture features). Can be used for further runs, so that features do not have to be calculated from scratch</description>
+        <channel>output</channel>
+    </geometry>
+    <geometry type="model">
+        <name>fragmentModelOutput</name>
+        <longflag>--fragmentModelOutput</longflag>
+        <label>Aligned model</label>
+        <description>Aligned model including calculated attributes(curvature, normals, texture features used for analysis and fine tuning step</description>
+        <channel>output</channel>
+    </geometry>
+  </parameters>
+
+  <parameters>
+  <label>Advanced registration parameters</label>
+    <boolean>
+        <name>useCoordinates</name>
+        <longflag>--useCoordinates</longflag>
+        <label>Use coordinates for alignment</label>
+        <description>Use coordinates to select points for registration (should not be checked when no manual pre alignment was performed)</description>
+        <default>yes</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+    <boolean>
+        <name>useNormals</name>
+        <longflag>--useNormals</longflag>
+        <label>Use surface normals for alignment</label>
+        <description>Use surface normals to select points for registration</description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+    <boolean>
+        <name>useCurvature</name>
+        <longflag>--useCurvature</longflag>
+        <label>Use mean curvature for alignment</label>
+        <description>Use mean curvature to select points for registration</description>
+        <default>yes</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+    <boolean>
+        <name>useTexture</name>
+        <longflag>--useTexture</longflag>
+        <label>Use texture features for alignment</label>
+        <description>Use coordinates to select points for registration </description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+    <boolean>
+        <name>fineTuning</name>
+        <longflag>--fineTuning</longflag>
+        <label>Perform fine tuning only</label>
+        <description>If set to true only fine tuning of the fragments using only fracture surfaces will be performed</description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+    <float>
+        <name>decimationFactor</name>
+        <longflag>--decimationFactor</longflag>
+        <label>Surface point decimation factor</label>
+        <description>Amount of decimation for surface points used for feature calculation and registration (e.g. 0.4 means decimation to 40%)</description>
+        <default>0.4</default>
+     </float>
+
+    <float>
+        <name>histogramBins</name>
+        <longflag>--histogramBins</longflag>
+        <label>Number of histogram bins</label>
+        <description>Specifies the number of histogram bins that shall be used for the calculation of the Haralick texture features </description>
+        <default>150</default>
+        <minimum>5</minimum>
+        <maximum>5000</maximum>
+     </float>
+
+    <float>
+        <name>cylinderLength</name>
+        <longflag>--cylinderLength</longflag>
+        <label>Length of cylindric VOI used for texture calculation</label>
+        <description>Determines length of the cylinric VOI that will be used to compute texture features for each surface point </description>
+        <default>4</default>
+        <minimum>2</minimum>
+        <maximum>20</maximum>
+     </float>
+
+    <float>
+        <name>cylinderRadius</name>
+        <longflag>--cylinderRadius</longflag>
+        <label>Radius of cylindric VOI used for texture calculation</label>
+        <description>Determines length of the cylinric VOI that will be used to compute texture features for each surface point </description>
+        <default>4</default>
+        <minimum>2</minimum>
+        <maximum>20</maximum>
+     </float>
+     </parameters>
+</executable>
