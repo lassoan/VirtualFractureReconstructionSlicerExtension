@@ -2,37 +2,6 @@
 
 namespace ibia {
 
-/**
- * \brief Implementation of static "NEW" method from itk to be able to usa IBIA filter pipeline
- * \author KD Fritscher
- **/
-/*
-template<class LabelType, class InputImageType>
-typename CorrespondingPointsIdentifier<LabelType, InputImageType>::Pointer CorrespondingPointsIdentifier<
-LabelType, InputImageType>::New(bool preRegistration,
-                                unsigned int adjStart, unsigned int adjacencyLevels,
-                                unsigned int initialVertIndex, unsigned int smoothingIterations,
-                                float maxDist, unsigned int stepSize, bool refMode,bool greyscaleStatistics, bool calculateCorrelation, bool performGreyscaleReg,
-                                bool extICP, bool calcDiffVectors) {
-    Pointer smartPtr = CorrespondingPointsIdentifier::New();
-    smartPtr->m_AdjacencyLevels = adjacencyLevels;
-    smartPtr->m_SmoothingIterations = smoothingIterations;
-    smartPtr->m_VertIndex = initialVertIndex;
-    smartPtr->m_MaxDist = maxDist;
-    smartPtr->m_PreRegistration = preRegistration;
-    smartPtr->m_StepSize = stepSize;
-    smartPtr->m_AdjacencyLevelsStart = adjStart;
-    smartPtr->m_ReferenceMode = refMode;
-    smartPtr->m_MaxPointDistance = 10.0;
-    smartPtr->m_UseGreyscaleStatistics=greyscaleStatistics;
-    smartPtr->m_CalculateCorrelation=calculateCorrelation;
-    smartPtr->m_PerformGreyscaleRegistration=performGreyscaleReg;
-    smartPtr->m_FinalMetricValue=0;
-    smartPtr->m_UseExtendedICP=extICP;
-    smartPtr->m_CalculateDifferenceVectors=calcDiffVectors;
-    smartPtr->m_RefOutFinished=false;
-    return smartPtr;
-}*/
 
 template<class LabelType, class InputImageType>
 CorrespondingPointsIdentifier<LabelType, InputImageType>::CorrespondingPointsIdentifier(MemIni* iniFile)
@@ -100,10 +69,6 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::CorrespondingPointsIde
 }
 
 
-
-
-
-
 /**
  * \brief Destructor
  * \author KD Fritscher
@@ -120,7 +85,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::~CorrespondingPointsId
 
 
 /**
- * \brief Method that executes the whole pipeline for registering candidate and reference polydata (TODO: HAS TO BE CLEANED UP!!)
+ * \brief Method that executes the whole pipeline for registering candidate and reference polydata
  * \author KD Fritscher
  **/
 template<class LabelType, class InputImageType>
