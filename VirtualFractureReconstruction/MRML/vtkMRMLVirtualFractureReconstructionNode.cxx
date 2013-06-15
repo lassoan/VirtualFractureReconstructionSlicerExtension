@@ -38,7 +38,10 @@ vtkMRMLNodeNewMacro(vtkMRMLVirtualFractureReconstructionNode);
 //----------------------------------------------------------------------------
 vtkMRMLVirtualFractureReconstructionNode::vtkMRMLVirtualFractureReconstructionNode()
 {
-    this->HideFromEditors = 1;
+    this->HideFromEditorsOn();
+
+    this->SaveWithSceneOff();
+    this->SetName("ActiveFractureReconstructionNode");
 
     this->ReferenceLabelmapNodeID = NULL;
     this->FragmentLabelmapNodeID =NULL;
@@ -167,6 +170,7 @@ std::string vtkMRMLVirtualFractureReconstructionNode::GetReferencePolyDataFileNa
 //----------------------------------------------------------------------------
 vtkMRMLVirtualFractureReconstructionNode::~vtkMRMLVirtualFractureReconstructionNode()
 {
+    this->SetName("");
     if (ReferenceLabelmapNodeID)
     {
         this->SetReferenceLabelmapNodeID(NULL);
@@ -220,6 +224,10 @@ vtkMRMLVirtualFractureReconstructionNode::~vtkMRMLVirtualFractureReconstructionN
     {
         this->SetCurrentInitialTransformNodeID(NULL);
     }
+    this->TransformContainer =NULL;
+    this->FragmentLabelmapsAndVolumes.clear();
+    this->ModelIDs.clear();
+    this->LabelmapIDs.clear();
 
 }
 
