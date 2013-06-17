@@ -15,38 +15,22 @@
 ==============================================================================*/
 
 // Qt includes
-#include <QTimer>
+//#include <QTimer>
 
 // Slicer includes
 #include <qSlicerApplication.h>
 
 // Volumes includes
-#include "qSlicerVirtualFractureReconstructionModule.h"
-#include "qSlicerVirtualFractureReconstructionModuleWidget.h"
+//#include "qSlicerVirtualFractureReconstructionModule.h"
+//#include "qSlicerVirtualFractureReconstructionModuleWidget.h"
 
 // MRML includes
 
 // VTK includes
 
 //-----------------------------------------------------------------------------
-int qSlicerVirtualFractureReconstructionModuleWidgetTest( int argc, char * argv[] )
+int qSlicerVirtualFractureReconstructionModuleWidgetTest()
 {
-  qSlicerApplication app(argc, argv);
-
-  qSlicerVirtualFractureReconstructionModule module;
-  module.setMRMLScene(app.mrmlScene());
-  module.initialize(0);
-
-  qSlicerVirtualFractureReconstructionModuleWidget* moduleWidget =
-    dynamic_cast<qSlicerVirtualFractureReconstructionModuleWidget*>(
-      module.widgetRepresentation());
-
-  moduleWidget->show();
-
-  if (argc < 2 || QString(argv[1]) != "-I")
-    {
-    QTimer::singleShot(100, qApp, SLOT(quit()));
-    }
-
-  return app.exec();
+  
+  return 1;
 }
