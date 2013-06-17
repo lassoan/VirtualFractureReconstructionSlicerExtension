@@ -30,7 +30,6 @@
 //VTK includes
 #include "vtkSmartPointer.h"
 
-
 class qSlicerVirtualFractureReconstructionModuleWidgetPrivate;
 
 class vtkMRMLNode;
@@ -65,6 +64,7 @@ protected slots:
   void AssignTransformToSliders(vtkMRMLLinearTransformNode* transform);
 
   void updateWidget();
+  void onEndCloseEvent();
   void updateParameters();
   void updateCLIModuleParameters();
   void onReferenceLabelmapChanged();
@@ -91,12 +91,14 @@ protected:
   void SetupTreeView(qMRMLTreeView* tree, QString hierarchyName="ModelHierarchy");
   virtual void setup();
   void enter();
+  void WatcherUpdate();
 
   vtkMRMLTransformableNode* GetNodeFromIndex(const QModelIndex indices);
 
   vtkMRMLLinearTransformNode*  InitializeTransform(bool reference=false,std::string infix="",std::string modelID="");
   vtkMRMLLinearTransformNode*  InitializeTransform2(std::string infix,std::string modelID);
   vtkMRMLLinearTransformNode*  InitializeInteractiveTransform(vtkSmartPointer<vtkMRMLLinearTransformNode> copyTransform);
+  void InitializeTreeView();
 
   void CreateTransformAndConnectToModelAndLabelmap(vtkMRMLNode* newModelNode,std::string labelmapID,bool reference=false);
 
