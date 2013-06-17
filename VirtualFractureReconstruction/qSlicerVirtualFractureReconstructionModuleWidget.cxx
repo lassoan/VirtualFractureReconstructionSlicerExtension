@@ -548,8 +548,8 @@ void qSlicerVirtualFractureReconstructionModuleWidget::setup()
           this, SLOT(onStep1TabOpened(int)  ));*/
 
   //Not in use yet
-  /*d->PresetBox->addItem("Proximal humerus");
-  d->PresetBox->addItem("Proximal femur");
+  d->PresetBox->addItem("Default scenario");
+  /*d->PresetBox->addItem("Proximal femur");
   d->PresetBox->addItem("Proximal tibia");
   d->PresetBox->addItem("Distal humerus");
   d->PresetBox->addItem("Distal femur");
