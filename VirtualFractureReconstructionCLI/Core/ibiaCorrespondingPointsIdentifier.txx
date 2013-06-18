@@ -784,10 +784,9 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         polywriter->Update();*/
     std::cout<<"Polydata transformed"<<std::endl;
 
-    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyrAfterTransform.vtk").c_str());
+    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterTransform.vtk").c_str());
     polywriter->SetInput(polyData);
     polywriter->Update();
-    vtkMatrix->Delete();
     return transformFilter->GetOutput();
 }
 
