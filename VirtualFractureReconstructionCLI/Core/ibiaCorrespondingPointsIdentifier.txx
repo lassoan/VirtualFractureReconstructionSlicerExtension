@@ -389,7 +389,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",4);
     m_Ini->Update();
 
-    //vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
+    vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
 
     do
     {
@@ -415,17 +415,21 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         if(m_TransformInitializer->GetRegistrationPerformed())
         {
+            polywriter->SetFileName(polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTrans.vtk").c_str()););
+            polywriter->SetInput(m_CandidatePolyData);
+            polywriter->Update();
+
             vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
             this->m_CandidatePolyData->DeepCopy(temp);
 
-//            std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
-//            polywriter->SetFileName(filename.c_str());
-//            polywriter->SetInput(m_CandidatePolyData);
-//            polywriter->Update();
+            //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
+            polywriter->SetFileName(polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str()););
+            polywriter->SetInput(m_CandidatePolyData);
+            polywriter->Update();
 
-//            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/ReferencePolyData"+this->m_SpecialSuffix+".vtk").c_str());
-//            polywriter->SetInput(this->m_ReferencePolyData);
-//            polywriter->Update();
+            polywriter->SetFileName(polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"RefPoly.vtk").c_str()););
+            polywriter->SetInput(this->m_ReferencePolyData);
+            polywriter->Update();
 
             //Update ReferenceFileName in Ini file
             m_Ini->WriteString("General","ReferenceFileName",FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"Poly/ReferencePolyData"+this->m_SpecialSuffix+".vtk").c_str());
