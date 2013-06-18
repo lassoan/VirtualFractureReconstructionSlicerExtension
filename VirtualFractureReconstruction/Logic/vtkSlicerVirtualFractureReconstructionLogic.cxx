@@ -114,7 +114,7 @@ void vtkSlicerVirtualFractureReconstructionLogic::SetCLIReconstructionLogic(vtkS
 
 void vtkSlicerVirtualFractureReconstructionLogic::SetCLIReconstructionPropertyNode(vtkMRMLCLIFractureReconstructionPropertyNode* propNode)
 {
-  this->CLIReconstructionPropertyNode.TakeReference(propNode);
+  this->CLIReconstructionPropertyNode=propNode;
 }
 
 vtkMRMLCLIFractureReconstructionPropertyNode* vtkSlicerVirtualFractureReconstructionLogic::GetCLIReconstructionPropertyNode()

@@ -148,7 +148,9 @@ void qSlicerVirtualFractureReconstructionModule::setup()
          vtkSlicerCLIModuleLogic* fractureReconstructionCLILogic =
            vtkSlicerCLIModuleLogic::SafeDownCast(fractureReconstructionModule->logic());
          fractureReconstructionLogic->SetCLIReconstructionLogic(fractureReconstructionCLILogic);
+         qDebug() <<"CLI module logic set";
          vtkSmartPointer<vtkMRMLCLIFractureReconstructionPropertyNode> CLIReconstructionPropertyNode = vtkSmartPointer<vtkMRMLCLIFractureReconstructionPropertyNode>::New();
+         qDebug() <<"CLI fracture reconstruction prop. node "<<CLIReconstructionPropertyNode->GetID()<< "was created";
          fractureReconstructionLogic->SetCLIReconstructionPropertyNode(CLIReconstructionPropertyNode);
       }
     else

@@ -556,7 +556,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::setup()
   d->Step2Description->setPlainText("If you are satisfied with the alignment, press 'Accept registration'-button. Otherwise you can: \n\nPerform manual corrections by clicking on the misaligned fragment in the ReconstructionHierarchy and  using the Transform sliders. \nAlternatively you can go back to the previous tab and restart the alignment process after altering the parameters for fragment alignment and/or using manual pre-alignment.\n\nIf only minor corrections are necessary press the 'Start fine tuning'-button for automatic 'fine tuning' of the reconstruction ");
   d->Step2Description->setReadOnly(true);
 
-  d->TransformSliders->setCollapsed(true);
+  d->TransformSliders->setCollapsed(false);
   d->FragmentModelsTree->sortByColumn(5);
 
 }
