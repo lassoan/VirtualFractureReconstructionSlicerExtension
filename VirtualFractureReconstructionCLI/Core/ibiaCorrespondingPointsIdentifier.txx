@@ -389,7 +389,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",4);
     m_Ini->Update();
 
-    //vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
+    vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
 
     do
     {
