@@ -27,7 +27,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton">
+    <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -40,10 +40,10 @@
        <height>488</height>
       </size>
      </property>
-     <property name="text">
+     <property name="text" stdset="0">
       <string>Fracture reconstruction</string>
      </property>
-     <property name="collapsed">
+     <property name="collapsed" stdset="0">
       <bool>false</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
@@ -541,7 +541,7 @@
            </widget>
           </item>
           <item>
-           <widget class="qMRMLNodeComboBox" name="ReferenceImageComboBox"/>
+           <widget class="qMRMLNodeComboBox" name="ReferenceImageComboBox" native="true"/>
           </item>
           <item>
            <widget class="QLabel" name="ReferenceLabelmapLabel">
@@ -557,7 +557,7 @@
            </widget>
           </item>
           <item>
-           <widget class="qMRMLNodeComboBox" name="ReferenceLabelmapComboBox"/>
+           <widget class="qMRMLNodeComboBox" name="ReferenceLabelmapComboBox" native="true"/>
           </item>
           <item>
            <widget class="QLabel" name="FragmentImageLabel">
@@ -573,7 +573,7 @@
            </widget>
           </item>
           <item>
-           <widget class="qMRMLNodeComboBox" name="FragmentImageComboBox"/>
+           <widget class="qMRMLNodeComboBox" name="FragmentImageComboBox" native="true"/>
           </item>
           <item>
            <widget class="QLabel" name="DataLabelRef">
@@ -620,15 +620,15 @@
             <property name="headerHidden">
              <bool>true</bool>
             </property>
-            <property name="nodeTypes">
+            <property name="nodeTypes" stdset="0">
              <stringlist>
               <string>vtkMRMLTransformableNode</string>
              </stringlist>
             </property>
-            <property name="fitSizeToVisibleIndexes">
+            <property name="fitSizeToVisibleIndexes" stdset="0">
              <bool>true</bool>
             </property>
-            <property name="showRootNode">
+            <property name="showRootNode" stdset="0">
              <bool>true</bool>
             </property>
            </widget>
@@ -682,19 +682,19 @@
             <property name="headerHidden">
              <bool>true</bool>
             </property>
-            <property name="sceneModelType">
+            <property name="sceneModelType" stdset="0">
              <string>ModelHierarchy</string>
             </property>
-            <property name="nodeTypes">
+            <property name="nodeTypes" stdset="0">
              <stringlist>
               <string>vtkMRMLModelNode</string>
               <string>vtkMRMLModelHierarchyNode</string>
              </stringlist>
             </property>
-            <property name="fitSizeToVisibleIndexes">
+            <property name="fitSizeToVisibleIndexes" stdset="0">
              <bool>true</bool>
             </property>
-            <property name="showScene">
+            <property name="showScene" stdset="0">
              <bool>false</bool>
             </property>
            </widget>
@@ -1641,13 +1641,13 @@
             <property name="headerHidden">
              <bool>true</bool>
             </property>
-            <property name="nodeTypes">
+            <property name="nodeTypes" stdset="0">
              <stringlist>
               <string>vtkMRMLModelNode</string>
               <string>vtkMRMLModelHierarchyNode</string>
              </stringlist>
             </property>
-            <property name="fitSizeToVisibleIndexes">
+            <property name="fitSizeToVisibleIndexes" stdset="0">
              <bool>false</bool>
             </property>
            </widget>
@@ -1768,13 +1768,13 @@
             <property name="headerHidden">
              <bool>true</bool>
             </property>
-            <property name="nodeTypes">
+            <property name="nodeTypes" stdset="0">
              <stringlist>
               <string>vtkMRMLModelNode</string>
               <string>vtkMRMLModelHierarchyNode</string>
              </stringlist>
             </property>
-            <property name="fitSizeToVisibleIndexes">
+            <property name="fitSizeToVisibleIndexes" stdset="0">
              <bool>false</bool>
             </property>
            </widget>
@@ -1813,7 +1813,7 @@
     </widget>
    </item>
    <item>
-    <widget class="ctkCollapsibleButton" name="ParameterSettings">
+    <widget class="ctkCollapsibleButton" name="ParameterSettings" native="true">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -1829,18 +1829,21 @@
        <height>500</height>
       </size>
      </property>
-     <property name="text">
+     <property name="text" stdset="0">
       <string>Parameter settings</string>
      </property>
-     <property name="collapsed">
+     <property name="collapsed" stdset="0">
       <bool>false</bool>
      </property>
-     <property name="collapsedHeight">
+     <property name="collapsedHeight" stdset="0">
       <number>0</number>
      </property>
      <layout class="QGridLayout" name="gridLayout_7">
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabWidget">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -1857,13 +1860,13 @@
          <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
           <string>TransformSliders</string>
          </attribute>
-         <widget class="qSlicerWidget" name="TransformTab">
+         <widget class="qSlicerWidget" name="TransformTab" native="true">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -1874,7 +1877,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
-            <widget class="ctkCollapsibleButton" name="TransformSliders">
+            <widget class="ctkCollapsibleButton" name="TransformSliders" native="true">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -1890,59 +1893,56 @@
                <height>340</height>
               </size>
              </property>
-             <property name="text">
+             <property name="text" stdset="0">
               <string>TransformSliders</string>
              </property>
-             <property name="collapsed">
+             <property name="collapsed" stdset="0">
               <bool>false</bool>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_7">
               <item>
-               <widget class="qMRMLTransformSliders" name="MRMLRotationSliders">
+               <widget class="qMRMLTransformSliders" name="MRMLRotationSliders" native="true">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
-                <property name="Title">
+                <property name="Title" stdset="0">
                  <string>Rotation</string>
                 </property>
-                <property name="TypeOfTransform">
-                 <enum>qMRMLTransformSliders::ROTATION</enum>
-                </property>
-                <property name="ISLabel">
+                <property name="ISLabel" stdset="0">
                  <string notr="true">IS</string>
                 </property>
-                <property name="SingleStep">
+                <property name="SingleStep" stdset="0">
                  <double>0.500000000000000</double>
                 </property>
-                <property name="minimum">
+                <property name="minimum" stdset="0">
                  <double>-180.000000000000000</double>
                 </property>
-                <property name="maximum">
+                <property name="maximum" stdset="0">
                  <double>180.000000000000000</double>
                 </property>
-                <property name="minMaxVisible">
+                <property name="minMaxVisible" stdset="0">
                  <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="qMRMLTransformSliders" name="MRMLTranslationSliders">
+               <widget class="qMRMLTransformSliders" name="MRMLTranslationSliders" native="true">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
-                <property name="Title">
+                <property name="Title" stdset="0">
                  <string>Translation</string>
                 </property>
-                <property name="SingleStep">
+                <property name="SingleStep" stdset="0">
                  <double>0.100000000000000</double>
                 </property>
-                <property name="minimum">
+                <property name="minimum" stdset="0">
                  <double>-500.000000000000000</double>
                 </property>
-                <property name="maximum">
+                <property name="maximum" stdset="0">
                  <double>500.000000000000000</double>
                 </property>
-                <property name="minMaxVisible">
+                <property name="minMaxVisible" stdset="0">
                  <bool>false</bool>
                 </property>
                </widget>
@@ -1970,7 +1970,7 @@
          <attribute name="title">
           <string>Parameter settings for step 1</string>
          </attribute>
-         <widget class="qSlicerWidget" name="ParameterSettings1Tab">
+         <widget class="qSlicerWidget" name="ParameterSettings1Tab" native="true">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -2000,6 +2000,9 @@
            </item>
            <item row="8" column="1">
             <widget class="QDoubleSpinBox" name="SigmaFactor">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
              </property>
@@ -2019,6 +2022,9 @@
            </item>
            <item row="6" column="0">
             <widget class="QLabel" name="PointPerctEMLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Percentage of points used during EM-ICP registration</string>
              </property>
@@ -2077,6 +2083,9 @@
            </item>
            <item row="7" column="0">
             <widget class="QLabel" name="SigmaInfLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2087,6 +2096,9 @@
            </item>
            <item row="6" column="1">
             <widget class="QDoubleSpinBox" name="EMPointPercentage">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Percentage of points used during EM-ICP registration</string>
              </property>
@@ -2167,6 +2179,9 @@
            </item>
            <item row="3" column="0">
             <widget class="QCheckBox" name="UseEMICP">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Use EM-ICP algorithm for registration (slower than ICP, but more accurate)</string>
              </property>
@@ -2212,6 +2227,9 @@
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="PointDecimationLabel">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="toolTip">
               <string>Portion of surface points used for feature calculation </string>
              </property>
@@ -2235,6 +2253,9 @@
            </item>
            <item row="7" column="1">
             <widget class="QDoubleSpinBox" name="SigmaInf">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2286,10 +2307,16 @@
              <property name="text">
               <string>Use ICP (less accurate)</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item row="5" column="1">
             <widget class="QDoubleSpinBox" name="PointDecimation">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="toolTip">
               <string>Portion of surface points used for feature calculation </string>
              </property>
@@ -2300,12 +2327,15 @@
               <double>0.050000000000000</double>
              </property>
              <property name="value">
-              <double>0.400000000000000</double>
+              <double>0.750000000000000</double>
              </property>
             </widget>
            </item>
            <item row="8" column="0">
             <widget class="QLabel" name="SigmaFactoLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
              </property>
@@ -2356,7 +2386,7 @@
          <attribute name="title">
           <string>Parameters for fine tuning step</string>
          </attribute>
-         <widget class="qSlicerWidget" name="SlicerWidgetFT">
+         <widget class="qSlicerWidget" name="SlicerWidgetFT" native="true">
           <property name="geometry">
            <rect>
             <x>0</x>
