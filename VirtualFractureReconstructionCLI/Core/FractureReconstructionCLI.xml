@@ -11,7 +11,7 @@
   <acknowledgements><![CDATA[funded by Austrian Science Fund]]></acknowledgements>
 
   <parameters>
-    <label>I/O section</label>
+    <label>IO</label>
     <description><![CDATA[Input/output parameters]]></description>
     <image>
       <name>referenceLabelMap</name>
@@ -58,18 +58,68 @@
     </string-vector>
     </parameters>
     <parameters>
-    <label>Advanced I/O paramters</label>
+    <label>Advanced</label>
     <boolean>
         <name>UseReference</name>
         <longflag>--useReference</longflag>
         <label>Use predefined reference polydata file (optional)</label>
-        <description>If you have a predefined reference polydata file containing metadata like curvature and texture information computation will be faster</description>
+        <description>If you have a predefined reference polydata file containing metadata like curvature and texutre information computation will be faster</description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+    <boolean>
+        <name>useCoordinates</name>
+        <longflag>--useCoordinates</longflag>
+        <label>Use coordinates for alignment</label>
+        <description>Use coordinates to select points for registration (should not be checked when no manual pre alignment was performed)</description>
+        <default>yes</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+    <boolean>
+        <name>useNormals</name>
+        <longflag>--useNormals</longflag>
+        <label>Use normals for alignment</label>
+        <description>Use normals to select points for registration</description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+    <boolean>
+        <name>useCurvature</name>
+        <longflag>--useCurvature</longflag>
+        <label>Use curvature for alignment</label>
+        <description>Use coordinates to select points for registration</description>
+        <default>yes</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+
+    <boolean>
+        <name>useTexture</name>
+        <longflag>--useTexture</longflag>
+        <label>Use texture features for alignment</label>
+        <description>Use coordinates to select points for registration </description>
         <default>no</default>
         <element>yes</element>
         <element>no</element>
     </boolean>
 
 
+
+    <boolean>
+        <name>fineTuning</name>
+        <longflag>--fineTuning</longflag>
+        <label>Perform fine tuning only</label>
+        <description>If set to true only fine tuning of the fragments using only fracture surfaces will be performed</description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
     <string>
         <name>TempFilePath</name>
         <longflag>--slicerTempPath</longflag>
@@ -170,60 +220,86 @@
   </parameters>
 
   <parameters>
-  <label>Advanced registration parameters</label>
+  <label>Advanced parameters</label>
     <boolean>
-        <name>useCoordinates</name>
-        <longflag>--useCoordinates</longflag>
-        <label>Use coordinates for alignment</label>
-        <description>Use coordinates to select points for registration (should not be checked when no manual pre alignment was performed)</description>
-        <default>yes</default>
-        <element>yes</element>
-        <element>no</element>
-    </boolean>
-    <boolean>
-        <name>useNormals</name>
-        <longflag>--useNormals</longflag>
-        <label>Use surface normals for alignment</label>
-        <description>Use surface normals to select points for registration</description>
-        <default>no</default>
-        <element>yes</element>
-        <element>no</element>
-    </boolean>
-
-    <boolean>
-        <name>useCurvature</name>
-        <longflag>--useCurvature</longflag>
-        <label>Use mean curvature for alignment</label>
-        <description>Use mean curvature to select points for registration</description>
-        <default>yes</default>
-        <element>yes</element>
-        <element>no</element>
-    </boolean>
-
-    <boolean>
-        <name>useTexture</name>
-        <longflag>--useTexture</longflag>
-        <label>Use texture features for alignment</label>
-        <description>Use coordinates to select points for registration </description>
+        <name>useICP</name>
+        <longflag>--useICP</longflag>
+        <label>Use ICP algorithm for alignment</label>
+        <description>Using ICP insteal of EM-ICP is a lot faster, but also less accurate!</description>
         <default>no</default>
         <element>yes</element>
         <element>no</element>
     </boolean>
     <boolean>
-        <name>fineTuning</name>
-        <longflag>--fineTuning</longflag>
-        <label>Perform fine tuning only</label>
-        <description>If set to true only fine tuning of the fragments using only fracture surfaces will be performed</description>
+        <name>UseCoordinates</name>
+        <longflag>--UseCoordinates</longflag>
+        <label>Use point coordinates to select candidate points</label>
+        <description></description>
         <default>no</default>
         <element>yes</element>
         <element>no</element>
     </boolean>
+    <boolean>
+        <name>UseCurvature</name>
+        <longflag>--UseCurvature</longflag>
+        <label>Use curvature to select candidate points</label>
+        <description></description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+    <boolean>
+        <name>UseNormals</name>
+        <longflag>--UseNormals</longflag>
+        <label>Use normals to select candidate points</label>
+        <description></description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+    <boolean>
+        <name>UseTexture</name>
+        <longflag>--UseTexture</longflag>
+        <label>Use texture features to select candidate points</label>
+        <description></description>
+        <default>no</default>
+        <element>yes</element>
+        <element>no</element>
+    </boolean>
+    </parameters>
+    <parameters>
+    <label>EM-ICP parameters</label>
     <float>
         <name>decimationFactor</name>
         <longflag>--decimationFactor</longflag>
         <label>Surface point decimation factor</label>
-        <description>Amount of decimation for surface points used for feature calculation and registration (e.g. 0.4 means decimation to 40%)</description>
+        <description>Amount of decimation for surface points used for feature calculation (e.g. 0.4 means decimation to 40%)</description>
         <default>0.4</default>
+     </float>
+     <float>
+         <name>pointPercentageEMICP</name>
+         <longflag>--pointPercentageEMICP</longflag>
+         <label>Point perct. for EM-ICP (in %)</label>
+         <description>Amount of decimation for surface points used for feature calculation (e.g. 0.4 means decimation to 40%)</description>
+         <default>0.4</default>
+      </float>
+     <float>
+         <name>sigmaInf</name>
+         <longflag>--sigmaInf</longflag>
+         <label>Value for sigma-inf.</label>
+         <description>Value that determines stopping criterion for EM-ICP value (lower values = more itertions) </description>
+         <default>1</default>
+         <minimum>0.1</minimum>
+         <maximum>50</maximum>
+      </float>
+    <float>
+        <name>sigmaFactor</name>
+        <longflag>--sigmaFactor</longflag>
+        <label>Value for sigma-factor</label>
+        <description>Value that determines the decimation of sigma after every iteration for EM-ICP value (lower values = more itertions) </description>
+        <default>0.99</default>
+        <minimum>0.5</minimum>
+        <maximum>0.9999</maximum>
      </float>
 
     <float>

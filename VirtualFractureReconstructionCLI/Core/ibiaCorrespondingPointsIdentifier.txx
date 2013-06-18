@@ -217,9 +217,6 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
         currentImage->SetPixelContainer(m_PreProcessedLabel->GetPixelContainer());
 
         candidateImage=m_PreProcessedLabel;
-
-        TransformWriter::WriteTransform(m_PrepTransform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyMain"));
-
     }
 
     InputImagePointer initialGreyScaleImage = InputImageType::New();
@@ -387,7 +384,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     itksys::SystemTools::MakeDirectory(polyOutput.c_str());
 
     //Set sigma_inf to 5 for first iteration
-    //float tempSigma=m_Ini->ReadValue<float>("EM-ICP","sigma_inf_ini",1);
+    float tempSigma=m_Ini->ReadValue<float>("EM-ICP","sigma_inf_ini",1);
 
     m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",4);
     m_Ini->Update();
@@ -399,8 +396,16 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         if(iter>0)
         {
-           lastMeanMahalDistance=m_TransformInitializer->GetSigmaP2Init();
+            lastMeanMahalDistance=m_TransformInitializer->GetSigmaP2Init();
+
         }
+        if(iter==m_Ini->ReadValue<int>("Initializer","ViewerIteration",100))
+        {
+            m_Ini->WriteValue<int>("Initializer","UseViewer",1);
+        }
+        else
+            m_Ini->WriteValue<int>("Initializer","UseViewer",0);
+        m_Ini->Update();
 
         this->m_SpecialSuffix = this->m_SpecialSuffix+"_"+static_cast<ostringstream*>( &(ostringstream() << (iter+1)) )->str();
 
@@ -411,32 +416,23 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         if(m_TransformInitializer->GetRegistrationPerformed())
         {
-            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTransMain"+this->m_SpecialSuffix+".vtk").c_str());
+            vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
+            this->m_CandidatePolyData->DeepCopy(temp);
+
+            /*std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
+            polywriter->SetFileName(filename.c_str());
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();
 
-            TransformWriter::WriteTransform(m_InitialITKTransformPS,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyMain"));
-
-            this->m_CandidatePolyData->DeepCopy(this->TransformPolyData(m_CandidatePolyData, m_InitialITKTransformPS));
-
-            /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterTransMain"+this->m_SpecialSuffix+".vtk").c_str());
-            polywriter->SetInput(m_CandidatePolyData);
-            polywriter->Update();*/
-
-            //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
-            /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
-            polywriter->SetInput(m_CandidatePolyData);
-            polywriter->Update();
-
-            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"RefPoly.vtk").c_str());
+            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/ReferencePolyData"+this->m_SpecialSuffix+".vtk").c_str());
             polywriter->SetInput(this->m_ReferencePolyData);
-            polywriter->Update();
+            polywriter->Update();*/
 
             //Update ReferenceFileName in Ini file
             m_Ini->WriteString("General","ReferenceFileName",FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"Poly/ReferencePolyData"+this->m_SpecialSuffix+".vtk").c_str());
             m_Ini->Update();
 
-            std::cout<<"PolyOut written!!"<<std::endl;*/
+            std::cout<<"PolyOut written!!"<<std::endl;
 
             this->m_SpecialSuffix=tempSuffix;
             iter++;
@@ -447,8 +443,8 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
             if (iter==1)
             {
                 //Reset sigma to user defined values
-                //m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",tempSigma);
-                //m_Ini->Update();
+                m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",tempSigma);
+                m_Ini->Update();
                 m_TransformInitializer->SetMaximumMahalanobisDistance(10000);
                 m_TransformInitializer->SetUseActiveReferencePointsForMahalanobis(this->m_Ini->ReadValue("General","UseActivePointsForMahalanobisAfterIter1",0));
             }
@@ -456,26 +452,26 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         }
     }
-    while (iter<2);//m_TransformInitializer->GetRegistrationPerformed()&&m_TransformInitializer->GetMaximumMahalnobisDistance()<FLT_MAX);
+    while (m_TransformInitializer->GetRegistrationPerformed()&&m_TransformInitializer->GetMaximumMahalnobisDistance()<FLT_MAX);
     this->m_SpecialSuffix=tempSuffix;
 
     ///Save updated polydata to File
 
-//    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/FinalCandidatePolyData"+this->m_SpecialSuffix+".vtk").c_str());
-//    polywriter->SetInput(this->m_CandidatePolyData);
-//    polywriter->Update();
+    /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/FinalCandidatePolyData"+this->m_SpecialSuffix+".vtk").c_str());
+    polywriter->SetInput(this->m_CandidatePolyData);
+    polywriter->Update();*/
 
     //Selecting active points
     ActivePointSelector* selector  =new ActivePointSelector();
     selector->SetReferencePolyData(this->m_CandidatePolyData,0);
     selector->MarkInactivePoints(this->m_ReferencePolyData);
-//    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/ReferencePolyData"+this->m_SpecialSuffix+"final.vtk").c_str());
-//    polywriter->SetInput(this->m_ReferencePolyData);
-//    polywriter->Update();
+    /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/ReferencePolyData"+this->m_SpecialSuffix+"final.vtk").c_str());
+    polywriter->SetInput(this->m_ReferencePolyData);
+    polywriter->Update();
 
-//    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/FinalCandidatePolyData_After_"+this->m_SpecialSuffix+"_final.vtk").c_str());
-//    polywriter->SetInput(this->m_CandidatePolyData);
-//    polywriter->Update();
+    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/FinalCandidatePolyData_After_"+this->m_SpecialSuffix+"_final.vtk").c_str());
+    polywriter->SetInput(this->m_CandidatePolyData);
+    polywriter->Update();*/
 
     //Update ReferenceFileName in Ini file
     m_Ini->WriteString("General","ReferenceFileName",FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"Poly/ReferencePolyData"+this->m_SpecialSuffix+"final.vtk").c_str());
@@ -742,39 +738,22 @@ template<class LabelType, class InputImageType>
 typename CorrespondingPointsIdentifier<LabelType, InputImageType>::vtkSmartPolyDataPointer
 CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkSmartPolyDataPointer polyData, ITKTransformPointer transform, bool invert) {
 
-    vtkSmartPointer<vtkPolyDataWriter> polywriter =
-            vtkSmartPointer<vtkPolyDataWriter>::New();
-
     ITKMatrixType itkMatrix = transform->GetMatrix();
 
     ITKTransformOffsetType itkOffset = transform->GetOffset();
 
     vtkSmartPointer<vtkTransform> vtkTrans =  vtkSmartPointer<vtkTransform>::New();
-    vtkMatrix4x4* vtkMatrix= vtkMatrix4x4::New();
-    vtkMatrix->Identity();
 
-    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeCreation.vtk").c_str());
-    polywriter->SetInput(polyData);
-    polywriter->Update();
-
-    TransformWriter::WriteTransform(transform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPoly"));
-
-    /*for (unsigned int i = 0; i < 3; i++) {
+    for (unsigned int i = 0; i < 3; i++) {
         for (unsigned int j = 0; j < 3; j++) {
-            vtkMatrix->SetElement(i, j,transform->GetMatrix().GetVnlMatrix().get(i, j));
+            vtkTrans->GetMatrix()->SetElement(i, j,itkMatrix.GetVnlMatrix().get(i, j));
         }
-        vtkMatrix->SetElement(i, 3, itkOffset[i]);
-    }*/
+        vtkTrans->GetMatrix()->SetElement(i, 3, itkOffset[i]);
+    }
 
-    TransformWriter::WriteTransform(transform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyAfterCreation"));
-    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterCreation.vtk").c_str());
-    polywriter->SetInput(polyData);
-    polywriter->Update();
-
-    vtkTrans->SetMatrix(vtkMatrix);
     std::cout<<"Starting transform filter"<<std::endl;
-    vtkSmartPointer<vtkTransformPolyDataFilter> transformFilter =
-            vtkSmartPointer<vtkTransformPolyDataFilter>::New();
+    vtkTransformPolyDataFilter* transformFilter =
+            vtkTransformPolyDataFilter::New();
     transformFilter->SetInput(polyData);
     if(invert) vtkTrans->Inverse();
     transformFilter->SetTransform(vtkTrans);
@@ -788,10 +767,6 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         polywriter->SetInput(transformFilter->GetOutput());
         polywriter->Update();*/
     std::cout<<"Polydata transformed"<<std::endl;
-
-    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterTransform.vtk").c_str());
-    polywriter->SetInput(polyData);
-    polywriter->Update();
     return transformFilter->GetOutput();
 }
 

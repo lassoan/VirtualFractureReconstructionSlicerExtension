@@ -64,7 +64,7 @@ SampleExtractor< InputImageType, TemplateImageType>::SampleExtractor()
 template<class InputImageType, class TemplateImageType>
 SampleExtractor< InputImageType, TemplateImageType>::~SampleExtractor()
 {
-
+ this->m_SheetnessImage=NULL;
 }
 
 /**

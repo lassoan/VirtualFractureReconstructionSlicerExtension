@@ -57,15 +57,13 @@ public:
   typedef typename    InputImageType::ConstPointer    InputImagePointer;
   typedef VTKImageExport< InputImageType>            ExporterFilterType; 
   typedef typename ExporterFilterType::Pointer        ExporterFilterPointer;
-
-  typedef typename Superclass::DataObjectIdentifierType DataObjectIdentifierType;
  
   /** Get the output in the form of a vtkImage. 
       This call is delegated to the internal vtkImageImporter filter  */
   vtkImageData *  GetOutput() const;
 
   /** Set the input in the form of an itk::Image */
-  virtual void SetInputImage( const InputImageType * );
+  void SetInput( const InputImageType * );
 
   /** Return the internal VTK image importer filter.
       This is intended to facilitate users the access 

@@ -23,6 +23,7 @@ SheetnessImageCreator<ImageType>::SheetnessImageCreator(){
 template<class ImageType>
 SheetnessImageCreator<ImageType>::~SheetnessImageCreator() {
 	// TODO Auto-generated destructor stub
+    m_SheetnessImage=NULL;
 }
 
 
@@ -37,16 +38,6 @@ void SheetnessImageCreator<ImageType>::doFilter(InputImagePointer input) {
     m_SheetnessFilter->Modified();
 
 	m_SheetnessFilter->SetDetectBrightSheets(true);
-
-    /*
-
-	m_HessianFilter->SetSigma(atof(argv[4]));
-
-	m_SheetnessFilter->SetSheetnessNormalization(atof(argv[5]));
-
-	m_SheetnessFilter->SetBloobinessNormalization(atof(argv[6]));
-
-	m_SheetnessFilter->SetNoiseNormalization(atof(argv[7]));*/
 
 	m_EigenAnalysis->SetDimension(3);
 

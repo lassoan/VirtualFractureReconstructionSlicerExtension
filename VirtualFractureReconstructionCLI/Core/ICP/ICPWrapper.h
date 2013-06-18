@@ -79,7 +79,6 @@ public:
     m_Parameters.sigma_inf=para.sigma_inf;
     m_Parameters.sigma_factor=para.sigma_factor;
     m_Parameters.d_02=para.d_02;
-    m_Parameters.maxIteration=para.maxIteration;
     //m_Parameters.noviewer=para.noviewer;
   }
 

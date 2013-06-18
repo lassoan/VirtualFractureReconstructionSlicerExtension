@@ -79,6 +79,7 @@ void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
         this->m_ActiveReferencePointSet=this->ExtractClosestNActivePoints(m_ActiveReferencePolyData);
 
         this->m_EMICP->SetRegistrationParameters(this->GetEMICPParameters());
+        this->m_EMICP->SetViewer(0);
 
         this->m_EMICP->doRegistration(m_ActiveReferencePointSet,m_ActiveCandidatePointSet,100,100);
 
@@ -88,37 +89,37 @@ void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
 
         vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
 
-        /*char temp[200];
+        char temp[200];
         sprintf(temp,"CandidatePolyBeforeReg%i.vtk",f);
         polywriter->SetFileName(temp);
         polywriter->SetInput(m_ActiveCandidatePolyData);
-        polywriter->Update();*/
+        polywriter->Update();
 
         for (unsigned int frag=1;frag<this->m_FragmentContainer.size();frag++)
         {
             if(this->m_FragmentContainer[frag].second==0)
                 TransformWriter::TransformPolyData(this->m_FragmentContainer[frag].first,m_ActiveTransform,false);
 
-            /*sprintf(temp,"CandidatePoly%iAfterReg_Iter%i.vtk",f,frag);
+            sprintf(temp,"CandidatePoly%iAfterReg_Iter%i.vtk",f,frag);
             polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
             polywriter->SetInput(m_ActiveCandidatePolyData);
-            polywriter->Update();*/
+            polywriter->Update();
         }
         this->m_FinalTransformContainer.push_back(m_ActiveTransform);
 
 
-//        sprintf(temp,"ReferencePoly%i.vtk",f);
-//        polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
-//        polywriter->SetInput(m_ActiveReferencePolyData);
-//        polywriter->Update();
+        sprintf(temp,"ReferencePoly%i.vtk",f);
+        polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
+        polywriter->SetInput(m_ActiveReferencePolyData);
+        polywriter->Update();
 
         this->UpdateActiveReferencePointSet();
 
-//        sprintf(temp,"ReferencePoly%iAfterUpdate.vtk",f);
-//        polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
-//        polywriter->SetInput(m_ActiveReferencePolyData);
-//        polywriter->Update();
-        char temp[200];
+        sprintf(temp,"ReferencePoly%iAfterUpdate.vtk",f);
+        polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
+        polywriter->SetInput(m_ActiveReferencePolyData);
+        polywriter->Update();
+
         sprintf(temp,"Fragment%iAfterMultiReg.vtk",f);
         polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
         polywriter->SetInput(m_ActiveCandidatePolyData);
@@ -151,12 +152,10 @@ registrationParameters MultiFragmentRegistrator::GetEMICPParameters()
 {
     registrationParameters para;
 
-    //Currently not in use
-//    para.sigma_p2=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_p2_ini",3);
-//    para.sigma_inf=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_inf_ini",0.1);
-//    para.sigma_factor=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_factor_ini",0.99);
-//    para.d_02=m_Ini->ReadValue<float>("EM-ICP-Multi","d_02_ini",0.01);
-    para.maxIteration=m_Ini->ReadValue<int>("Multi","ICP-MaxIterations",100);
+    para.sigma_p2=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_p2_ini",3);
+    para.sigma_inf=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_inf_ini",0.1);
+    para.sigma_factor=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_factor_ini",0.99);
+    para.d_02=m_Ini->ReadValue<float>("EM-ICP-Multi","d_02_ini",0.01);
     //para.noviewer=!(m_Ini->ReadValue<int>("EM-ICP","UseViewer",1)>0);
     return para;
 }

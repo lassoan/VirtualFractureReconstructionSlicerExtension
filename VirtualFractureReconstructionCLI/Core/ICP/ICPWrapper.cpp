@@ -52,15 +52,15 @@ void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmart
     maskPointsR->GenerateVerticesOn();
     maskPointsR->Update();
 
-    vtkSmartPointer<vtkDecimatePro> decimateR = vtkSmartPointer<vtkDecimatePro>::New();
+    /*vtkSmartPointer<vtkDecimatePro> decimateR = vtkSmartPointer<vtkDecimatePro>::New();
     decimateR->SetInput(maskPointsR->GetOutput());
-    decimateR->SetTargetReduction(percentRef/100);
+    decimateR->SetTargetReduction(1);
     decimateR->PreserveTopologyOn();
 
     vtkSmartPointer<vtkDecimatePro> decimateC = vtkSmartPointer<vtkDecimatePro>::New();
     decimateC->SetInput(maskPointsC->GetOutput());
-    decimateC->SetTargetReduction(percentCand/100);
-    decimateC->PreserveTopologyOn();
+    decimateC->SetTargetReduction(1);
+    decimateC->PreserveTopologyOn();*/
 
     m_ICPVTK ->SetSource(maskPointsC->GetOutput());
     m_ICPVTK ->SetTarget(maskPointsR->GetOutput());
@@ -68,23 +68,20 @@ void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmart
 	m_ICPVTK ->SetMaximumNumberOfIterations(this->m_Parameters.maxIteration);
     //m_ICPVTK ->StartByMatchingCentroidsOn();
 	m_ICPVTK ->Modified();
-    m_ICPVTK->Update();
-    vtkMatrix4x4* tempMatrix= vtkMatrix4x4::New();
-    tempMatrix->DeepCopy(this->m_ICPVTK->GetMatrix());
+	m_ICPVTK->Update();
 
 	int count=0;
     for(unsigned int m=0;m<3;m++)
     {
         for(unsigned int n=0;n<3;n++)
         {
-            this->m_ResultMatrixITK[m][n]=tempMatrix->GetElement(m,n);
+            this->m_ResultMatrixITK[m][n]=this->m_ICPVTK->GetMatrix()->GetElement(m,n);
             count++;
         }
     }
 
     for(unsigned int o=0;o<3;o++)
-        this->m_ResultOffsetITK[o]=tempMatrix->GetElement(o,3);
-    tempMatrix->Delete();
+        this->m_ResultOffsetITK[o]=this->m_ICPVTK->GetMatrix()->GetElement(o,3);
 }
 
 
