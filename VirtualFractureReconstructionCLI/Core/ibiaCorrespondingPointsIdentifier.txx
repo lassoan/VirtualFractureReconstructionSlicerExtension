@@ -384,12 +384,12 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     itksys::SystemTools::MakeDirectory(polyOutput.c_str());
 
     //Set sigma_inf to 5 for first iteration
-    float tempSigma=m_Ini->ReadValue<float>("EM-ICP","sigma_inf_ini",1);
+    //float tempSigma=m_Ini->ReadValue<float>("EM-ICP","sigma_inf_ini",1);
 
     m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",4);
     m_Ini->Update();
 
-    vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
+    //vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
 
     do
     {
@@ -398,15 +398,8 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
         {
            lastMeanMahalDistance=m_TransformInitializer->GetSigmaP2Init();
         }
-        if(iter==m_Ini->ReadValue<int>("Initializer","ViewerIteration",100))
-        {
-            m_Ini->WriteValue<int>("Initializer","UseViewer",1);
-        }
-        else
-            m_Ini->WriteValue<int>("Initializer","UseViewer",0);
-        m_Ini->Update();
 
-        this->m_SpecialSuffix = this->m_SpecialSuffix+"_"+static_cast<ostringstream*>( &(ostringstream() << (iter+1)) )->str();
+        //this->m_SpecialSuffix = this->m_SpecialSuffix+"_"+static_cast<ostringstream*>( &(ostringstream() << (iter+1)) )->str();
 
         if(iter==0)
             this->m_InitialITKTransformPS=m_TransformInitializer->doFilter(m_ReferencePolyData, m_CandidatePolyData,lastMeanMahalDistance);
@@ -419,8 +412,8 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();*/
 
-            //vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
-            //this->m_CandidatePolyData->DeepCopy(temp);
+            vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
+            this->m_CandidatePolyData->DeepCopy(temp);
 
             //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
             /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
@@ -437,7 +430,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
             std::cout<<"PolyOut written!!"<<std::endl;*/
 
-            this->m_SpecialSuffix=tempSuffix;
+            //this->m_SpecialSuffix=tempSuffix;
             iter++;
             //Use coordinates after first iteration
             m_Ini->WriteValue<int>("Mahalanobis","UseCoordinates",1);
