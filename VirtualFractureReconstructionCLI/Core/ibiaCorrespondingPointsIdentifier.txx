@@ -419,8 +419,8 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();*/
 
-            vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
-            this->m_CandidatePolyData->DeepCopy(temp);
+            //vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
+            //this->m_CandidatePolyData->DeepCopy(temp);
 
             //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
             /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
