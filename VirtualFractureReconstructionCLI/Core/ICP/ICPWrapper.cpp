@@ -62,8 +62,8 @@ void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmart
     decimateC->SetTargetReduction(percentCand/100);
     decimateC->PreserveTopologyOn();
 
-    m_ICPVTK ->SetSource(decimateC->GetOutput());
-    m_ICPVTK ->SetTarget(decimateR->GetOutput());
+    m_ICPVTK ->SetSource(maskPointsC->GetOutput());
+    m_ICPVTK ->SetTarget(maskPointsR->GetOutput());
 	m_ICPVTK ->GetLandmarkTransform()->SetModeToRigidBody();
 	m_ICPVTK ->SetMaximumNumberOfIterations(this->m_Parameters.maxIteration);
     //m_ICPVTK ->StartByMatchingCentroidsOn();
