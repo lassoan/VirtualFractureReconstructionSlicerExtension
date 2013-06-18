@@ -161,7 +161,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::SetupTreeView(qMRMLTreeVi
     tree->header()->setResizeMode(2, QHeaderView::ResizeToContents);
 
     tree->sortFilterProxyModel()->setHideChildNodeTypes(
-      QStringList() << "vtkMRMLFiberBundleNode" << "vtkMRMLAnnotationNode"<<"vtkMRMLScalarVolumeNode");
+    QStringList() << "vtkMRMLFiberBundleNode" << "vtkMRMLAnnotationNode"<<"vtkMRMLScalarVolumeNode");
     //tree->sortFilterProxyModel()->setShowHiddenForTypes(
     //  QStringList() << "vtkMRMLModelHierarchyNode");
 
