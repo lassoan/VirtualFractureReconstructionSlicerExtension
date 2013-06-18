@@ -417,13 +417,13 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
         {
             /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTrans.vtk").c_str());
             polywriter->SetInput(m_CandidatePolyData);
-            polywriter->Update();
+            polywriter->Update();*/
 
             vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
             this->m_CandidatePolyData->DeepCopy(temp);
 
             //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
-            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
+            /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();
 
@@ -455,7 +455,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         }
     }
-    while (iter<1);//&&m_TransformInitializer->GetRegistrationPerformed()&&m_TransformInitializer->GetMaximumMahalnobisDistance()<FLT_MAX);
+    while (m_TransformInitializer->GetRegistrationPerformed()&&m_TransformInitializer->GetMaximumMahalnobisDistance()<FLT_MAX);
     this->m_SpecialSuffix=tempSuffix;
 
     ///Save updated polydata to File
