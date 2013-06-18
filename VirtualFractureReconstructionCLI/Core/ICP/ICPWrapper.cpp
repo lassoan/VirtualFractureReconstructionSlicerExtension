@@ -68,20 +68,23 @@ void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmart
 	m_ICPVTK ->SetMaximumNumberOfIterations(this->m_Parameters.maxIteration);
     //m_ICPVTK ->StartByMatchingCentroidsOn();
 	m_ICPVTK ->Modified();
-	m_ICPVTK->Update();
+    m_ICPVTK->Update();
+    vtkMatrix4x4* tempMatrix= vtkMatrix4x4::New();
+    tempMatrix->DeepCopy(this->m_ICPVTK->GetMatrix());
 
 	int count=0;
     for(unsigned int m=0;m<3;m++)
     {
         for(unsigned int n=0;n<3;n++)
         {
-            this->m_ResultMatrixITK[m][n]=this->m_ICPVTK->GetMatrix()->GetElement(m,n);
+            this->m_ResultMatrixITK[m][n]=tempMatrix->GetElement(m,n);
             count++;
         }
     }
 
     for(unsigned int o=0;o<3;o++)
-        this->m_ResultOffsetITK[o]=this->m_ICPVTK->GetMatrix()->GetElement(o,3);
+        this->m_ResultOffsetITK[o]=tempMatrix->GetElement(o,3);
+    tempMatrix->Delete();
 }
 
 

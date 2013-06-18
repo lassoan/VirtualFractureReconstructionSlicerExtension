@@ -2,6 +2,37 @@
 
 namespace ibia {
 
+/**
+ * \brief Implementation of static "NEW" method from itk to be able to usa IBIA filter pipeline
+ * \author KD Fritscher
+ **/
+/*
+template<class LabelType, class InputImageType>
+typename CorrespondingPointsIdentifier<LabelType, InputImageType>::Pointer CorrespondingPointsIdentifier<
+LabelType, InputImageType>::New(bool preRegistration,
+                                unsigned int adjStart, unsigned int adjacencyLevels,
+                                unsigned int initialVertIndex, unsigned int smoothingIterations,
+                                float maxDist, unsigned int stepSize, bool refMode,bool greyscaleStatistics, bool calculateCorrelation, bool performGreyscaleReg,
+                                bool extICP, bool calcDiffVectors) {
+    Pointer smartPtr = CorrespondingPointsIdentifier::New();
+    smartPtr->m_AdjacencyLevels = adjacencyLevels;
+    smartPtr->m_SmoothingIterations = smoothingIterations;
+    smartPtr->m_VertIndex = initialVertIndex;
+    smartPtr->m_MaxDist = maxDist;
+    smartPtr->m_PreRegistration = preRegistration;
+    smartPtr->m_StepSize = stepSize;
+    smartPtr->m_AdjacencyLevelsStart = adjStart;
+    smartPtr->m_ReferenceMode = refMode;
+    smartPtr->m_MaxPointDistance = 10.0;
+    smartPtr->m_UseGreyscaleStatistics=greyscaleStatistics;
+    smartPtr->m_CalculateCorrelation=calculateCorrelation;
+    smartPtr->m_PerformGreyscaleRegistration=performGreyscaleReg;
+    smartPtr->m_FinalMetricValue=0;
+    smartPtr->m_UseExtendedICP=extICP;
+    smartPtr->m_CalculateDifferenceVectors=calcDiffVectors;
+    smartPtr->m_RefOutFinished=false;
+    return smartPtr;
+}*/
 
 template<class LabelType, class InputImageType>
 CorrespondingPointsIdentifier<LabelType, InputImageType>::CorrespondingPointsIdentifier(MemIni* iniFile)
@@ -69,6 +100,10 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::CorrespondingPointsIde
 }
 
 
+
+
+
+
 /**
  * \brief Destructor
  * \author KD Fritscher
@@ -85,7 +120,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::~CorrespondingPointsId
 
 
 /**
- * \brief Method that executes the whole pipeline for registering candidate and reference polydata
+ * \brief Method that executes the whole pipeline for registering candidate and reference polydata (TODO: HAS TO BE CLEANED UP!!)
  * \author KD Fritscher
  **/
 template<class LabelType, class InputImageType>
@@ -417,7 +452,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         }
     }
-    while (m_TransformInitializer->GetRegistrationPerformed()&&m_TransformInitializer->GetMaximumMahalnobisDistance()<FLT_MAX);
+    while (iter<3&&m_TransformInitializer->GetRegistrationPerformed()&&m_TransformInitializer->GetMaximumMahalnobisDistance()<FLT_MAX);
     this->m_SpecialSuffix=tempSuffix;
 
     ///Save updated polydata to File
@@ -708,17 +743,21 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
     ITKTransformOffsetType itkOffset = transform->GetOffset();
 
     vtkSmartPointer<vtkTransform> vtkTrans =  vtkSmartPointer<vtkTransform>::New();
+    vtkMatrix4x4* vtkMatrix= vtkMatrix4x4::New();
+    vtkMatrix->Identity();
+
 
     for (unsigned int i = 0; i < 3; i++) {
         for (unsigned int j = 0; j < 3; j++) {
-            vtkTrans->GetMatrix()->SetElement(i, j,itkMatrix.GetVnlMatrix().get(i, j));
+            vtkMatrix->SetElement(i, j,itkMatrix.GetVnlMatrix().get(i, j));
         }
-        vtkTrans->GetMatrix()->SetElement(i, 3, itkOffset[i]);
+        vtkMatrix->SetElement(i, 3, itkOffset[i]);
     }
 
+    vtkTrans->SetMatrix(vtkMatrix);
     std::cout<<"Starting transform filter"<<std::endl;
-    vtkTransformPolyDataFilter* transformFilter =
-            vtkTransformPolyDataFilter::New();
+    vtkSmartPointer<vtkTransformPolyDataFilter> transformFilter =
+            vtkSmartPointer<vtkTransformPolyDataFilter>::New();
     transformFilter->SetInput(polyData);
     if(invert) vtkTrans->Inverse();
     transformFilter->SetTransform(vtkTrans);
@@ -732,6 +771,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         polywriter->SetInput(transformFilter->GetOutput());
         polywriter->Update();*/
     std::cout<<"Polydata transformed"<<std::endl;
+    vtkMatrix->Delete();
     return transformFilter->GetOutput();
 }
 
