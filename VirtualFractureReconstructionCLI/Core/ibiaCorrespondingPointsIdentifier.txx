@@ -399,7 +399,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
            lastMeanMahalDistance=m_TransformInitializer->GetSigmaP2Init();
         }
 
-        //this->m_SpecialSuffix = this->m_SpecialSuffix+"_"+static_cast<ostringstream*>( &(ostringstream() << (iter+1)) )->str();
+        this->m_SpecialSuffix = this->m_SpecialSuffix+"_"+static_cast<ostringstream*>( &(ostringstream() << (iter+1)) )->str();
 
         if(iter==0)
             this->m_InitialITKTransformPS=m_TransformInitializer->doFilter(m_ReferencePolyData, m_CandidatePolyData,lastMeanMahalDistance);
@@ -408,12 +408,16 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         if(m_TransformInitializer->GetRegistrationPerformed())
         {
-            /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTrans.vtk").c_str());
+            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTransMain"+this->m_SpecialSuffix+".vtk").c_str());
             polywriter->SetInput(m_CandidatePolyData);
-            polywriter->Update();*/
+            polywriter->Update();
 
             vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData,  m_InitialITKTransformPS);
             this->m_CandidatePolyData->DeepCopy(temp);
+
+            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterTransMain"+this->m_SpecialSuffix+".vtk").c_str());
+            polywriter->SetInput(m_CandidatePolyData);
+            polywriter->Update();
 
             //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
             /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
@@ -430,7 +434,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
             std::cout<<"PolyOut written!!"<<std::endl;*/
 
-            //this->m_SpecialSuffix=tempSuffix;
+            this->m_SpecialSuffix=tempSuffix;
             iter++;
             //Use coordinates after first iteration
             m_Ini->WriteValue<int>("Mahalanobis","UseCoordinates",1);
