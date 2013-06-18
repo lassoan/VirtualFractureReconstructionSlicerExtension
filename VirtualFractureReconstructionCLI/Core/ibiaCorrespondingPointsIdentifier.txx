@@ -760,12 +760,12 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
 
     TransformWriter::WriteTransform(transform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPoly"));
 
-    for (unsigned int i = 0; i < 3; i++) {
+    /*for (unsigned int i = 0; i < 3; i++) {
         for (unsigned int j = 0; j < 3; j++) {
-            vtkMatrix->SetElement(i, j,itkMatrix.GetVnlMatrix().get(i, j));
+            vtkMatrix->SetElement(i, j,transform->GetMatrix().GetVnlMatrix().get(i, j));
         }
         vtkMatrix->SetElement(i, 3, itkOffset[i]);
-    }
+    }*/
 
     TransformWriter::WriteTransform(transform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyAfterCreation"));
     polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterCreation.vtk").c_str());
