@@ -140,9 +140,6 @@ Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
 
   qDebug() <<"Fracture reconstruction MRML scene set";
 
-  // observe close event
-  qvtkReconnect(this->mrmlScene(), vtkMRMLScene::EndCloseEvent,
-    this, SLOT(onEndCloseEvent()));
 }
 
 
@@ -207,11 +204,6 @@ void qSlicerVirtualFractureReconstructionModuleWidget::enter()
   this->Superclass::enter();
 }
 
-//-----------------------------------------------------------------------------
-void qSlicerVirtualFractureReconstructionModuleWidget::onEndCloseEvent()
-{
-  this->initializeReconstructionNode(this->mrmlScene());
-}
 
 //-----------------------------------------------------------------------------
 void qSlicerVirtualFractureReconstructionModuleWidget::updateWidget()

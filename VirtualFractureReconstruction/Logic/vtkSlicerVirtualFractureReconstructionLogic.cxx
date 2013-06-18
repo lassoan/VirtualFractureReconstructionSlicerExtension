@@ -516,11 +516,11 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
 
         vtkXMLImageDataWriter* writer = vtkXMLImageDataWriter::New();
 
-        QString name="/home/kfritscher/LabelOut";
+        /*QString name="/home/kfritscher/LabelOut";
         name.append(counter);
-        name.append(".vtk");
+        name.append(".vtk");*/
 
-        writer->SetFileName(name.toStdString().c_str());
+        writer->SetFileName(tempNameFinal.toStdString().c_str());
         writer->SetInput(vnode->GetImageData());
         writer->Update();
         counter++;

@@ -64,7 +64,6 @@ protected slots:
   void AssignTransformToSliders(vtkMRMLLinearTransformNode* transform);
 
   void updateWidget();
-  void onEndCloseEvent();
   void updateParameters();
   void updateCLIModuleParameters();
   void onReferenceLabelmapChanged();
