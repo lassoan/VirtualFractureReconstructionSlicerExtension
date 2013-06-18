@@ -1166,6 +1166,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onStartRegistrationStep1(
 
     Q_D(const qSlicerVirtualFractureReconstructionModuleWidget);
     bool registrationPerformed=false;
+    qDebug() << "Updating CLI module parameters";
     this->updateCLIModuleParameters();
 
     qDebug() << "Reference labelmap on regstart"<<this->ReconstructionNode->GetReferenceLabelmapNodeID();
