@@ -217,6 +217,9 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
         currentImage->SetPixelContainer(m_PreProcessedLabel->GetPixelContainer());
 
         candidateImage=m_PreProcessedLabel;
+
+        TransformWriter::WriteTransform(m_PrepTransform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyMain"));
+
     }
 
     InputImagePointer initialGreyScaleImage = InputImageType::New();
@@ -412,7 +415,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();
 
-             TransformWriter::WriteTransform(m_InitialITKTransformPS,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyMain"));
+            TransformWriter::WriteTransform(m_InitialITKTransformPS,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyMain"));
 
             vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData, m_InitialITKTransformPS);
             this->m_CandidatePolyData->DeepCopy(temp);
