@@ -53,7 +53,7 @@ VTKMarchingCubesFilter<TInputImage>::MarchingCubesFilter(InputImagePointer inIma
     m_Caster->UpdateLargestPossibleRegion();
     typename ibia::GaussianFilter<ImageTypeFloat,ImageTypeFloat>::Pointer gauss = ibia::GaussianFilter<ImageTypeFloat,ImageTypeFloat>::New();
     gauss->SetSigma(sigma);
-    vtkImporter->SetInput(gauss->doFilter(m_Caster->GetOutput()));
+    vtkImporter->SetInputImage(gauss->doFilter(m_Caster->GetOutput()));
     vtkImporter->Update();
 
     vtkSmartPointer<vtkImageConstantPad> pad = vtkSmartPointer<vtkImageConstantPad>::New();

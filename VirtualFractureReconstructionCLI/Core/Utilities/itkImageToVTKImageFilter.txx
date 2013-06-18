@@ -76,7 +76,7 @@ ImageToVTKImageFilter<TInputImage>
 template <class TInputImage>
 void
 ImageToVTKImageFilter<TInputImage>
-::SetInput( const InputImageType * inputImage )
+::SetInputImage( const InputImageType * inputImage )
 {
   m_Exporter->SetInput( inputImage );
 }
