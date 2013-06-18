@@ -415,7 +415,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
         if(m_TransformInitializer->GetRegistrationPerformed())
         {
-            polywriter->SetFileName(polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTrans.vtk").c_str()););
+            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeTrans.vtk").c_str());
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();
 
@@ -423,11 +423,11 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
             this->m_CandidatePolyData->DeepCopy(temp);
 
             //std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
-            polywriter->SetFileName(polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str()););
+            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPoly.vtk").c_str());
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();
 
-            polywriter->SetFileName(polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"RefPoly.vtk").c_str()););
+            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"RefPoly.vtk").c_str());
             polywriter->SetInput(this->m_ReferencePolyData);
             polywriter->Update();
 
