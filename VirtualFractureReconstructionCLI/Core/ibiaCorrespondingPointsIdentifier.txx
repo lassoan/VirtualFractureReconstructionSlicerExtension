@@ -417,10 +417,10 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
             TransformWriter::WriteTransform(m_InitialITKTransformPS,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyMain"));
 
-            /*vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData, m_InitialITKTransformPS);
-            this->m_CandidatePolyData->DeepCopy(temp);
+            vtkPolyData* temp=this->TransformPolyData(m_CandidatePolyData, m_InitialITKTransformPS);
+            //this->m_CandidatePolyData->DeepCopy(temp);
 
-            polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterTransMain"+this->m_SpecialSuffix+".vtk").c_str());
+            /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterTransMain"+this->m_SpecialSuffix+".vtk").c_str());
             polywriter->SetInput(m_CandidatePolyData);
             polywriter->Update();*/
 
