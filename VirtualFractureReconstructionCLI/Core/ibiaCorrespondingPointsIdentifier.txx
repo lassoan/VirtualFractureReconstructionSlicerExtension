@@ -766,6 +766,8 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         }
         vtkMatrix->SetElement(i, 3, itkOffset[i]);
     }
+
+    TransformWriter::WriteTransform(transform,FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"TransformPolyAfterCreation"));
     polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyAfterCreation.vtk").c_str());
     polywriter->SetInput(polyData);
     polywriter->Update();
