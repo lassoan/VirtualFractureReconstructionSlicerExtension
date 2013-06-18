@@ -741,6 +741,9 @@ template<class LabelType, class InputImageType>
 typename CorrespondingPointsIdentifier<LabelType, InputImageType>::vtkSmartPolyDataPointer
 CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkSmartPolyDataPointer polyData, ITKTransformPointer transform, bool invert) {
 
+    vtkSmartPointer<vtkPolyDataWriter> polywriter =
+            vtkSmartPointer<vtkPolyDataWriter>::New();
+
     ITKMatrixType itkMatrix = transform->GetMatrix();
 
     ITKTransformOffsetType itkOffset = transform->GetOffset();
@@ -749,6 +752,9 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
     vtkMatrix4x4* vtkMatrix= vtkMatrix4x4::New();
     vtkMatrix->Identity();
 
+    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyBeforeCreation.vtk").c_str());
+    polywriter->SetInput(polyData);
+    polywriter->Update();
 
     for (unsigned int i = 0; i < 3; i++) {
         for (unsigned int j = 0; j < 3; j++) {
@@ -756,6 +762,9 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         }
         vtkMatrix->SetElement(i, 3, itkOffset[i]);
     }
+    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyrAfterCreation.vtk").c_str());
+    polywriter->SetInput(polyData);
+    polywriter->Update();
 
     vtkTrans->SetMatrix(vtkMatrix);
     std::cout<<"Starting transform filter"<<std::endl;
@@ -774,6 +783,10 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         polywriter->SetInput(transformFilter->GetOutput());
         polywriter->Update();*/
     std::cout<<"Polydata transformed"<<std::endl;
+
+    polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"CandPolyrAfterTransform.vtk").c_str());
+    polywriter->SetInput(polyData);
+    polywriter->Update();
     vtkMatrix->Delete();
     return transformFilter->GetOutput();
 }
