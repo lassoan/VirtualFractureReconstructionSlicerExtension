@@ -26,8 +26,6 @@ template<class ImageType>
 void
 DeepCopy<ImageType>::DeepCopyImage(ImagePointer input,ImagePointer output) {
 
-
-
   ConstIteratorType inputIterator(input, input->GetLargestPossibleRegion());
   IteratorType outputIterator(output, output->GetLargestPossibleRegion());
 

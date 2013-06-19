@@ -184,18 +184,11 @@ double* vtkSlicerVirtualFractureReconstructionLogic::GetColorFromIndex(int index
 bool vtkSlicerVirtualFractureReconstructionLogic
 ::CreateModel(vtkMRMLVirtualFractureReconstructionNode *reconstructionNode,vtkMRMLScalarVolumeNode* volumeNode,vtkMRMLModelHierarchyNode* hierarchyNode,bool reference)
 {
-    vtkSmartPointer<vtkMRMLCommandLineModuleNode>  modelMakerNode;
-   /* if(!reconstructionNode->GetModelMakerNodeID())
-    {*/
-          modelMakerNode=
-          this->Internal->ModelMakerLogic->CreateNodeInScene();
-          reconstructionNode->SetModelMakerNodeID(modelMakerNode->GetID());
-          assert(modelMakerNode.GetPointer() != 0);
-   /* }
-    else
-    {
-        modelMakerNode=vtkMRMLCommandLineModuleNode::SafeDownCast(this->GetMRMLScene()->GetNodeByID(reconstructionNode->GetModelMakerNodeID()));
-    }*/
+   vtkMRMLCommandLineModuleNode* modelMakerNode=
+    this->Internal->ModelMakerLogic->CreateNodeInScene();
+    reconstructionNode->SetModelMakerNodeID(modelMakerNode->GetID());
+    if(!modelMakerNode) return 1;
+
    vtkSmartPointer<vtkMRMLModelHierarchyNode> modelHierarchyNode;
    if(reconstructionNode->GetCurrentFragmentModelHierarchyNodeID()&&!hierarchyNode)
    {
@@ -241,8 +234,7 @@ bool vtkSlicerVirtualFractureReconstructionLogic
     vtkSmartPointer<vtkCollection> modelNodeColl=vtkSmartPointer<vtkCollection>::New();
     hierarchy->GetChildrenDisplayableNodes(modelNodeColl);
 
-    vtkSmartPointer<vtkMRMLModelNode> modelNode;
-    modelNode.TakeReference(vtkMRMLModelNode::SafeDownCast(modelNodeColl->GetItemAsObject(modelNodeColl->GetNumberOfItems()-1)));
+    vtkSmartPointer<vtkMRMLModelNode> modelNode=vtkMRMLModelNode::SafeDownCast(modelNodeColl->GetItemAsObject(modelNodeColl->GetNumberOfItems()-1));
 
     int labelVal=this->GetLabelColor(volumeNode->GetImageData());
     qDebug()<<"ModelDisplayNode: "<<modelNode->GetModelDisplayNode()<<"with color index "<<labelVal<<" created ";
@@ -264,9 +256,10 @@ bool vtkSlicerVirtualFractureReconstructionLogic
     else
         reconstructionNode->SetCurrentReferenceModelID(modelNode->GetID());
 
-    //this->GetMRMLScene()->GetNodeByID(modelNode->GetID())->HideFromEditorsOn();
+    this->GetMRMLScene()->RemoveNode(modelMakerNode);
 
-    //this->GetMRMLScene()->RemoveNode(modelMakerNode);
+
+    modelMakerNode=NULL;
     return 0;
 }
 
@@ -280,29 +273,6 @@ bool vtkSlicerVirtualFractureReconstructionLogic
     assert(reconstructionNodeCLI.GetPointer() != 0);
     qDebug() <<"Setting CLINodeID "<<reconstructionNodeCLI->GetID()<<" for reconstruction node with address"<<reconstructionNode;
     reconstructionNode->SetCLIReconstructionNodeID(reconstructionNodeCLI->GetID());
-
-    //Setting parameters
-    //TODO: Use CLIReconstructionPropertyNode consistently or not at all!!
-    /*qDebug()<<"Setting parameters";
-    qDebug()<<"RefLabel:"<<reconstructionNode->GetReferenceLabelmapNodeID();
-    reconstructionNodeCLI->SetParameterAsString("referenceLabelMap", reconstructionNode->GetReferenceLabelmapNodeID());
-    qDebug()<<"FragLabel:"<<reconstructionNode->GetFragmentLabelmapNodeID();
-    reconstructionNodeCLI->SetParameterAsString("fragmentLabelMap", reconstructionNode->GetFragmentLabelmapNodeID());
-    qDebug()<<"RefImage:"<<reconstructionNode->GetReferenceImageNodeID();
-    reconstructionNodeCLI->SetParameterAsString("referenceImage", reconstructionNode->GetReferenceImageNodeID());
-    qDebug()<<"FragImage:"<<reconstructionNode->GetFragmentImageNodeID();
-    reconstructionNodeCLI->SetParameterAsString("fragmentImage", reconstructionNode->GetFragmentImageNodeID());
-    //reconstructionNodeCLI->SetParameterAsString("candidateModelInput",reconstructionNode->GetCurrentFragmentModelID());
-    reconstructionNodeCLI->SetParameterAsString("fragmentModelOutput",this->CLIReconstructionPropertyNode->GetModifiedCandidatePolyDataID());
-    if(this->CLIReconstructionPropertyNode->GetInputReferenceModelID())
-        reconstructionNodeCLI->SetParameterAsString("referenceModelInput",this->CLIReconstructionPropertyNode->GetInputReferenceModelID());
-    reconstructionNodeCLI->SetParameterAsString("referenceModelOutput",this->CLIReconstructionPropertyNode->GetOutputReferencePolyDataID());
-    reconstructionNodeCLI->SetParameterAsString("outputFragment", this->CLIReconstructionPropertyNode->GetOutputLabelMapNodeID());
-    qDebug()<<"OutputTransformNode:"<<reconstructionNode->GetOutputTransformNodeID();
-    reconstructionNodeCLI->SetParameterAsString("outputTransform",reconstructionNode->GetOutputTransformNodeID());
-    qDebug()<<"InputTransformNode:"<<reconstructionNode->GetCurrentInitialTransformNodeID();
-    reconstructionNodeCLI->SetParameterAsString("inputTransform",reconstructionNode->GetCurrentInitialTransformNodeID());
-    reconstructionNodeCLI->SetParameterAsBool("fineTuning",this->CLIReconstructionPropertyNode->GetFineTuningOnly());*/
 
     //Set all parameters
     this->UpdateStep1Parameters(reconstructionNodeCLI,reconstructionNode);
@@ -348,10 +318,7 @@ bool vtkSlicerVirtualFractureReconstructionLogic
 
 void vtkSlicerVirtualFractureReconstructionLogic::CorrectPose(std::string incorrectModelID, std::string correctNodeID,std::string additionalTransformNodeID,bool invert)
 {
-    /*vtkSmartPointer<vtkMRMLModelNode> incorrectModel;
-    incorrectModel.TakeReference(vtkMRMLModelNode::SafeDownCast(this->GetMRMLScene()->GetNodeByID(incorrectModelID)));
-    vtkSmartPointer<vtkMRMLScalarVolumeNode> correctNode;
-    correctNode.TakeReference(vtkMRMLScalarVolumeNode::SafeDownCast(this->GetMRMLScene()->GetNodeByID(correctNodeID)));*/
+
     vtkSmartPointer<vtkMatrix4x4> referenceMatrix = vtkSmartPointer<vtkMatrix4x4>::New();
     vtkMRMLScalarVolumeNode::SafeDownCast(this->GetMRMLScene()->GetNodeByID(correctNodeID))->GetIJKToRASDirectionMatrix(referenceMatrix);
     vtkMRMLModelNode::SafeDownCast(this->GetMRMLScene()->GetNodeByID(incorrectModelID))->ApplyTransformMatrix(referenceMatrix);
@@ -484,11 +451,14 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
         vnode->SetName(labelName.c_str());
 
         this->GetMRMLScene()->AddNode(vnode);
+        vnode->SetScene(this->GetMRMLScene());
 
         //Define display node, color node, stroage node for new volume
         vtkSmartPointer<vtkMRMLLabelMapVolumeDisplayNode> displayNode = vtkSmartPointer<vtkMRMLLabelMapVolumeDisplayNode>::New();
 
         this->GetMRMLScene()->AddNode(displayNode);
+        vnode->SetScene(this->GetMRMLScene());
+
         displayNode->SetInputImageData((*it).second);
         displayNode->SetDefaultColorMap();
 
@@ -508,21 +478,12 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
         storageNode->SetFileName(tempNameFinal.toStdString().c_str());
 
         this->GetMRMLScene()->AddNode(storageNode);
+        storageNode->SetScene(this->GetMRMLScene());
         //vnode->AddAndObserveStorageNodeID(storageNode->GetID());
 
         volumeNodes[volumeOrderedImages.size()-counter]=vnode->GetID();
 
         qDebug()<<"ADDING LABEL WITH "<<(*it).first<<" VOXELS" ;
-
-        vtkXMLImageDataWriter* writer = vtkXMLImageDataWriter::New();
-
-        /*QString name="/home/kfritscher/LabelOut";
-        name.append(counter);
-        name.append(".vtk");*/
-
-        writer->SetFileName(tempNameFinal.toStdString().c_str());
-        writer->SetInput(vnode->GetImageData());
-        writer->Update();
         counter++;
 
     }

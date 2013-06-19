@@ -53,6 +53,7 @@ vtkMRMLVirtualFractureReconstructionNode::vtkMRMLVirtualFractureReconstructionNo
     this->CurrentReferenceModelID=NULL;
     this->CurrentFragmentTransformNodeID=NULL;
     this->CurrentInitialTransformNodeID=NULL;
+    this->CurrentModifiedReferenceModelID=NULL;
     this->ReferenceModelNodeID=NULL;
     this->ModelMakerNodeID=NULL;
     this->CLIReconstructionNodeID=NULL;
@@ -190,7 +191,6 @@ vtkMRMLVirtualFractureReconstructionNode::~vtkMRMLVirtualFractureReconstructionN
     {
         this->SetReferenceImageNodeID(NULL);
     }
-
 
     if (this->OutputLabelmapNodeID)
     {

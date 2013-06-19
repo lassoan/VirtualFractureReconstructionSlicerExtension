@@ -1841,6 +1841,9 @@
      <layout class="QGridLayout" name="gridLayout_7">
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabWidget">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -1857,7 +1860,7 @@
          <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -2000,6 +2003,9 @@
            </item>
            <item row="8" column="1">
             <widget class="QDoubleSpinBox" name="SigmaFactor">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
              </property>
@@ -2019,6 +2025,9 @@
            </item>
            <item row="6" column="0">
             <widget class="QLabel" name="PointPerctEMLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Percentage of points used during EM-ICP registration</string>
              </property>
@@ -2077,6 +2086,9 @@
            </item>
            <item row="7" column="0">
             <widget class="QLabel" name="SigmaInfLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2087,6 +2099,9 @@
            </item>
            <item row="6" column="1">
             <widget class="QDoubleSpinBox" name="EMPointPercentage">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Percentage of points used during EM-ICP registration</string>
              </property>
@@ -2167,6 +2182,9 @@
            </item>
            <item row="3" column="0">
             <widget class="QCheckBox" name="UseEMICP">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Use EM-ICP algorithm for registration (slower than ICP, but more accurate)</string>
              </property>
@@ -2212,6 +2230,9 @@
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="PointDecimationLabel">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="toolTip">
               <string>Portion of surface points used for feature calculation </string>
              </property>
@@ -2235,6 +2256,9 @@
            </item>
            <item row="7" column="1">
             <widget class="QDoubleSpinBox" name="SigmaInf">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2286,10 +2310,16 @@
              <property name="text">
               <string>Use ICP (less accurate)</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item row="5" column="1">
             <widget class="QDoubleSpinBox" name="PointDecimation">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="toolTip">
               <string>Portion of surface points used for feature calculation </string>
              </property>
@@ -2300,12 +2330,15 @@
               <double>0.050000000000000</double>
              </property>
              <property name="value">
-              <double>0.400000000000000</double>
+              <double>0.750000000000000</double>
              </property>
             </widget>
            </item>
            <item row="8" column="0">
             <widget class="QLabel" name="SigmaFactoLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
              </property>

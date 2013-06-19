@@ -86,7 +86,7 @@ protected:
   QScopedPointer<qSlicerVirtualFractureReconstructionModuleWidgetPrivate> d_ptr;
 
   void setMRMLScene(vtkMRMLScene* scene);
-  void initializeReconstructionNode(vtkMRMLScene* scene);
+  void checkReconstructionNode(vtkMRMLScene* scene);
   void SetupTreeView(qMRMLTreeView* tree, QString hierarchyName="ModelHierarchy");
   virtual void setup();
   void enter();

@@ -104,7 +104,7 @@ qSlicerVirtualFractureReconstructionModuleWidget::qSlicerVirtualFractureReconstr
 
 qSlicerVirtualFractureReconstructionModuleWidget::~qSlicerVirtualFractureReconstructionModuleWidget()
 {
-
+    this->ReconstructionNode=NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -117,22 +117,21 @@ Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
         return;
     }
 
-  this->initializeReconstructionNode(scene);
+  this->checkReconstructionNode(scene);
 
   this->updateWidget();
 
-  d->InputDataTree->setRootIndex(
-              d->InputDataTree->sortFilterProxyModel()->mrmlSceneIndex());
+
 
   this->SetupTreeView(d->FragmentModelsTree);
   this->SetupTreeView(d->ResultModelsTree1);
   this->SetupTreeView(d->ResultModelsTree2);
 
-
-
   QStringList nodeTypesInput;
 
+  d->InputDataTree->setRootIndex(d->InputDataTree->sortFilterProxyModel()->mrmlSceneIndex());
   nodeTypesInput << QString("vtkMRMLScalarVolumeNode");
+
   d->InputDataTree->setNodeTypes(nodeTypesInput);
   d->FragmentImageComboBox->setNodeTypes(nodeTypesInput);
   d->ReferenceImageComboBox->setNodeTypes(nodeTypesInput);
@@ -170,32 +169,38 @@ void qSlicerVirtualFractureReconstructionModuleWidget::SetupTreeView(qMRMLTreeVi
     tree->setSelectionMode(QTreeView::ExtendedSelection);
     tree->setSelectionBehavior(QTreeView::SelectRows);
 }
-//-----------------------------------------------------------------------------
-void qSlicerVirtualFractureReconstructionModuleWidget::initializeReconstructionNode(vtkMRMLScene* scene)
+
+
+void qSlicerVirtualFractureReconstructionModuleWidget::checkReconstructionNode(vtkMRMLScene* scene)
 {
-  vtkCollection* reconstructionNodes = scene->GetNodesByClass("vtkMRMLVirtualFractureReconstructionNode");
-
-  if(reconstructionNodes->GetNumberOfItems() > 0)
+    vtkCollection* reconstructionNodes = scene->GetNodesByClass("vtkMRMLVirtualFractureReconstructionNode");
+    Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
+    if(reconstructionNodes->GetNumberOfItems() > 0)
     {
-    this->ReconstructionNode = vtkMRMLVirtualFractureReconstructionNode::SafeDownCast(reconstructionNodes->GetItemAsObject(0));
-    if(!this->ReconstructionNode)
-      {
-      qCritical() << "FATAL ERROR: Cannot instantiate VirtualFractureReconstructionNode";
-      Q_ASSERT(this->ReconstructionNode);
-      }
+        this->ReconstructionNode = vtkMRMLVirtualFractureReconstructionNode::SafeDownCast(reconstructionNodes->GetItemAsObject(0));
+        if(!this->ReconstructionNode)
+        {
+            qCritical() << "FATAL ERROR: Cannot instantiate VirtualFractureReconstructionNode";
+        }
     }
-  else
+    else
     {
-    qDebug() << "Creating new fracture reconstruction node";
-    this->ReconstructionNode = vtkMRMLVirtualFractureReconstructionNode::New();
-    scene->AddNode(this->ReconstructionNode);
-    this->ReconstructionNode->Delete();
-    }
-  //this->InitializeTransform();
-  this->InitializeTreeView();
+        qDebug() << "Creating new fracture reconstruction node";
+        this->ReconstructionNode = vtkMRMLVirtualFractureReconstructionNode::New();
+        scene->AddNode(this->ReconstructionNode);
 
-  reconstructionNodes->Delete();
+        //Reseting input data tree, should rather be somewhere else
+        d->InputDataTree->reset();
+        d->InputDataTree->setRootIndex(d->InputDataTree->sortFilterProxyModel()->mrmlSceneIndex());
+
+        QStringList nodeTypesInput;
+        nodeTypesInput << QString("vtkMRMLScalarVolumeNode");
+        d->InputDataTree->setNodeTypes(nodeTypesInput);
+    }
+    reconstructionNodes->Delete();
 }
+
+
 
 //-----------------------------------------------------------------------------
 void qSlicerVirtualFractureReconstructionModuleWidget::enter()
@@ -266,6 +271,9 @@ void qSlicerVirtualFractureReconstructionModuleWidget::updateParameters()
 void qSlicerVirtualFractureReconstructionModuleWidget::onReferenceLabelmapChanged()
 {
   Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
+
+  //make sure reconstruction node is present
+  this->checkReconstructionNode(this->mrmlScene());
   if(!this->ReconstructionNode)
   {
       qDebug() <<"No reconstruction node present";
@@ -284,6 +292,10 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onReferenceLabelmapChange
 void qSlicerVirtualFractureReconstructionModuleWidget::onReferenceImageChanged()
 {
   Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
+
+  //make sure reconstruction node is present
+  this->checkReconstructionNode(this->mrmlScene());
+
   if(!this->ReconstructionNode)
   {
       qDebug() <<"No reconstruction node present";
@@ -302,11 +314,10 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onReferenceImageChanged()
 void qSlicerVirtualFractureReconstructionModuleWidget::onFragmentImageChanged()
 {
   Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
-  if(!this->ReconstructionNode)
-  {
-      qDebug() <<"No reconstruction node present";
-    return;
-  }
+
+  //make sure reconstruction node is present
+  this->checkReconstructionNode(this->mrmlScene());
+
   vtkMRMLNode* node = d->FragmentImageComboBox->currentNode();
   if(node)
     {
@@ -320,11 +331,9 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onFragmentImageChanged()
 void qSlicerVirtualFractureReconstructionModuleWidget::onFragmentModelsSelectionChanged()
 {
     Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
-    if(!this->ReconstructionNode)
-    {
-        qDebug() <<"No reconstruction node present";
-      return;
-    }
+
+    this->checkReconstructionNode(this->mrmlScene());
+
     vtkMRMLNode* node = d->FragmentModelsTree->currentNode();
 
     if(node)
@@ -629,11 +638,12 @@ void qSlicerVirtualFractureReconstructionModuleWidget::AssignTransformToSliders(
 {
     Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
     d->MRMLRotationSliders->setMRMLTransformNode(transform);
-    d->MRMLTranslationSliders->setMRMLTransformNode(transform);
     d->MRMLRotationSliders->activateWindow();
     d->MRMLRotationSliders->update();
+
+    d->MRMLTranslationSliders->setMRMLTransformNode(transform);
     d->MRMLTranslationSliders->activateWindow();
-    d->MRMLRotationSliders->update();
+    d->MRMLTranslationSliders->update();
 }
 
 
@@ -722,6 +732,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onResetManualTransformBut
           transformNodeID=this->ReconstructionNode->GetInitialTransformIDForModel(modelIDs[i]);
           vtkSmartPointer<vtkMRMLLinearTransformNode> iniTransform=vtkMRMLLinearTransformNode::SafeDownCast(this->mrmlScene()->GetNodeByID(transformNodeID));
           d->MRMLRotationSliders->resetUnactiveSliders();
+          d->MRMLTranslationSliders->resetUnactiveSliders();
           iniTransform->GetMatrixTransformToParent()->Identity();
           qDebug()<<"Resetting transform node "<<iniTransform->GetName();
       }
@@ -1099,10 +1110,9 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
     std::map<unsigned char, unsigned int> labelColors;
     foreach(QModelIndex selectedIndex, selectedIndices)
     {
-        vtkSmartPointer<vtkMRMLScalarVolumeNode> node =
-                vtkSmartPointer<vtkMRMLScalarVolumeNode>::Take(
+        vtkMRMLScalarVolumeNode* node =
                     vtkMRMLScalarVolumeNode::SafeDownCast(
-                        d->InputDataTree->sortFilterProxyModel()->mrmlNodeFromIndex(selectedIndex)));
+                        d->InputDataTree->sortFilterProxyModel()->mrmlNodeFromIndex(selectedIndex));
         node->SetLabelMap(1);
 
         labelColors=d->logic()->GetLabelIntensities(node->GetImageData());
@@ -1118,7 +1128,6 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
             {
                 labelmaps.push_back(vtkMRMLScalarVolumeNode::SafeDownCast(this->mrmlScene()->GetNodeByID(labelmapIDs[i])));
             }
-            node->Delete();
         }
         else
             labelmaps.push_back(node);
@@ -1141,9 +1150,9 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
         }
         //d->InputDataTree->sortFilterProxyModel()->setHiddenNodeIDs(QStringList()<<d->InputDataTree->sortFilterProxyModel()->hiddenNodeIDs()<<vnode->GetID());
     }
-    //this->mrmlScene()->Up
     d->ReconstructionTab->setCurrentIndex(1);
     labelmaps.clear();
+    labelColors.clear();
 
 }
 
@@ -1288,19 +1297,30 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onStartRegistrationStep1(
             }
         }
     }
+
     if(registrationPerformed)
     {
         this->setCursor(Qt::ArrowCursor);
         d->RegistrationStep1Tab->setEnabled(true);
+        //Start button 2 will only be enabled when Registration step 1 has been performed for all fragments
+        //d->StartButton2->setEnabled(0);
         this->ReconstructionNode->SetCurrentlyActiveModelTab(2);
         qDebug ()<< "DONE";
 
-        //d->ResultModelsTree1->sortFilterProxyModel()->setHiddenNodeIDs(QStringList() <<this->ReconstructionNode->GetCurrentReferenceModelID());
+
         d->AcceptResultButton->setEnabled(1);
-        //d->ResultModelsTree1->sortFilterProxyModel()->setHiddenNodeIDs(QStringList() <<this->ReconstructionNode->GetCurrentFragmentModelHierarchyNodeID());
+
         d->ReconstructionTab->setCurrentIndex(2);
         d->ResultModelsTree1->expand(d->ResultModelsTree1->sortFilterProxyModel()->indexFromMRMLNode(this->mrmlScene()->GetNodeByID(this->ReconstructionNode->GetCurrentFragmentModelHierarchyNodeID())));
     }
+    //Check if all fragments have been registered so that fine tuning button can be activated
+    //std::vector<std::string> modelIDs=this->ReconstructionNode->GetModelIDs();
+    //Skip reference model therefore start with numModel=1 (remove reference from model container??)
+    /*for(unsigned int numModel=1;numModel<modelIDs.size();numModel++)
+    {
+        if(this->ReconstructionNode->GetStep1TransformIDForModel(modelIDs[numModel]).compare("")==0) return ;
+    }
+    d->StartButton2->setEnabled(1);*/
 }
 
 

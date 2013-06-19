@@ -1,6 +1,8 @@
 #ifndef SheetnessImageCreator_txx_
 #define SheetnessImageCreator_txx_
 
+#include "DeepCopy.h"
+
 /*
  * SheetnessImageCreator.cpp
  *
@@ -11,38 +13,45 @@
 #include "SheetnessImageCreator.h"
 
 
-template<class ImageType>
-SheetnessImageCreator<ImageType>::SheetnessImageCreator(){
+template<class InputImageType>
+SheetnessImageCreator<InputImageType>::SheetnessImageCreator(){
 
-	m_SheetnessFilter = SheetnessFilterType::New();
-	m_HessianFilter= HessianFilterType::New();
-	m_EigenAnalysis= EigenAnalysisFilterType::New();
+    //m_SheetnessFilter = SheetnessFilterType::New();
+    //m_HessianFilter= HessianFilterType::New();
+    //m_EigenAnalysis= EigenAnalysisFilterType::New();
+    m_SheetnessImage = InputImageType::New();
 
 }
 
-template<class ImageType>
-SheetnessImageCreator<ImageType>::~SheetnessImageCreator() {
+template<class InputImageType>
+SheetnessImageCreator<InputImageType>::~SheetnessImageCreator() {
 	// TODO Auto-generated destructor stub
     m_SheetnessImage=NULL;
 }
 
 
-template<class ImageType>
-void SheetnessImageCreator<ImageType>::doFilter(InputImagePointer input) {
+template<class InputImageType>
+void SheetnessImageCreator<InputImageType>::doFilter(InputImagePointer input) {
 
-	m_HessianFilter->SetInput(input);
-    m_HessianFilter->Modified();
-	m_EigenAnalysis->SetInput(m_HessianFilter->GetOutput());
-    m_EigenAnalysis->Modified();
-	m_SheetnessFilter->SetInput(m_EigenAnalysis->GetOutput());
-    m_SheetnessFilter->Modified();
+    SheetnessFilterPointer sheetnessFilter = SheetnessFilterType::New();
+    HessianFilterPointer hessianFilter= HessianFilterType::New();
+    EigenAnalysisFilterPointer eigenAnalysis= EigenAnalysisFilterType::New();
 
-	m_SheetnessFilter->SetDetectBrightSheets(true);
+    hessianFilter->SetInput(input);
+    hessianFilter->Modified();
 
-	m_EigenAnalysis->SetDimension(3);
+    eigenAnalysis->SetInput(hessianFilter->GetOutput());
+    eigenAnalysis->SetDimension(3);
+    eigenAnalysis->Modified();
 
-    m_SheetnessFilter->UpdateLargestPossibleRegion();
-	m_SheetnessImage=m_SheetnessFilter->GetOutput();
+    sheetnessFilter->SetInput(eigenAnalysis->GetOutput());
+    sheetnessFilter->Modified();
+
+    sheetnessFilter->SetDetectBrightSheets(true);
+    sheetnessFilter->UpdateLargestPossibleRegion();
+
+    typename ibia::DeepCopy<InputImageType>::Pointer clone = ibia::DeepCopy<InputImageType>::New();
+    clone->CreateAndDeepCopyImage(m_SheetnessFilter->GetOutput(),m_SheetnessImage);
 
 }
 
