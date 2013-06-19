@@ -111,6 +111,14 @@ main(int argc, char **argv)
     m_Ini->WriteValue<int>("Mahalanobis","UseNormals",useNormals);
     m_Ini->WriteValue<int>("Mahalanobis","UseTexture",useTexture);
 
+    m_Ini->WriteValue<int>("Initializer","UseEM-ICPForInitialization",!useICP);
+
+    m_Ini->WriteValue<float>("EM-ICP","sigma_factor_ini",sigmaFactor);
+    m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",sigmaInf);
+    m_Ini->WriteValue<unsigned int>("EM-ICP","PerctCand",pointPercentageEMICP);
+    m_Ini->WriteValue<unsigned int>("EM-ICP","PerctRef",pointPercentageEMICP);
+
+
     m_Ini->WriteValue<float>("General","DecimationFactorCandidate",decimationFactor);
     m_Ini->WriteValue<float>("General","DecimationFactorReference",decimationFactor);
 
