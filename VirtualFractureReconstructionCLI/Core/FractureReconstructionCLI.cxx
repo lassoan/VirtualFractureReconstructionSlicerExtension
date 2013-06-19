@@ -111,21 +111,12 @@ main(int argc, char **argv)
     m_Ini->WriteValue<int>("Mahalanobis","UseNormals",useNormals);
     m_Ini->WriteValue<int>("Mahalanobis","UseTexture",useTexture);
 
-    m_Ini->WriteValue<int>("Initializer","UseEM-ICPForInitialization",!useICP);
-
-    m_Ini->WriteValue<float>("EM-ICP","sigma_factor_ini",sigmaFactor);
-    m_Ini->WriteValue<float>("EM-ICP","sigma_inf_ini",sigmaInf);
-    m_Ini->WriteValue<unsigned int>("EM-ICP","PerctCand",pointPercentageEMICP);
-    m_Ini->WriteValue<unsigned int>("EM-ICP","PerctRef",pointPercentageEMICP);
-
-
     m_Ini->WriteValue<float>("General","DecimationFactorCandidate",decimationFactor);
     m_Ini->WriteValue<float>("General","DecimationFactorReference",decimationFactor);
 
     m_Ini->WriteValue<unsigned int>("General","NumberOfBinsHaralick",histogramBins);
     m_Ini->WriteValue<float>("Texture","CylinderLength",cylinderLength);
     m_Ini->WriteValue<float>("Texture","CylinderRadius",cylinderRadius);
-
 
     //Update LoadReferenceFromFile after first fragment
     m_Ini->WriteValue<int>("General","LoadReferencePolyDataFromFile",UseReference);
