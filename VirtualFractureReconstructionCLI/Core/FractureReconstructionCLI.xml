@@ -60,7 +60,7 @@
     <parameters>
     <label>Advanced</label>
     <boolean>
-        <name>UseReference</name>
+        <name>useReference</name>
         <longflag>--useReference</longflag>
         <label>Use predefined reference polydata file (optional)</label>
         <description>If you have a predefined reference polydata file containing metadata like curvature and texutre information computation will be faster</description>
@@ -121,7 +121,7 @@
         <element>no</element>
     </boolean>
     <string>
-        <name>TempFilePath</name>
+        <name>slicerTempPath</name>
         <longflag>--slicerTempPath</longflag>
         <label>Path to folder in which temp files are stored </label>
         <description>You can provide a path in which some advanced parameters can be predefined</description>
@@ -129,7 +129,7 @@
 
 
     <string>
-        <name>SettingsFileName</name>
+        <name>settingsFileName</name>
         <longflag>--settingsFileName</longflag>
         <label>Name of file containing parameter settings </label>
         <description>You can provide a file in which some advanced parameters can be predefined</description>
@@ -137,7 +137,7 @@
     </string>
 
     <string>
-        <name>InitialTransformName</name>
+        <name>initialTransformName</name>
         <longflag>--initialTransformName</longflag>
         <label>Predefined Transform (optional):</label>
         <description>You can use a predefined transform to used initially to pre-align a fragment to the reference label </description>
@@ -146,8 +146,8 @@
 
 
     <string>
-        <name>OutputDirectory</name>
-        <longflag>--OutputDirectory</longflag>
+        <name>outputDirectory</name>
+        <longflag>--outputDirectory</longflag>
         <label>Predefined output directory for debugging purposes (optional):</label>
         <description>Here you can specify a directory where output files for debugging purposes will be stored</description>
         <default></default>
@@ -230,6 +230,17 @@
         <element>yes</element>
         <element>no</element>
     </boolean>
+
+    <integer>
+        <name>maxICPIterations</name>
+        <longflag>--maxICPIterations</longflag>
+        <label>Maximum number of iterations for ICP</label>
+        <description>Set maximum number of iterations for ICP registration algorithm (more iterations = slower = better results)</description>
+        <default>101</default>
+        <minimum>1</minimum>
+        <maximum>1000</maximum>
+    </integer>
+
     <boolean>
         <name>UseCoordinates</name>
         <longflag>--UseCoordinates</longflag>
@@ -331,5 +342,27 @@
         <minimum>2</minimum>
         <maximum>20</maximum>
      </float>
+
+    <float>
+        <name>maxPointDistanceMulti</name>
+        <longflag>--maxPointDistanceMulti</longflag>
+        <label>Maximum point distance between adjacent fragments</label>
+        <description>Determines the maximum distance between the fracture srufaces of two pre-aligned fragements. Points with larger distance will not be used for fine tuning registration</description>
+        <default>5</default>
+        <minimum>0.1</minimum>
+        <maximum>20</maximum>
+     </float>
+
+    <float>
+        <name>maxCrestCurvatureMulti</name>
+        <longflag>--maxCrestCurvatureMulti</longflag>
+        <label>Maximum curvature value for crest points</label>
+        <description>Determines the maximum distance between the fracture srufaces of two pre-aligned fragements. Points with larger distance will not be used for fine tuning registration</description>
+        <default>-0.1</default>
+        <minimum>-0.5</minimum>
+        <maximum>0.5</maximum>
+     </float>
+
+Curvature values that determines if point is likely to be on the fracture crest. Points with higher value are likely to be not part of the fracture crest
      </parameters>
 </executable>

@@ -46,17 +46,18 @@ void MultiFragmentRegistrator::Initialize(){
     //this->m_ActiveReferencePolyData->SetPoints(this->m_ActiveReferencePointSet);
     //this->m_ActiveCandidatePolyData->SetPoints(this->m_ActiveCandidatePointSet);
     this->m_Ini->SetFileName(this->m_DefaultIniName);
-    this->m_Ini->LoadValues();
-
-
 }
 
 void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
+    this->m_Ini->LoadValues();
+
+
+    this->m_FinalTransformContainer.clear();
 
     std::string outputFolder = this->m_Ini->ReadString("Multi","FragmentOutputFolder");
-    m_MaxPointDistanceToRef=m_Ini->ReadValue<float>("Multi","MaxPointDistanceToRef",5);
-    m_MaxPointDistanceToExtCand=m_Ini->ReadValue<float>("Multi","MaxPointDistanceToExtCand",5);
-    m_CrestCurvatureMaxVal=m_Ini->ReadValue<float>("Multi","CrestCurvatureThreshold",-0.05);
+    m_MaxPointDistanceToRef=m_Ini->ReadValue<float>("Multi","MaxPointDistanceMulti",5);
+    m_MaxPointDistanceToExtCand=m_Ini->ReadValue<float>("Multi","MaxPointDistanceMulti",5);
+    m_CrestCurvatureMaxVal=m_Ini->ReadValue<float>("Multi","MaxCrestCurvatureMulti",-0.1);
 
     this->InitializeActiveReferencePointSet();
 
@@ -150,8 +151,8 @@ void MultiFragmentRegistrator::RefineCrestPointSelection(vtkSmartPointer<vtkPoly
 
 registrationParameters MultiFragmentRegistrator::GetEMICPParameters()
 {
+    //Currently not in use
     registrationParameters para;
-
     para.sigma_p2=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_p2_ini",3);
     para.sigma_inf=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_inf_ini",0.1);
     para.sigma_factor=m_Ini->ReadValue<float>("EM-ICP-Multi","sigma_factor_ini",0.99);
@@ -254,7 +255,7 @@ vtkPoints* MultiFragmentRegistrator::UpdateActiveReferencePointSet(){
     for (int p=0;p<this->m_ActiveCandidatePolyData->GetNumberOfPoints();p++)
     {
         if(this->m_ActiveCandidatePolyData->GetPointData()->GetArray("ActivePoints")->GetTuple1(p)==0
-                &&this->m_ActiveCandidatePolyData->GetPointData()->GetArray("CrestPoints")->GetTuple1(p)==1 )
+           && this->m_ActiveCandidatePolyData->GetPointData()->GetArray("CrestPoints")->GetTuple1(p)==1 )
         {
             double newPoint[3];
             this->m_ActiveCandidatePolyData->GetPoint(p,newPoint);
@@ -274,7 +275,7 @@ vtkPoints* MultiFragmentRegistrator::UpdateActiveReferencePointSet(){
 vtkPolyData* MultiFragmentRegistrator::IdentifyClosestInactiveFragment(){
     unsigned int maxNumberOfClosePoints=0;
     unsigned int currentActiveFragmentNumber=0;
-    vtkSmartPointer<vtkIntArray> activePoints= vtkSmartPointer<vtkIntArray>::New();
+    //vtkSmartPointer<vtkIntArray> activePoints= vtkSmartPointer<vtkIntArray>::New();
 
     this->m_ClosestPointFinder->SetReferencePolyData(this->m_ActiveReferencePolyData);
 

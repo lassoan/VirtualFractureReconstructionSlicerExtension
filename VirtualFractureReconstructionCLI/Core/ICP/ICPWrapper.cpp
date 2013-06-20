@@ -27,7 +27,7 @@ ICPWrapper::ICPWrapper()
 
 	m_Parameters.noviewer=0;
 	m_Parameters.nostop=0;
-	m_Parameters.maxIteration=100;
+    m_Parameters.maxIterations=100;
 }
 
 ICPWrapper::~ICPWrapper()
@@ -38,6 +38,9 @@ ICPWrapper::~ICPWrapper()
 void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmartPointer<vtkPolyData> candidate,unsigned int percentRef,unsigned int percentCand)
 {
 
+    //Currently not used. Trying to avoid warnings wihtoput deleting (might use them later on
+    percentRef=100;
+    percentCand=100;
 
 	// Setup ICP transform
     vtkSmartPointer<vtkMaskPoints> maskPointsC = vtkSmartPointer<vtkMaskPoints>::New();
@@ -52,22 +55,23 @@ void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmart
     maskPointsR->GenerateVerticesOn();
     maskPointsR->Update();
 
-    /*vtkSmartPointer<vtkDecimatePro> decimateR = vtkSmartPointer<vtkDecimatePro>::New();
+    //decimation not used at the moment->causes crash for some reason
+    vtkSmartPointer<vtkDecimatePro> decimateR = vtkSmartPointer<vtkDecimatePro>::New();
     decimateR->SetInput(maskPointsR->GetOutput());
-    decimateR->SetTargetReduction(1);
+    decimateR->SetTargetReduction(percentRef/100);
     decimateR->PreserveTopologyOn();
 
     vtkSmartPointer<vtkDecimatePro> decimateC = vtkSmartPointer<vtkDecimatePro>::New();
     decimateC->SetInput(maskPointsC->GetOutput());
-    decimateC->SetTargetReduction(1);
-    decimateC->PreserveTopologyOn();*/
+    decimateC->SetTargetReduction(percentCand/100);
+    decimateC->PreserveTopologyOn();
 
     m_ICPVTK ->SetSource(maskPointsC->GetOutput());
     m_ICPVTK ->SetTarget(maskPointsR->GetOutput());
 	m_ICPVTK ->GetLandmarkTransform()->SetModeToRigidBody();
-	m_ICPVTK ->SetMaximumNumberOfIterations(this->m_Parameters.maxIteration);
+    m_ICPVTK ->SetMaximumNumberOfIterations(this->m_Parameters.maxIterations);
     //m_ICPVTK ->StartByMatchingCentroidsOn();
-	m_ICPVTK ->Modified();
+    m_ICPVTK->Modified();
 	m_ICPVTK->Update();
 
 	int count=0;

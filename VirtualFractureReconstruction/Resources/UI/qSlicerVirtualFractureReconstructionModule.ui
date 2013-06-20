@@ -2024,15 +2024,15 @@
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="PointPerctEMLabel">
+            <widget class="QLabel" name="MaxICPIterationsLabel">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="toolTip">
               <string>Percentage of points used during EM-ICP registration</string>
              </property>
              <property name="text">
-              <string>Point perct. :</string>
+              <string>Max ICP iterations:</string>
              </property>
             </widget>
            </item>
@@ -2098,18 +2098,18 @@
             </widget>
            </item>
            <item row="6" column="1">
-            <widget class="QDoubleSpinBox" name="EMPointPercentage">
+            <widget class="QDoubleSpinBox" name="MaxICPIterations">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="toolTip">
-              <string>Percentage of points used during EM-ICP registration</string>
+              <string>Maximum number of iterations for ICP </string>
              </property>
              <property name="maximum">
-              <double>100.000000000000000</double>
+              <double>1000.000000000000000</double>
              </property>
              <property name="value">
-              <double>25.000000000000000</double>
+              <double>101.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -2250,7 +2250,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Parameters for EMICP:</string>
+              <string>Parameters for ICP:</string>
              </property>
             </widget>
            </item>
@@ -2401,6 +2401,9 @@
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="5" column="0" rowspan="2">
             <widget class="QLabel" name="SigmaIniLabel_FT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2434,6 +2437,9 @@
            </item>
            <item row="9" column="0">
             <widget class="QLabel" name="SigmaFactoLabel_FT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Sigma value for EM-ICP alogrithm is the value by which sigma will by multiplied after each iteration</string>
              </property>
@@ -2444,6 +2450,9 @@
            </item>
            <item row="5" column="1" rowspan="2">
             <widget class="QDoubleSpinBox" name="SigmaIni_FT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2457,6 +2466,9 @@
            </item>
            <item row="7" column="1">
             <widget class="QDoubleSpinBox" name="SigmaInf_FT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2498,7 +2510,7 @@
             </widget>
            </item>
            <item row="1" column="2">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox">
+            <widget class="QDoubleSpinBox" name="PointDistanceFT">
              <property name="toolTip">
               <string>Determines the maximum distance between the fracture srufaces of two pre-aligned fragements. Points with larger distance will not be used for fine tuning registration</string>
              </property>
@@ -2518,6 +2530,9 @@
            </item>
            <item row="9" column="1">
             <widget class="QDoubleSpinBox" name="SigmaFactor_FT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="minimum">
               <double>0.500000000000000</double>
              </property>
@@ -2534,6 +2549,9 @@
            </item>
            <item row="7" column="0">
             <widget class="QLabel" name="SigmaInfLabel_FT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="toolTip">
               <string>Value that determines stopping criterion for EM-ICP value (lower values = more itertions)</string>
              </property>
@@ -2544,6 +2562,9 @@
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="EMICPParametersLabelFT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="font">
               <font>
                <weight>75</weight>

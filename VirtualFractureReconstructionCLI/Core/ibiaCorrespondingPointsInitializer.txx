@@ -465,13 +465,14 @@ CorrespondingPointsInitializer<InputImageType, GreyscaleImageType>::SetEMICPPara
     }*/
 
     registrationParameters para;
-
+/*
     para.sigma_p2=this->m_SigmaP2Ini<150?this->m_SigmaP2Ini : 150;
     para.sigma_inf=m_Ini->ReadValue<float>("EM-ICP","sigma_inf_ini",1);
     if(para.sigma_inf>para.sigma_p2) para.sigma_inf=1;
     para.sigma_factor=m_Ini->ReadValue<float>("EM-ICP","sigma_factor_ini",0.995);
     para.d_02=this->m_D02ini;//m_Ini->ReadValue<float>("EM-ICP","d_02_ini",10);
-    m_EMICP->SetViewer(m_Ini->ReadValue<int>("Initializer","UseViewer",0)>0);
+    m_EMICP->SetViewer(m_Ini->ReadValue<int>("Initializer","UseViewer",0)>0);*/
+    para.maxIterations=m_Ini->ReadValue<unsigned int>("Registration","MaxICPIterations",101);
     m_EMICP->SetRegistrationParameters(para);
 }
 

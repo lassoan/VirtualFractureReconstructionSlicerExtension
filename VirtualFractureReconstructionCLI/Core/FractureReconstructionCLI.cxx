@@ -88,20 +88,22 @@ main(int argc, char **argv)
 
     //std::string settingsFileName=argv[22];
 
-    if(TempFilePath.compare("")==0) TempFilePath=itksys::SystemTools::GetCurrentWorkingDirectory();
-    if(SettingsFileName.compare("")==0)
+    std::cout<<"SLICER TEMP PATH CLI: "<<slicerTempPath;
+
+    if(slicerTempPath.compare("")==0) slicerTempPath=itksys::SystemTools::GetCurrentWorkingDirectory();
+    if(settingsFileName.compare("")==0)
     {
         char temp[300];
-        std::string tempString=TempFilePath;
+        std::string tempString=slicerTempPath;
         sprintf(temp,"%s/_Settings.ini",tempString.c_str());
-        SettingsFileName=temp;
+        settingsFileName=temp;
     }
-    m_Ini->SetFileName(SettingsFileName);
+    m_Ini->SetFileName(settingsFileName);
     m_Ini->LoadValues();
     m_Ini->Update();
     if(!m_Ini)
     {
-        std::cout<<"Ini file"<< SettingsFileName<<" not found!!!"<<std::endl;
+        std::cout<<"Ini file"<< settingsFileName<<" not found!!! Creating new ini file"<<std::endl;
         return 0;
     }
 
@@ -114,12 +116,18 @@ main(int argc, char **argv)
     m_Ini->WriteValue<float>("General","DecimationFactorCandidate",decimationFactor);
     m_Ini->WriteValue<float>("General","DecimationFactorReference",decimationFactor);
 
+    m_Ini->WriteValue<unsigned int>("Registration","MaxICPIterations",maxICPIterations);
+
     m_Ini->WriteValue<unsigned int>("General","NumberOfBinsHaralick",histogramBins);
     m_Ini->WriteValue<float>("Texture","CylinderLength",cylinderLength);
     m_Ini->WriteValue<float>("Texture","CylinderRadius",cylinderRadius);
 
+    m_Ini->WriteString("Multi","FragmentOutputFolder",slicerTempPath);
+    m_Ini->WriteValue<float>("Multi","MaxPointDistanceMulti",5);
+    m_Ini->WriteValue<float>("Multi","MaxCrestCurvatureMulti",-0.05);
+
     //Update LoadReferenceFromFile after first fragment
-    m_Ini->WriteValue<int>("General","LoadReferencePolyDataFromFile",UseReference);
+    m_Ini->WriteValue<int>("General","LoadReferencePolyDataFromFile",useReference);
 
     m_Ini->Update();
 
@@ -154,7 +162,7 @@ main(int argc, char **argv)
             ///Add fragment with transform
             multi->AddFragment(r->GetOutput(),prepTransform);
         }
-        multi->SetIniFileName(SettingsFileName);
+        multi->SetIniFileName(settingsFileName);
         multi->StartMultiFragmentAlignment();
         //Write output transforms
 
@@ -218,15 +226,15 @@ main(int argc, char **argv)
     std::cout<<"ALL images read"<<std::endl;
 
     char dir[300];
-    if(OutputDirectory.compare("")==0)
+    if(outputDirectory.compare("")==0)
     {
-        OutputDirectory=TempFilePath;
-        std::string tempString=TempFilePath;
+        outputDirectory=slicerTempPath;
+        std::string tempString=slicerTempPath;
         sprintf(dir,"%s",tempString.c_str());
     }
     else
     {
-        sprintf(dir,"%s",OutputDirectory.c_str());
+        sprintf(dir,"%s",outputDirectory.c_str());
         itksys::SystemTools::MakeDirectory(dir);
     }
     finder->SetOutputDirectory(dir);
@@ -324,6 +332,6 @@ main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    //delete finder;
+    delete finder;
     return EXIT_SUCCESS;
 }

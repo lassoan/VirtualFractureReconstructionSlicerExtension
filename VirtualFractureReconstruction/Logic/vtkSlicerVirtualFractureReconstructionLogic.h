@@ -80,6 +80,7 @@ public:
 
 private:
   void UpdateStep1Parameters(vtkSmartPointer<vtkMRMLCommandLineModuleNode> reconstructionNodeCLI,vtkMRMLVirtualFractureReconstructionNode *reconstructionNode);
+  void UpdateStep2Parameters(vtkSmartPointer<vtkMRMLCommandLineModuleNode> reconstructionNodeCLI);
 
    vtkSetStringMacro(CurrentModelID);
    vtkGetStringMacro(CurrentModelID);

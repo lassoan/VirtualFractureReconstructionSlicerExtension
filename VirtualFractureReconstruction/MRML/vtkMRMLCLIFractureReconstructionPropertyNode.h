@@ -98,8 +98,8 @@ class Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT vtkMRMLCLIFracture
     vtkSetStringMacro(OutputLabelMapNodeID);
     vtkGetStringMacro(OutputLabelMapNodeID);
 
-	//vtkSetStringMacro(TempPath);
-    //vtkGetStringMacro(TempPath);
+    vtkSetStringMacro(TempPath);
+    vtkGetStringMacro(TempPath);
 
     vtkSetMacro(SigmaInf,float);
     vtkGetMacro(SigmaInf,float);
@@ -125,8 +125,18 @@ class Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT vtkMRMLCLIFracture
     vtkSetMacro(MaxSmoothingIts, unsigned int);
     vtkGetMacro(MaxSmoothingIts, unsigned int);
 
+    vtkSetMacro(MaxICPIterations,unsigned int);
+    vtkGetMacro(MaxICPIterations,unsigned int);
+
+
     vtkSetMacro(StepSize, unsigned int);
     vtkGetMacro(StepSize, unsigned int);
+
+    vtkSetMacro(MaxPointDistanceMulti,float);
+    vtkGetMacro(MaxPointDistanceMulti,float);
+
+    vtkSetMacro(CrestCurvatureValueMulti,float);
+    vtkGetMacro(CrestCurvatureValueMulti,float);
 
 
     static vtkMRMLCLIFractureReconstructionPropertyNode *New();
@@ -169,6 +179,7 @@ protected:
     unsigned int NumberOfAdjLevels;
     unsigned int MaxSmoothingIts;
     unsigned int NumberOfHistogramBins;
+    unsigned int MaxICPIterations;
 
     float MaxDist;
     unsigned int StepSize;
@@ -183,7 +194,7 @@ protected:
     char* CommaSeparatedModelFileNames;
     char* CommaSeparatedTransformIDs;
     char* CommaSeparatedInputTransformIDs;
-    //char* TempPath;
+    char* TempPath;
 
     float SigmaInf;
     float SigmaFactor;
@@ -193,6 +204,9 @@ protected:
 
     float EMPointPercentage;
     float DecimationFactor;
+
+    float MaxPointDistanceMulti;
+    float CrestCurvatureValueMulti;
 
 
 

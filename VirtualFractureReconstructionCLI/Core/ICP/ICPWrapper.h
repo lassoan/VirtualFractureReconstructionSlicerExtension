@@ -32,9 +32,9 @@ typedef struct {
   float d_02;          // values for outlier (see EM-ICP paper). default: 0.01
 
   // for ICP
-  int maxIteration; // Number of ICP iterations. default: 30
+  int maxIterations; // Number of ICP iterations. default: 30
 
-  // misc
+  // misc currently not used for slicer extension
   int noviewer; // No viewer is shown. Just align point sets, and quit.
   int nostop;   // No interatction by the viewer is required.
   int notimer;  // No timer is shown.
@@ -70,15 +70,16 @@ public:
   TransformType::Pointer GetFinalTransform();
 
   void SetDefaultRegistrationParameters(){
-    m_Parameters.maxIteration=100;
+    m_Parameters.maxIterations=100;
   }
 
   void SetRegistrationParameters(registrationParameters para)
   {
-    m_Parameters.sigma_p2=para.sigma_p2;
-    m_Parameters.sigma_inf=para.sigma_inf;
-    m_Parameters.sigma_factor=para.sigma_factor;
-    m_Parameters.d_02=para.d_02;
+    //m_Parameters.sigma_p2=para.sigma_p2;
+    //m_Parameters.sigma_inf=para.sigma_inf;
+    //m_Parameters.sigma_factor=para.sigma_factor;
+    //m_Parameters.d_02=para.d_02;
+    m_Parameters.maxIterations=para.maxIterations;
     //m_Parameters.noviewer=para.noviewer;
   }
 

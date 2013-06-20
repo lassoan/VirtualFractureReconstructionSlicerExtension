@@ -305,10 +305,7 @@ bool vtkSlicerVirtualFractureReconstructionLogic
     qDebug()<<"CS-InputTransform: "<<this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedInputTransformIDs();
     qDebug()<<"CS-OutputTransform: "<<this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedTransformIDs();
 
-    reconstructionNodeCLI->SetParameterAsString("fineTuningInputTransforms",this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedInputTransformIDs());
-    reconstructionNodeCLI->SetParameterAsString("fineTuningOutputTransforms",this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedTransformIDs());
-    reconstructionNodeCLI->SetParameterAsString("fragmentModelFineTuning",this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedModelFileNames());
-    reconstructionNodeCLI->SetParameterAsBool("fineTuning",true);
+    this->UpdateStep2Parameters(reconstructionNodeCLI);
 
     this->Internal->CLIReconstructorLogic->ApplyAndWait(reconstructionNodeCLI);
     this->GetMRMLScene()->RemoveNode(reconstructionNodeCLI);
@@ -494,9 +491,26 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
 }
 
 
+void vtkSlicerVirtualFractureReconstructionLogic::UpdateStep2Parameters(vtkSmartPointer<vtkMRMLCommandLineModuleNode> reconstructionNodeCLI)
+{
+    char* tempPath=this->CLIReconstructionPropertyNode->GetTempPath();
+    reconstructionNodeCLI->SetParameterAsString("slicerTempPath",tempPath);
+    qDebug()<<"SLICER TEMP LOGIG"<<reconstructionNodeCLI->GetParameterAsString("slicerTempPath").c_str();
+
+    reconstructionNodeCLI->SetParameterAsString("fineTuningInputTransforms",this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedInputTransformIDs());
+    reconstructionNodeCLI->SetParameterAsString("fineTuningOutputTransforms",this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedTransformIDs());
+    reconstructionNodeCLI->SetParameterAsString("fragmentModelFineTuning",this->GetCLIReconstructionPropertyNode()->GetCommaSeparatedModelFileNames());
+    reconstructionNodeCLI->SetParameterAsFloat("maxPointDistanceMulti",this->GetCLIReconstructionPropertyNode()->GetMaxPointDistanceMulti());
+    reconstructionNodeCLI->SetParameterAsInt("maxICPIterations",this->GetCLIReconstructionPropertyNode()->GetMaxICPIterations());
+    reconstructionNodeCLI->SetParameterAsFloat("maxCrestCurvatureMulti",this->GetCLIReconstructionPropertyNode()->GetCrestCurvatureValueMulti());
+    reconstructionNodeCLI->SetParameterAsBool("fineTuning",true);
+}
+
 void vtkSlicerVirtualFractureReconstructionLogic::UpdateStep1Parameters(vtkSmartPointer<vtkMRMLCommandLineModuleNode> reconstructionNodeCLI,vtkMRMLVirtualFractureReconstructionNode *reconstructionNode)
 {
-    //reconstructionNodeCLI->SetParameterAsString("slicerTempPath",this->CLIReconstructionPropertyNode->GetTempPath());
+    char* tempPath=this->CLIReconstructionPropertyNode->GetTempPath();
+    reconstructionNodeCLI->SetParameterAsString("slicerTempPath",tempPath);
+    qDebug()<<"SLICER TEMP LOGIG"<<reconstructionNodeCLI->GetParameterAsString("slicerTempPath").c_str();
 
     reconstructionNodeCLI->SetParameterAsString("referenceLabelMap", reconstructionNode->GetReferenceLabelmapNodeID());
 

@@ -225,17 +225,22 @@ void qSlicerVirtualFractureReconstructionModuleWidget::updateWidget()
 void qSlicerVirtualFractureReconstructionModuleWidget::updateCLIModuleParameters()
 {
     Q_D(qSlicerVirtualFractureReconstructionModuleWidget);
-    //QString tempPath=qSlicerCoreApplication::application()->temporaryPath();
-    //d->logic()->GetCLIReconstructionPropertyNode()->SetTempPath(tempPath.toStdString().c_str());
+    QString tempPath=qSlicerCoreApplication::application()->temporaryPath();
+    qDebug()<<"SLICER TEMP-PATH LOADABLE: "<<tempPath;
+    d->logic()->GetCLIReconstructionPropertyNode()->SetTempPath(tempPath.toStdString().c_str());
     d->logic()->GetCLIReconstructionPropertyNode()->SetUseCoordinates(d->UseCoordinatesCB->isChecked());
     d->logic()->GetCLIReconstructionPropertyNode()->SetUseCurvature(d->UseCurvatureCB->isChecked());
     d->logic()->GetCLIReconstructionPropertyNode()->SetUseNormals(d->UseNormalsCB->isChecked());
     d->logic()->GetCLIReconstructionPropertyNode()->SetUseTexture(d->UseTextureCB->isChecked());
     d->logic()->GetCLIReconstructionPropertyNode()->SetSigmaFactor(d->SigmaFactor->value());
     d->logic()->GetCLIReconstructionPropertyNode()->SetSigmaInf(d->SigmaInf->value());
+    d->logic()->GetCLIReconstructionPropertyNode()->SetMaxICPIterations(d->MaxICPIterations->value());
     d->logic()->GetCLIReconstructionPropertyNode()->SetNumberOfHistogramBins(d->HistogramBins->value());
-    d->logic()->GetCLIReconstructionPropertyNode()->SetEMPointPercentage(d->EMPointPercentage->value());
     d->logic()->GetCLIReconstructionPropertyNode()->SetDecimationFactor(d->PointDecimation->value());
+    d->logic()->GetCLIReconstructionPropertyNode()->SetCylinderLength(d->CylinderAxisLength->value());
+    d->logic()->GetCLIReconstructionPropertyNode()->SetCylinderRadius(d->CylinderRadius->value());
+    d->logic()->GetCLIReconstructionPropertyNode()->SetMaxPointDistanceMulti(d->PointDistanceFT->value());
+    d->logic()->GetCLIReconstructionPropertyNode()->SetCrestCurvatureValueMulti(d->CrestCurvatureFT->value());
 }
 
 //-----------------------------------------------------------------------------
@@ -337,11 +342,19 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onFragmentModelsSelection
     vtkMRMLNode* node = d->FragmentModelsTree->currentNode();
 
     if(node)
-      {
+    {
         qDebug() <<"Fragment selection changed to "<<node->GetID()<<"of class"<<node->GetClassName();
-      }
-    std::string className=node->GetClassName();
+    }
+    else
+    {
+        qDebug() <<"No valid node selected ";
+        return;
+    }
+
     vtkMRMLLinearTransformNode* tnode;
+
+    /*std::string className=node->GetClassName();
+
     qDebug ()<< "Comparing class name"<<className.c_str();
     if(className.compare("vtkMRMLLinearTransformNode")==0)
     {
@@ -349,20 +362,20 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onFragmentModelsSelection
         tnode=vtkMRMLLinearTransformNode::SafeDownCast(node);
     }
     else if (className.compare("vtkMRMLModelNode")==0)
-    {
-      vtkMRMLModelNode* mnode = vtkMRMLModelNode::SafeDownCast(node);
-      qDebug ()<< "Using model node.Looking for initialTransformID for "<<mnode->GetID();
-      std::string tnodeID=this->ReconstructionNode->GetInitialTransformIDForModel(mnode->GetID());
+    {*/
+    vtkMRMLModelNode* mnode = vtkMRMLModelNode::SafeDownCast(node);
+    qDebug ()<< "Using model node.Looking for initialTransformID for "<<mnode->GetID();
+    std::string tnodeID=this->ReconstructionNode->GetInitialTransformIDForModel(mnode->GetID());
 
-      if(tnodeID.compare("")==0)
-       {
-          qDebug()<<" No transform found for model"<<mnode->GetID();
-          return;
-      }
-      tnode=vtkMRMLLinearTransformNode::SafeDownCast(this->mrmlScene()->GetNodeByID(tnodeID));
-      this->AssignTransformToSliders(tnode);
-      qDebug()<<"Setting transform "<<tnode->GetID()<<"for sliders";
+    if(tnodeID.compare("")==0)
+    {
+        qDebug()<<" No transform found for model"<<mnode->GetID();
+        return;
     }
+    tnode=vtkMRMLLinearTransformNode::SafeDownCast(this->mrmlScene()->GetNodeByID(tnodeID));
+    this->AssignTransformToSliders(tnode);
+    qDebug()<<"Setting transform "<<tnode->GetID()<<"for sliders";
+    //}
 }
 
 //TODO Create only ONE onFragmentSelectionChangedForAllTrees
@@ -845,88 +858,6 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onAlignmentToggleButtonPr
     }
 }
 
-////-----------------------------------------------------------------------------
-//void qSlicerVirtualFractureReconstructionModuleWidget::onReconstructionTabChanged()
-//{
-//    Q_D(const qSlicerVirtualFractureReconstructionModuleWidget);
-//    int tabIndex=d->ReconstructionTab->currentIndex() ;
-//    qDebug()<<"Tab index:" <<tabIndex;
-//    std::vector<std::string> modelIDs=this->ReconstructionNode->GetModelIDs();
-//    qDebug()<<modelIDs.size()<<" model(s) found";
-//    if(modelIDs.size()>0)
-//    {
-//        vtkMRMLModelNode* modelNode;
-//        vtkMRMLScalarVolumeNode* labelMapNode;
-//        std::string transformNodeID="";
-
-//        for(unsigned int i=0;i<modelIDs.size();i++)
-//         {
-//            qDebug()<<"Current reference model ID"<<this->ReconstructionNode->GetCurrentReferenceModelID();
-//            modelNode=vtkMRMLModelNode::SafeDownCast(this->mrmlScene()->GetNodeByID(modelIDs[i]));
-//            if(modelIDs[i]!=this->ReconstructionNode->GetCurrentReferenceModelID())
-//            {
-//                labelMapNode=vtkMRMLScalarVolumeNode::SafeDownCast(this->mrmlScene()->GetNodeByID(this->ReconstructionNode->GetLabelmapIDForModel(modelIDs[i])));
-//                if(tabIndex==3)
-//                {
-//                    d->FragmentModelsTree->selectionModel()->clearSelection();
-//                    qDebug()<<"Seeking transform for model"<<modelIDs[i].c_str();
-//                     transformNodeID=this->ReconstructionNode->GetStep2TransformIDForModel(modelIDs[i]);
-//                     if(transformNodeID=="")
-//                     {
-//                         qDebug()<<"No transform found for "<<modelIDs[i].c_str();
-//                         return;
-//                     }
-//                     if(modelNode->GetTransformNodeID()!=transformNodeID)
-//                     {
-//                        qDebug()<<"Setting transform"<<transformNodeID.c_str()<<"for model"<<modelIDs[i].c_str();
-//                        modelNode->SetAndObserveTransformNodeID(transformNodeID.c_str());
-//                        labelMapNode->SetAndObserveTransformNodeID(transformNodeID.c_str());
-//                       this->ReconstructionNode->SetCurrentFragmentTransformNodeID(transformNodeID.c_str());
-//                     }
-//                }
-//                else if(tabIndex==2)
-//                {
-//                    qDebug()<<"Seeking transform for model"<<modelIDs[i].c_str();
-//                     transformNodeID=this->ReconstructionNode->GetStep1InteractiveTransformIDForModel(modelIDs[i]);
-//                     if(transformNodeID=="")
-//                     {
-//                         qDebug()<<"No transform found for "<<modelIDs[i].c_str();
-//                          return;
-//                     }
-//                     if(modelNode->GetTransformNodeID()!=transformNodeID)
-//                     {
-//                        qDebug()<<"Setting transform"<<transformNodeID.c_str()<<"for model"<<modelIDs[i].c_str();
-//                        modelNode->SetAndObserveTransformNodeID(transformNodeID.c_str());
-//                        labelMapNode->SetAndObserveTransformNodeID(transformNodeID.c_str());
-//                        this->AssignTransformToSliders(vtkMRMLLinearTransformNode::SafeDownCast(this->mrmlScene()->GetNodeByID(modelIDs[i].c_str())));
-//                        this->ReconstructionNode->SetCurrentFragmentTransformNodeID(transformNodeID.c_str());
-//                     }
-//                }
-//                else if (tabIndex==1)
-//                {
-//                    //Change tooltip
-//                    d->ReconstructionTab->setToolTip("Please select fragment(s) that shall be aligned. ");
-//                    qDebug()<<"Seeking transform for model"<<modelIDs[i].c_str();
-//                    transformNodeID=this->ReconstructionNode->GetInitialTransformIDForModel(modelIDs[i]).c_str();
-//                    if(transformNodeID=="")
-//                    {
-//                        qDebug()<<"No transform found for "<<modelIDs[i].c_str();
-//                        return;
-//                    }
-//                    if(modelNode->GetTransformNodeID()!=transformNodeID)
-//                    {
-//                        qDebug()<<"Setting transform"<<transformNodeID.c_str()<<"for model"<<modelIDs[i].c_str();
-//                        modelNode->SetAndObserveTransformNodeID(transformNodeID.c_str());
-//                        labelMapNode->SetAndObserveTransformNodeID(transformNodeID.c_str());
-//                        this->AssignTransformToSliders(vtkMRMLLinearTransformNode::SafeDownCast(this->mrmlScene()->GetNodeByID(modelIDs[i].c_str())));
-//                        this->ReconstructionNode->SetCurrentFragmentTransformNodeID(transformNodeID.c_str());
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-
 //-----------------------------------------------------------------------------
 void qSlicerVirtualFractureReconstructionModuleWidget::onReconstructionTabChanged()
 {
@@ -1403,7 +1334,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::onStartRegistrationStep2(
 
     Q_D(const qSlicerVirtualFractureReconstructionModuleWidget);
     this->setCursor(Qt::WaitCursor);
-
+    this->updateCLIModuleParameters();
     vtkSlicerVirtualFractureReconstructionLogic *logic = d->logic();
 
     qDebug() <<"Invoking logic for registration";
