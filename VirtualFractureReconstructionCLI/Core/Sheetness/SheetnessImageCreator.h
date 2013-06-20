@@ -66,11 +66,9 @@ template<class InputImageType>
 
    protected:
     
-    HessianFilterPointer m_HessianFilter;
-
-    EigenAnalysisFilterPointer m_EigenAnalysis;
-
-    SheetnessFilterPointer m_SheetnessFilter;
+    SheetnessFilterPointer sheetnessFilter;
+    HessianFilterPointer hessianFilter;
+    EigenAnalysisFilterPointer eigenAnalysis;
 
     InputImagePointer m_SheetnessImage;
 

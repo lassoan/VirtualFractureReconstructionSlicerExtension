@@ -49,8 +49,28 @@ namespace ibia
 		/** Internal structure used for passing image data into the threading library */
 
           DeepCopy();
-          static void DeepCopyImage(ImagePointer input,ImagePointer output);
-          static void CreateAndDeepCopyImage(ImagePointer input,ImagePointer output);
+          void DeepCopyImage(ImagePointer input,ImagePointer output);
+          void CreateAndDeepCopyImage(ImagePointer input,ImagePointer output);
+
+          static void StaticCreateAndDeepCopyImage(ImagePointer input,ImagePointer output) {
+
+            //Copying information and allocating space
+            output->CopyInformation(input);
+            output->SetRegions(input->GetLargestPossibleRegion());
+            output->Allocate();
+
+            ConstIteratorType inputIterator(input, input->GetLargestPossibleRegion());
+            IteratorType outputIterator(output, output->GetLargestPossibleRegion());
+
+            while(!inputIterator.IsAtEnd())
+            {
+                outputIterator.Set(inputIterator.Get());
+                ++inputIterator;
+                ++outputIterator;
+            }
+
+          }
+
 	      ~DeepCopy();
 
 

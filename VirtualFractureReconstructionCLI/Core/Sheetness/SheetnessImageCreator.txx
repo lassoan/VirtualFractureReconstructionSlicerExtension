@@ -1,6 +1,9 @@
 #ifndef SheetnessImageCreator_txx_
 #define SheetnessImageCreator_txx_
 
+#include "itkImageRegionConstIterator.h"
+#include "itkImageRegionIterator.h"
+
 #include "DeepCopy.h"
 
 /*
@@ -37,6 +40,7 @@ void SheetnessImageCreator<InputImageType>::doFilter(InputImagePointer input) {
     HessianFilterPointer hessianFilter= HessianFilterType::New();
     EigenAnalysisFilterPointer eigenAnalysis= EigenAnalysisFilterType::New();
 
+
     hessianFilter->SetInput(input);
     hessianFilter->Modified();
 
@@ -50,8 +54,27 @@ void SheetnessImageCreator<InputImageType>::doFilter(InputImagePointer input) {
     sheetnessFilter->SetDetectBrightSheets(true);
     sheetnessFilter->UpdateLargestPossibleRegion();
 
-    typename ibia::DeepCopy<InputImageType>::Pointer clone = ibia::DeepCopy<InputImageType>::New();
-    clone->CreateAndDeepCopyImage(m_SheetnessFilter->GetOutput(),m_SheetnessImage);
+    m_SheetnessImage->CopyInformation(input);
+    m_SheetnessImage->SetRegions(input->GetLargestPossibleRegion());
+    m_SheetnessImage->Allocate();
+
+    ibia::DeepCopy<InputImageType>::StaticCreateAndDeepCopyImage(sheetnessFilter->GetOutput(),m_SheetnessImage);
+
+
+    //Copy image, remove from here
+
+    /*typedef itk::ImageRegionConstIterator<InputImageType> ConstIteratorType;
+    typedef itk::ImageRegionIterator<InputImageType> IteratorType;
+
+    ConstIteratorType inputIterator(sheetnessFilter->GetOutput(), sheetnessFilter->GetOutput()->GetLargestPossibleRegion());
+    IteratorType outputIterator(m_SheetnessImage, m_SheetnessImage->GetLargestPossibleRegion());
+
+    while(!inputIterator.IsAtEnd())
+    {
+        outputIterator.Set(inputIterator.Get());
+        ++inputIterator;
+        ++outputIterator;
+    }*/
 
 }
 

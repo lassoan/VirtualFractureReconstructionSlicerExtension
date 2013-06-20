@@ -40,8 +40,7 @@ DeepCopy<ImageType>::DeepCopyImage(ImagePointer input,ImagePointer output) {
 
 
 template<class ImageType>
-void
-DeepCopy<ImageType>::CreateAndDeepCopyImage(ImagePointer input,ImagePointer output) {
+void DeepCopy<ImageType>::CreateAndDeepCopyImage(ImagePointer input,ImagePointer output) {
 
   //Copying information and allocating space
   output->CopyInformation(input);

@@ -176,10 +176,6 @@ main(int argc, char **argv)
         return 0;
     }
 
-
-
-
-
     ibia::CorrespondingPointsIdentifier<LabelType,InputImageType>* finder = new ibia::CorrespondingPointsIdentifier<LabelType, InputImageType>(m_Ini);
     //finder->SetParameterFileInstance();
 
