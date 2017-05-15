@@ -329,7 +329,7 @@ MemIni
     if (!itksys::SystemTools::FileExists(m_Filename.c_str()))
     { 
       // make sure that folder exists:
-      itksys_stl::string s = itksys::SystemTools::GetFilenamePath(m_Filename.c_str());
+      std::string s = itksys::SystemTools::GetFilenamePath(m_Filename.c_str());
       if (s.length() > 0)
       { 
         if (!itksys::SystemTools::MakeDirectory(s.c_str()))

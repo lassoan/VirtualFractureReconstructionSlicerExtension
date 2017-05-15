@@ -125,7 +125,7 @@ CorrespondingPointsInitializer<InputImageType, GreyscaleImageType>::CorrectSurfa
      polyInput->GetPointData()->SetScalars(polyInput->GetPointData()->GetArray("SurfacePointsClassifier"));
 
      vtkSmartPointer<vtkPolyDataConnectivityFilter> connectivityFilter = vtkSmartPointer<vtkPolyDataConnectivityFilter>::New();
-     connectivityFilter->SetInput(polyInput);
+     connectivityFilter->SetInputData(polyInput);
      connectivityFilter->SetScalarConnectivity(1);
      connectivityFilter->SetScalarRange(1,1);
      connectivityFilter->SetExtractionModeToLargestRegion();
@@ -148,7 +148,7 @@ CorrespondingPointsInitializer<InputImageType, GreyscaleImageType>::CorrectSurfa
 
      vtkSmartPointer<vtkPolyDataWriter> writer = vtkSmartPointer<vtkPolyDataWriter>::New();
      writer->SetFileName("ConnectivityFilter.vtk");
-     writer->SetInput(polyInput);
+     writer->SetInputData(polyInput);
      writer->Update();
 
      return connectivityFilter->GetOutput();
@@ -176,7 +176,7 @@ CorrespondingPointsInitializer<InputImageType, GreyscaleImageType>::ExtractPoint
 //          m_PointsExtractorReference->SetUseMaxSheetnessForExtraction(1);
 //      }
       vtkWriterIni->SetFileName("ExtractedReference.vtk");
-      vtkWriterIni->SetInput(m_ReferencePolyData);
+      vtkWriterIni->SetInputData(m_ReferencePolyData);
       vtkWriterIni->Update();
     }
 

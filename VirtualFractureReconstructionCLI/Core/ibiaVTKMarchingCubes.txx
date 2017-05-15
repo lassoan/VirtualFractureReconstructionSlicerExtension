@@ -53,23 +53,23 @@ VTKMarchingCubesFilter<TInputImage>::MarchingCubesFilter(InputImagePointer inIma
     m_Caster->UpdateLargestPossibleRegion();
     typename ibia::GaussianFilter<ImageTypeFloat,ImageTypeFloat>::Pointer gauss = ibia::GaussianFilter<ImageTypeFloat,ImageTypeFloat>::New();
     gauss->SetSigma(sigma);
-    vtkImporter->SetInputImage(gauss->doFilter(m_Caster->GetOutput()));
+    vtkImporter->SetInput(gauss->doFilter(m_Caster->GetOutput()));
     vtkImporter->Update();
 
     vtkSmartPointer<vtkImageConstantPad> pad = vtkSmartPointer<vtkImageConstantPad>::New();
 
-    pad->SetInput(vtkImporter->GetOutput());
+    pad->SetInputData(vtkImporter->GetOutput());
 
     vtkSmartPointer<vtkContourFilter> mc = vtkSmartPointer<vtkContourFilter>::New();
-    mc->SetInput(pad->GetOutput());
+    mc->SetInputConnection(pad->GetOutputPort());
     mc->SetValue(0,0.5);
     vtkSmartPointer<vtkDecimatePro> deci = vtkSmartPointer<vtkDecimatePro>::New();
-    deci->SetInput(mc->GetOutput());
+    deci->SetInputConnection(mc->GetOutputPort());
     deci->SetTargetReduction(this->m_DecimationFactor);
     deci->PreserveTopologyOn();
 
 
-    m_PolyNormals->SetInput(deci->GetOutput());
+    m_PolyNormals->SetInputConnection(deci->GetOutputPort());
     m_PolyNormals->FlipNormalsOn();
     m_PolyNormals->Update();
 

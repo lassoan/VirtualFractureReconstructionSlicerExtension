@@ -452,7 +452,7 @@ vector<int> InitPath( MeshDataCustom* meshdata, vector<int> pts)
     scalars2->InsertTuple1(i, meshdata->cmap0[i] );
     }
   meshdata->polydata->GetPointData()->SetScalars(scalars2);
-  meshdata->polydata->Update();
+  meshdata->polydata->Modified();
 
   return C;
 }

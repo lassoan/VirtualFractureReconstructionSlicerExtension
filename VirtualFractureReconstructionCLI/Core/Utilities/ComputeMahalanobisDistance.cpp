@@ -35,7 +35,7 @@ ComputeMahalanobisDistance::~ComputeMahalanobisDistance()
 double ComputeMahalanobisDistance::Evaluate(vtkPoints * candidate, unsigned int index)
 {
     MeasurementVectorType arr2(3);
-    arr2.SetData(candidate->GetPoint(index));
+    arr2.SetDataSameSize(candidate->GetPoint(index));
     std::cout << "Sample: " << arr2 << std::endl;
     std::cout <<"Dist: "<<m_DistanceCalculator->Evaluate(arr2)<<std::endl;
     return m_DistanceCalculator->Evaluate(arr2);
@@ -48,7 +48,7 @@ void ComputeMahalanobisDistance::Evaluate(vtkPoints * candidate,vtkDataArray* di
     MeasurementVectorType arr2(3);
     for (unsigned int i=0;i<candidate->GetNumberOfPoints();i++)
     {
-       arr2.SetData(candidate->GetPoint(i));
+       arr2.SetDataSameSize(candidate->GetPoint(i));
        distances->SetTuple1(i,m_DistanceCalculator->Evaluate(arr2));
     }
 }
@@ -134,7 +134,7 @@ void ComputeMahalanobisDistance::Evaluate(vtkSmartPointer<vtkPolyData> candidate
             distances->SetTuple1(i,std::numeric_limits<float>::max());
         else
         {
-           arr.SetData(featureVector);
+           arr.SetDataSameSize(featureVector);
            float dist=m_DistanceCalculator->Evaluate(arr);
            sprintf(line, "%6.4f ",featureVector[0]);
            for (unsigned int f=1;f<measurementVectorSize;f++)
@@ -231,7 +231,7 @@ void ComputeMahalanobisDistance::SetReference(vtkSmartPointer<vtkPolyData> refer
             delete tempNorm;
         }
 
-       arr.SetData(featureVector);
+       arr.SetDataSameSize(featureVector);
        m_ReferenceData->PushBack(arr);
 
        sprintf(line, "%6.4f ",featureVector[0]);
@@ -288,7 +288,7 @@ void ComputeMahalanobisDistance::CalculateMeanAndCovariance(vtkPoints* reference
     MeasurementVectorType arr(3);
     for (unsigned int i=0;i<reference->GetNumberOfPoints();i++)
     {
-       arr.SetData(reference->GetPoint(i));
+       arr.SetDataSameSize(reference->GetPoint(i));
        m_ReferenceData->PushBack(arr);
     }
     this->CalculateMeanAndCovariance();

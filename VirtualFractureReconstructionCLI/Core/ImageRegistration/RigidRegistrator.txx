@@ -157,11 +157,11 @@ RigidRegistrator< TImage >
 template< class TImage >
 void
 RigidRegistrator< TImage >
-::StartRegistration()
+::Update()
   {
   try
     {
-    Superclass::StartRegistration();
+    Superclass::Update();
     }
   catch(ExceptionObject &e)
     {

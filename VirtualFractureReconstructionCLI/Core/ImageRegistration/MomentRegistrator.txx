@@ -41,12 +41,12 @@ MomentRegistrator< TImage >
 template< class TImage >
 void
 MomentRegistrator< TImage >
-::StartRegistration()
+::Update()
   {
   try
     {   
     // Don't call superclass startRegistration since optimizer, etc isn't used
-    //Superclass::StartRegistration();
+    //Superclass::Update();
     typename MomentsCalculatorType::AffineTransformType::Pointer newTransform;
     newTransform = MomentsCalculatorType::AffineTransformType::New();
     newTransform->SetIdentity();

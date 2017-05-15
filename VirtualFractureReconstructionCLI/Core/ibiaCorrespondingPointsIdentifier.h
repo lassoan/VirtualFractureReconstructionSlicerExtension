@@ -69,8 +69,8 @@ class ICPWrapper;
 
     static const unsigned int PointDimension = 3;
     static const unsigned int MaxCellDimension = 2;
-    typedef itk::DefaultStaticMeshTraits<vtkFloatingPointType, PointDimension, MaxCellDimension, vtkFloatingPointType, vtkFloatingPointType > MeshTraits;
-    typedef itk::Mesh<vtkFloatingPointType, PointDimension, MeshTraits> MeshType;
+    typedef itk::DefaultStaticMeshTraits<double, PointDimension, MaxCellDimension, double, double> MeshTraits;
+    typedef itk::Mesh<double, PointDimension, MeshTraits> MeshType;
 
     typedef itk::PointSet<float, 3, MeshTraits> PointSetTypeICP;
     typedef typename PointSetTypeICP::Pointer ICPPointSetPointer;

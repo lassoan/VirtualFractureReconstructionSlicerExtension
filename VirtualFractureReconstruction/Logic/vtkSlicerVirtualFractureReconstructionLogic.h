@@ -44,6 +44,7 @@
 
 class vtkMRMLVirtualFractureReconstructionNode;
 class vtkSlicerCLIModuleLogic;
+class vtkMRMLLabelMapVolumeNode;
 class vtkMRMLScalarVolumeNode;
 
 
@@ -58,7 +59,7 @@ public:
   vtkTypeMacro(vtkSlicerVirtualFractureReconstructionLogic,vtkSlicerModuleLogic);
   void PrintSelf(ostream& os, vtkIndent indent);
 
-   bool CreateModel(vtkMRMLVirtualFractureReconstructionNode *reconstructionNode,vtkMRMLScalarVolumeNode* volumeNode,vtkMRMLModelHierarchyNode* hierarchyNode=NULL,bool reference =false);
+   bool CreateModel(vtkMRMLVirtualFractureReconstructionNode *reconstructionNode,vtkMRMLLabelMapVolumeNode* volumeNode,vtkMRMLModelHierarchyNode* hierarchyNode=NULL,bool reference =false);
 
    bool StartRegistrationStep1(vtkMRMLVirtualFractureReconstructionNode *reconstructionNode);
 

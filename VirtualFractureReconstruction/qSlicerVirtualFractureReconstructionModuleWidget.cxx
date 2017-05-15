@@ -30,6 +30,7 @@
 #include <vtkMRMLApplicationLogic.h>
 #include "vtkMRMLVolumeNode.h"
 #include "vtkMRMLModelNode.h"
+#include "vtkMRMLLabelMapVolumeNode.h"
 #include "vtkMRMLScalarVolumeNode.h"
 #include "vtkMRMLScalarVolumeDisplayNode.h"
 #include "vtkMRMLVirtualFractureReconstructionNode.h"
@@ -37,7 +38,7 @@
 #include "vtkMRMLCLIFractureReconstructionPropertyNode.h"
 #include "vtkMRMLModelStorageNode.h"
 #include "vtkMRMLModelDisplayNode.h"
-#include "vtkMRMLModelTransformNode.h"
+//#include "vtkMRMLModelTransformNode.h"
 #include "vtkMRMLTransformStorageNode.h"
 #include "vtkMRMLColorNode.h"
 
@@ -994,7 +995,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelOfReference(vt
 
     vtkSlicerVirtualFractureReconstructionLogic *logic = d->logic();
     char* lmID=this->ReconstructionNode->GetReferenceLabelmapNodeID();
-    vtkMRMLScalarVolumeNode* vnode = vtkMRMLScalarVolumeNode::SafeDownCast(this->mrmlScene()->GetNodeByID(lmID));
+    vtkMRMLLabelMapVolumeNode* vnode = vtkMRMLLabelMapVolumeNode::SafeDownCast(this->mrmlScene()->GetNodeByID(lmID));
     //this->ChangeColorOfLabelmap(vnode,10);
     if(!logic->CreateModel(this->ReconstructionNode,vnode,hierarchyNode,true))
     {
@@ -1037,14 +1038,13 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
     selectedIndices = d->InputDataTree->selectionModel()->selectedRows();
     qDebug()<<selectedIndices.size()<<" rows selected";
 
-    std::vector<vtkSmartPointer<vtkMRMLScalarVolumeNode> > labelmaps;
+    std::vector<vtkSmartPointer<vtkMRMLLabelMapVolumeNode> > labelmaps;
     std::map<unsigned char, unsigned int> labelColors;
     foreach(QModelIndex selectedIndex, selectedIndices)
     {
-        vtkMRMLScalarVolumeNode* node =
-                    vtkMRMLScalarVolumeNode::SafeDownCast(
+        vtkMRMLLabelMapVolumeNode* node =
+                    vtkMRMLLabelMapVolumeNode::SafeDownCast(
                         d->InputDataTree->sortFilterProxyModel()->mrmlNodeFromIndex(selectedIndex));
-        node->SetLabelMap(1);
 
         labelColors=d->logic()->GetLabelIntensities(node->GetImageData());
         //Convert single labelmap with multiple labels to multiple labelmaps with one (foreground) label value
@@ -1057,7 +1057,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
             labelmapIDs=d->logic()->CreateScalarVolumeNodesFromMultiLabelNode(node,labelColors,referenceNode);
             for(unsigned int i=0;i<labelmapIDs.size();i++)
             {
-                labelmaps.push_back(vtkMRMLScalarVolumeNode::SafeDownCast(this->mrmlScene()->GetNodeByID(labelmapIDs[i])));
+                labelmaps.push_back(vtkMRMLLabelMapVolumeNode::SafeDownCast(this->mrmlScene()->GetNodeByID(labelmapIDs[i])));
             }
         }
         else
@@ -1065,7 +1065,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
     }
     for(unsigned int n=0;n<labelmaps.size();n++)
     {
-        vtkSmartPointer<vtkMRMLScalarVolumeNode> vnode=labelmaps[n];
+        vtkSmartPointer<vtkMRMLLabelMapVolumeNode> vnode=labelmaps[n];
         if(!vnode)
         {
             qDebug() << " no valid node available to create model";
@@ -1087,7 +1087,7 @@ void qSlicerVirtualFractureReconstructionModuleWidget::createModelsOfFragments(v
 
 }
 
-void qSlicerVirtualFractureReconstructionModuleWidget::createModelForNode(vtkMRMLScalarVolumeNode* vnode,vtkMRMLModelHierarchyNode* hierarchyNode)
+void qSlicerVirtualFractureReconstructionModuleWidget::createModelForNode(vtkMRMLLabelMapVolumeNode* vnode, vtkMRMLModelHierarchyNode* hierarchyNode)
 {
     Q_D(const qSlicerVirtualFractureReconstructionModuleWidget);
     //d->ReconstructionTab->setCurrentIndex(1);

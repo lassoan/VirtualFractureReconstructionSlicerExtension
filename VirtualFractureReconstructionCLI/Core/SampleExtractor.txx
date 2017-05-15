@@ -455,7 +455,7 @@ SampleExtractor< InputImageType, TemplateImageType>::ComputeMeanSurfaceCurvature
 {
 
     m_CurvatureCalculator = vtkComputeLocalGeometry::New();
-    m_CurvatureCalculator->SetInput(this->m_PolyData);
+    m_CurvatureCalculator->SetInputData(this->m_PolyData);
     m_CurvatureCalculator->Set_adj_levels(2);
     m_CurvatureCalculator->Set_H_smooth_its(5);
     m_CurvatureCalculator->UpdateWholeExtent();

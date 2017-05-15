@@ -255,15 +255,15 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     //    typename itk::ImageFileWriter<LabelType>::Pointer labelWriter =
     //            itk::ImageFileWriter<LabelType>::New();
     //    labelWriter->SetFileName("FeatureLabel.mhd");
-    //    labelWriter->SetInput(candidateImage);
+    //    labelWriter->SetInputData(candidateImage);
     //    labelWriter->Update();
 
     //    imageWriter->SetFileName("InitialImage.mhd");
-    //    imageWriter->SetInput(initialGreyScaleImage);
+    //    imageWriter->SetInputData(initialGreyScaleImage);
     //    imageWriter->Update();
 
     //    polywriter1->SetFileName("InitialPoly.vtk");
-    //    polywriter1->SetInput(m_CandidatePolyData);
+    //    polywriter1->SetInputData(m_CandidatePolyData);
     //    polywriter1->Update();
 
     samplerC->SetExtractTextureFeatures(m_ExtractReferenceFeatures);
@@ -333,7 +333,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     for (int c=m_Ini->ReadValue<int>("General","AdjacencyLevelsStart",1);c<=m_Ini->ReadValue<int>("General","AdjacencyLevelsMax",2);c++)
     {
         m_ReferenceGeometry = vtkComputeLocalGeometry::New();
-        m_ReferenceGeometry->SetInput(m_ReferencePolyData);
+        m_ReferenceGeometry->SetInputData(m_ReferencePolyData);
         m_ReferenceGeometry->Set_adj_levels(c);
         m_ReferenceGeometry->Set_H_smooth_its(m_Ini->ReadValue<int>("General","CurvatureSmoothingIterations",5));
         m_ReferenceGeometry->UpdateWholeExtent();
@@ -344,7 +344,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
         }
 
         m_CandidateGeometry = vtkComputeLocalGeometry::New();
-        m_CandidateGeometry->SetInput(m_CandidatePolyData);
+        m_CandidateGeometry->SetInputData(m_CandidatePolyData);
         m_CandidateGeometry->Set_adj_levels(c);
         m_CandidateGeometry->Set_H_smooth_its(m_Ini->ReadValue<int>("General","CurvatureSmoothingIterations",5));
         m_CandidateGeometry->UpdateWholeExtent();
@@ -367,11 +367,11 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     //    vtkSmartPointer<vtkPolyDataWriter> polywriter = vtkSmartPointer< vtkPolyDataWriter>::New();
 
     //    polywriter->SetFileName("PolyRef.vtk");
-    //    polywriter->SetInput(m_ReferencePolyData);
+    //    polywriter->SetInputData(m_ReferencePolyData);
     //    polywriter->Update();
 
     //    polywriter->SetFileName("PolyCand.vtk");
-    //    polywriter->SetInput(m_CandidatePolyData);
+    //    polywriter->SetInputData(m_CandidatePolyData);
     //    polywriter->Update();
 
     std::string tempSuffix=this->m_SpecialSuffix;
@@ -421,11 +421,11 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
 
             /*std::string filename=FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/PolyOut-IniEM"+this->m_SpecialSuffix+".vtk");
             polywriter->SetFileName(filename.c_str());
-            polywriter->SetInput(m_CandidatePolyData);
+            polywriter->SetInputData(m_CandidatePolyData);
             polywriter->Update();
 
             polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/ReferencePolyData"+this->m_SpecialSuffix+".vtk").c_str());
-            polywriter->SetInput(this->m_ReferencePolyData);
+            polywriter->SetInputData(this->m_ReferencePolyData);
             polywriter->Update();*/
 
             //Update ReferenceFileName in Ini file
@@ -458,7 +458,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     ///Save updated polydata to File
 
     /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/FinalCandidatePolyData"+this->m_SpecialSuffix+".vtk").c_str());
-    polywriter->SetInput(this->m_CandidatePolyData);
+    polywriter->SetInputData(this->m_CandidatePolyData);
     polywriter->Update();*/
 
     //Selecting active points
@@ -466,11 +466,11 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     selector->SetReferencePolyData(this->m_CandidatePolyData,0);
     selector->MarkInactivePoints(this->m_ReferencePolyData);
     /*polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/ReferencePolyData"+this->m_SpecialSuffix+"final.vtk").c_str());
-    polywriter->SetInput(this->m_ReferencePolyData);
+    polywriter->SetInputData(this->m_ReferencePolyData);
     polywriter->Update();
 
     polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/Poly/FinalCandidatePolyData_After_"+this->m_SpecialSuffix+"_final.vtk").c_str());
-    polywriter->SetInput(this->m_CandidatePolyData);
+    polywriter->SetInputData(this->m_CandidatePolyData);
     polywriter->Update();*/
 
     //Update ReferenceFileName in Ini file
@@ -492,11 +492,11 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::doFilter(LabelPointer 
     //    transformedBinaryImage=this->TransformBinaryImage(currentImage,this->m_CurrentTransform,true,this->m_GreyscaleReferenceImage);
 
     //    labelWriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/ImagesAndLabels/FinalLabel"+this->m_SpecialSuffix+".mhd").c_str());
-    //    labelWriter->SetInput(transformedBinaryImage);
+    //    labelWriter->SetInputData(transformedBinaryImage);
     //    labelWriter->Update();
 
     //    imageWriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"/ImagesAndLabels/FinalGreyscaleImage"+this->m_SpecialSuffix+".mhd").c_str());
-    //    imageWriter->SetInput(this->TransformGreyImage(this->m_GreyscaleCandidateImage,this->m_CurrentTransform,true,this->m_GreyscaleReferenceImage));
+    //    imageWriter->SetInputData(this->TransformGreyImage(this->m_GreyscaleCandidateImage,this->m_CurrentTransform,true,this->m_GreyscaleReferenceImage));
     //    imageWriter->Update();
 
     ////////
@@ -564,7 +564,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::PerformPreProcessing(L
             registrator->SetMovingImage(FlipLabel(candidateImage,flip));
         }
 
-        registrator->StartRegistration();
+        registrator->Update();
 
         m_InitialITKTransformPS->SetCenter(registrator->GetTypedTransform()->GetCenter());
         m_InitialITKTransformPS->SetOffset(registrator->GetTypedTransform()->GetOffset());
@@ -684,7 +684,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformCandidateObje
         m_CandidatePolyData->DeepCopy(this->TransformPolyData(m_CreatePolyDataCandidate->MarchingCubesFilter(FlipLabel(candidateImage,flipaxes),this->m_MCSigma),transform));
 
     polywriter->SetFileName(FileOutputWriter::ComposeFilename(this->m_OutputDirectory,"IniPoly.vtk").c_str());
-    polywriter->SetInput(m_CandidatePolyData);
+    polywriter->SetInputData(m_CandidatePolyData);
     polywriter->Update();
 }
 
@@ -754,7 +754,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
     std::cout<<"Starting transform filter"<<std::endl;
     vtkTransformPolyDataFilter* transformFilter =
             vtkTransformPolyDataFilter::New();
-    transformFilter->SetInput(polyData);
+    transformFilter->SetInputData(polyData);
     if(invert) vtkTrans->Inverse();
     transformFilter->SetTransform(vtkTrans);
     transformFilter->Update();
@@ -764,7 +764,7 @@ CorrespondingPointsIdentifier<LabelType, InputImageType>::TransformPolyData(vtkS
         char finalNamePoly[255];
         sprintf(finalNamePoly, "PolyOut.vtk");
         polywriter->SetFileName(finalNamePoly);
-        polywriter->SetInput(transformFilter->GetOutput());
+        polywriter->SetInputData(transformFilter->GetOutput());
         polywriter->Update();*/
     std::cout<<"Polydata transformed"<<std::endl;
     return transformFilter->GetOutput();
