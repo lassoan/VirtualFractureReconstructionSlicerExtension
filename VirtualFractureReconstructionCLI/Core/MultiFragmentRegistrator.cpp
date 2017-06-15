@@ -93,7 +93,7 @@ void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
         char temp[200];
         sprintf(temp,"CandidatePolyBeforeReg%i.vtk",f);
         polywriter->SetFileName(temp);
-        polywriter->SetInput(m_ActiveCandidatePolyData);
+        polywriter->SetInputData(m_ActiveCandidatePolyData);
         polywriter->Update();
 
         for (unsigned int frag=1;frag<this->m_FragmentContainer.size();frag++)
@@ -103,7 +103,7 @@ void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
 
             sprintf(temp,"CandidatePoly%iAfterReg_Iter%i.vtk",f,frag);
             polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
-            polywriter->SetInput(m_ActiveCandidatePolyData);
+            polywriter->SetInputData(m_ActiveCandidatePolyData);
             polywriter->Update();
         }
         this->m_FinalTransformContainer.push_back(m_ActiveTransform);
@@ -111,19 +111,19 @@ void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
 
         sprintf(temp,"ReferencePoly%i.vtk",f);
         polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
-        polywriter->SetInput(m_ActiveReferencePolyData);
+        polywriter->SetInputData(m_ActiveReferencePolyData);
         polywriter->Update();
 
         this->UpdateActiveReferencePointSet();
 
         sprintf(temp,"ReferencePoly%iAfterUpdate.vtk",f);
         polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
-        polywriter->SetInput(m_ActiveReferencePolyData);
+        polywriter->SetInputData(m_ActiveReferencePolyData);
         polywriter->Update();
 
         sprintf(temp,"Fragment%iAfterMultiReg.vtk",f);
         polywriter->SetFileName(FileOutputWriter::ComposeFilename(outputFolder,temp).c_str());
-        polywriter->SetInput(m_ActiveCandidatePolyData);
+        polywriter->SetInputData(m_ActiveCandidatePolyData);
         polywriter->Update();
 
         this->m_FragmentContainer[this->m_CurrentlyActiveFragment].second=1;
@@ -133,7 +133,7 @@ void MultiFragmentRegistrator::StartMultiFragmentAlignment(){
 void MultiFragmentRegistrator::RefineCrestPointSelection(vtkSmartPointer<vtkPolyData> fragment)
 {
     m_GeometricPropCalculator = vtkComputeLocalGeometry::New();
-    m_GeometricPropCalculator->SetInput(fragment);
+    m_GeometricPropCalculator->SetInputData(fragment);
     m_GeometricPropCalculator->Set_adj_levels(1);
     m_GeometricPropCalculator->Set_H_smooth_its(5);
     m_GeometricPropCalculator->Update();
@@ -212,7 +212,7 @@ void MultiFragmentRegistrator::AddFragment(vtkPolyData* fragment,ITKTransformPoi
     std::cout<<"Starting transform filter"<<std::endl;
     vtkTransformPolyDataFilter* transformFilter =
                     vtkTransformPolyDataFilter::New();
-    transformFilter->SetInput(fragment);
+    transformFilter->SetInputData(fragment);
     //vtkTrans->Inverse();
     transformFilter->SetTransform(vtkTrans);
     transformFilter->Update();

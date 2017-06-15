@@ -25,6 +25,7 @@
 // MRML includes
 #include <vtkMRMLVirtualFractureReconstructionNode.h>
 #include "vtkMRMLModelDisplayNode.h"
+#include "vtkMRMLLabelMapVolumeNode.h"
 #include "vtkMRMLScalarVolumeNode.h"
 #include "vtkMRMLScalarVolumeDisplayNode.h"
 #include "vtkMRMLModelHierarchyNode.h"
@@ -182,7 +183,7 @@ double* vtkSlicerVirtualFractureReconstructionLogic::GetColorFromIndex(int index
 }
 
 bool vtkSlicerVirtualFractureReconstructionLogic
-::CreateModel(vtkMRMLVirtualFractureReconstructionNode *reconstructionNode,vtkMRMLScalarVolumeNode* volumeNode,vtkMRMLModelHierarchyNode* hierarchyNode,bool reference)
+::CreateModel(vtkMRMLVirtualFractureReconstructionNode *reconstructionNode,vtkMRMLLabelMapVolumeNode* volumeNode,vtkMRMLModelHierarchyNode* hierarchyNode,bool reference)
 {
    vtkMRMLCommandLineModuleNode* modelMakerNode=
     this->Internal->ModelMakerLogic->CreateNodeInScene();
@@ -245,7 +246,6 @@ bool vtkSlicerVirtualFractureReconstructionLogic
     modelNode->Modified();
     //Updating properties for labelmap
     volumeNode->GetDisplayNode()->SetColor(this->GetColorFromIndex(1));
-    volumeNode->SetLabelMap(1);
     volumeNode->Modified();
 
     modelNode->UpdateScene(this->GetMRMLScene());
@@ -385,10 +385,7 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
     {
         vtkSmartPointer<vtkImageData> newImage = vtkSmartPointer<vtkImageData>::New();
         newImage->SetExtent(0,dimensions[0],0,dimensions[1],0,dimensions[2]);
-        newImage->SetScalarTypeToUnsignedChar();
-
-        newImage->SetNumberOfScalarComponents(1);
-        newImage->AllocateScalars();
+        newImage->AllocateScalars(VTK_UNSIGNED_CHAR, 1);
         newImage->SetSpacing(spacing);
         newImage->GetPointData()->GetScalars()->FillComponent(0, 0);
 
@@ -430,7 +427,7 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
     int counter=1;
     for(it = volumeOrderedImages.begin(); it!=volumeOrderedImages.end(); ++it)
     {
-        vtkSmartPointer<vtkMRMLScalarVolumeNode> vnode =vtkSmartPointer<vtkMRMLScalarVolumeNode>::New();
+        vtkSmartPointer<vtkMRMLLabelMapVolumeNode> vnode =vtkSmartPointer<vtkMRMLLabelMapVolumeNode>::New();
         vnode->SetAndObserveImageData((*it).second);
         //Transform node so that orientation corresponds to itk::Image
         vtkSmartPointer<vtkMatrix4x4> referenceMatrix = vtkSmartPointer<vtkMatrix4x4>::New();
@@ -444,7 +441,6 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
         std::ostringstream sstream;
         sstream<<"Fragment"<<(volumeOrderedImages.size()-counter)+1;
         labelName=sstream.str();
-        vnode->SetLabelMap(1);
         vnode->SetName(labelName.c_str());
 
         this->GetMRMLScene()->AddNode(vnode);
@@ -456,7 +452,6 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
         this->GetMRMLScene()->AddNode(displayNode);
         vnode->SetScene(this->GetMRMLScene());
 
-        displayNode->SetInputImageData((*it).second);
         displayNode->SetDefaultColorMap();
 
         //vnode->UpdateScene(this->GetMRMLScene());

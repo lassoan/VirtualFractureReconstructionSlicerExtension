@@ -43,7 +43,7 @@ vtkPolyData* TransformWriter::TransformPolyData(vtkSmartPointer<vtkPolyData> pol
         std::cout<<"Starting transform filter"<<std::endl;
         vtkSmartPointer<vtkTransformPolyDataFilter> transformFilter =
                         vtkSmartPointer<vtkTransformPolyDataFilter>::New();
-        transformFilter->SetInput(polyData);
+        transformFilter->SetInputData(polyData);
         if(invert) vtkTrans->Inverse();
         transformFilter->SetTransform(vtkTrans);
         transformFilter->Update();

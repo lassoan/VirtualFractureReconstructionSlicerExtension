@@ -36,7 +36,7 @@ class MomentRegistrator : public ImageRegistrationMethod < TImage, TImage >
 
     typedef ImageMomentsCalculator< TImage > MomentsCalculatorType;
 
-    void StartRegistration() ;
+    void Update() ;
 
     TransformType * GetTypedTransform(void)
       {

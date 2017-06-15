@@ -359,7 +359,7 @@ ImageRegistrationApp< TImage >
 
   try
     {
-    registrator->StartRegistration();
+    registrator->Update();
     }
   catch( ExceptionObject &e )
     {
@@ -399,7 +399,7 @@ ImageRegistrationApp< TImage >
 
   try
     {
-    registrator->StartRegistration();
+    registrator->Update();
     }
   catch( ExceptionObject &e )
     {
@@ -440,7 +440,7 @@ ImageRegistrationApp< TImage >
 
   try
     {
-    registrator->StartRegistration();
+    registrator->Update();
     }
   catch( ExceptionObject &e )
     {
@@ -481,7 +481,7 @@ ImageRegistrationApp< TImage >
 
   try
     {
-    registrator->StartRegistration();
+    registrator->Update();
     }
   catch( ExceptionObject &e )
     {
@@ -527,7 +527,7 @@ ImageRegistrationApp< TImage >
 
 //  try
 //    {
-//      registrator->StartRegistration();
+//      registrator->Update();
 //    }
 //  catch( ExceptionObject &e )
 //    {
@@ -649,7 +649,7 @@ ImageRegistrationApp< TImage >
 
   try
     {
-      registrator->StartRegistration();
+      registrator->Update();
     }
   catch(ExceptionObject &e)
     {
@@ -738,7 +738,7 @@ ImageRegistrationApp< TImage >
 
 //  try
 //    {
-//      registrator->StartRegistration();
+//      registrator->Update();
 //    }
 //  catch(ExceptionObject &e)
 //    {

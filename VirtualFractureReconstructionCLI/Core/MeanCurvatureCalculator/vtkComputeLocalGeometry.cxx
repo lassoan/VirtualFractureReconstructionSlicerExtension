@@ -26,12 +26,10 @@ void Debug_Display( vtkIntArray* activeContourVertIdx,
 {
       int numVerts = Lstar.size();
       for( int i = 0; i < numVerts; i++ ) {
-        int val = ( Lstar[i] );
-        activeContourVertIdx->SetTupleValue(i, &val);
+        activeContourVertIdx->SetValue(i, Lstar[i]);
       }
 }
 
-vtkCxxRevisionMacro(vtkComputeLocalGeometry, "$Revision: 1.00 $");
 vtkStandardNewMacro(vtkComputeLocalGeometry);
 
 vtkComputeLocalGeometry::vtkComputeLocalGeometry() {
@@ -40,7 +38,7 @@ vtkComputeLocalGeometry::vtkComputeLocalGeometry() {
 }
 
 void vtkComputeLocalGeometry::SetSource(vtkPolyData *source) {
-  this->SetInput(1, source);
+  this->SetInputData(1, source);
 }
 
 vtkPolyData *vtkComputeLocalGeometry::GetSource() {

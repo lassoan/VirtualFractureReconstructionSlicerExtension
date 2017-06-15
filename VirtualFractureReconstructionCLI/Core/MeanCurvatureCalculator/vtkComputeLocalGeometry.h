@@ -10,7 +10,7 @@
 class vtkComputeLocalGeometry : public vtkPolyDataAlgorithm
 {
 public:
-  vtkTypeRevisionMacro( vtkComputeLocalGeometry, vtkPolyDataAlgorithm);
+  vtkTypeMacro( vtkComputeLocalGeometry, vtkPolyDataAlgorithm);
   void PrintSelf(ostream& os, vtkIndent indent);
 
   // Description:

@@ -34,6 +34,7 @@ class qSlicerVirtualFractureReconstructionModuleWidgetPrivate;
 
 class vtkMRMLNode;
 class vtkMRMLVirtualFractureReconstructionNode;
+class vtkMRMLLabelMapVolumeNode;
 class vtkMRMLLinearTransformNode;
 class vtkMRMLTransformableNode;
 class vtkMRMLModelHierarchyNode;
@@ -59,7 +60,7 @@ protected slots:
   void createModels();
   void createModelsOfFragments(vtkMRMLModelHierarchyNode* hierarchyNode=NULL);
   void createModelOfReference(vtkMRMLModelHierarchyNode* hierarchyNode=NULL);
-  void createModelForNode(vtkMRMLScalarVolumeNode* vnode,vtkMRMLModelHierarchyNode* hierarchyNode=NULL);
+  void createModelForNode(vtkMRMLLabelMapVolumeNode* vnode, vtkMRMLModelHierarchyNode* hierarchyNode = NULL);
   //void initializeNode(vtkMRMLNode *n);
   void AssignTransformToSliders(vtkMRMLLinearTransformNode* transform);
 

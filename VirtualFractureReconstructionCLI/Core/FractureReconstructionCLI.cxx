@@ -306,7 +306,7 @@ main(int argc, char **argv)
 
     vtkSmartPointer<vtkXMLPolyDataWriter> outputFragmentPolyWriter = vtkSmartPointer< vtkXMLPolyDataWriter>::New();
     outputFragmentPolyWriter->SetFileName(fragmentModelOutput.c_str());
-    outputFragmentPolyWriter->SetInput(finder->GetFragmentPolyData());
+    outputFragmentPolyWriter->SetInputData(finder->GetFragmentPolyData());
     outputFragmentPolyWriter->Update();
     try
     {
@@ -321,7 +321,7 @@ main(int argc, char **argv)
 
     vtkSmartPointer<vtkXMLPolyDataWriter> referencePolyWriter = vtkSmartPointer< vtkXMLPolyDataWriter>::New();
     referencePolyWriter->SetFileName(referenceModelOutput.c_str());
-    referencePolyWriter->SetInput(finder->GetReferencePolyData());
+    referencePolyWriter->SetInputData(finder->GetReferencePolyData());
     try
     {
         referencePolyWriter->Update();

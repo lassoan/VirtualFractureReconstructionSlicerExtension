@@ -62,7 +62,7 @@ public:
     typedef typename Superclass::OptimizerType OptimizerType;
     typedef typename OptimizerType::Pointer OptimizerPointer;
 
-    void StartRegistration() ;
+    void Update() ;
 
 
     TransformType * GetTypedTransform(void)

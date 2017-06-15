@@ -63,7 +63,7 @@ set(MODULE_SRCS
 
 set(MODULE_TARGET_LIBRARIES
   ${ITK_LIBRARIES}
-  ${VTK_LIBRARIES} vtkHybrid vtkIO vtkRendering vtkCommon vtkFiltering vtkWidgets vtkVolumeRendering
+  ${VTK_LIBRARIES}
   #${LAPACK_LIBRARY} ${BLAS_LIBRARY}
 )
 

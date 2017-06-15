@@ -44,28 +44,29 @@ void  ICPWrapper::doRegistration(vtkSmartPointer<vtkPolyData> reference,vtkSmart
 
 	// Setup ICP transform
     vtkSmartPointer<vtkMaskPoints> maskPointsC = vtkSmartPointer<vtkMaskPoints>::New();
-    maskPointsC->SetInput(candidate);
+    maskPointsC->SetInputData(candidate);
     maskPointsC->SetMaximumNumberOfPoints(candidate->GetNumberOfPoints());
     maskPointsC->GenerateVerticesOn();
-    maskPointsC->Update();
 
     vtkSmartPointer<vtkMaskPoints> maskPointsR = vtkSmartPointer<vtkMaskPoints>::New();
-    maskPointsR->SetInput(reference);
+    maskPointsR->SetInputData(reference);
     maskPointsR->SetMaximumNumberOfPoints(reference->GetNumberOfPoints());
     maskPointsR->GenerateVerticesOn();
     maskPointsR->Update();
 
     //decimation not used at the moment->causes crash for some reason
     vtkSmartPointer<vtkDecimatePro> decimateR = vtkSmartPointer<vtkDecimatePro>::New();
-    decimateR->SetInput(maskPointsR->GetOutput());
+    decimateR->SetInputConnection(maskPointsR->GetOutputPort());
     decimateR->SetTargetReduction(percentRef/100);
     decimateR->PreserveTopologyOn();
 
     vtkSmartPointer<vtkDecimatePro> decimateC = vtkSmartPointer<vtkDecimatePro>::New();
-    decimateC->SetInput(maskPointsC->GetOutput());
+    decimateC->SetInputConnection(maskPointsC->GetOutputPort());
     decimateC->SetTargetReduction(percentCand/100);
     decimateC->PreserveTopologyOn();
 
+    maskPointsC->Update();
+    maskPointsR->Update();
     m_ICPVTK ->SetSource(maskPointsC->GetOutput());
     m_ICPVTK ->SetTarget(maskPointsR->GetOutput());
 	m_ICPVTK ->GetLandmarkTransform()->SetModeToRigidBody();
