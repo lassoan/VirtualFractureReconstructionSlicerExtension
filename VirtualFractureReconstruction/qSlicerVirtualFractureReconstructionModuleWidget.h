@@ -18,17 +18,14 @@
 #ifndef __qSlicerVirtualFractureReconstructionModuleWidget_h
 #define __qSlicerVirtualFractureReconstructionModuleWidget_h
 
+#include "qSlicerVirtualFractureReconstructionModuleExport.h"
+
 // SlicerQt includes
 #include "qSlicerAbstractModuleWidget.h"
 
-#include "qradiobutton.h"
-
-#include "qSlicerVirtualFractureReconstructionModuleExport.h"
-
-#include "qabstractitemmodel.h"
-
 //VTK includes
 #include "vtkSmartPointer.h"
+#include "vtkWeakPointer.h"
 
 class qSlicerVirtualFractureReconstructionModuleWidgetPrivate;
 
@@ -107,8 +104,7 @@ private:
   Q_DECLARE_PRIVATE(qSlicerVirtualFractureReconstructionModuleWidget);
   Q_DISABLE_COPY(qSlicerVirtualFractureReconstructionModuleWidget);
 
-  vtkMRMLVirtualFractureReconstructionNode* ReconstructionNode;
-
+  vtkWeakPointer<vtkMRMLVirtualFractureReconstructionNode> ReconstructionNode;
 };
 
 #endif
