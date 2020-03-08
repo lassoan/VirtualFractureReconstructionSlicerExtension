@@ -488,7 +488,7 @@ std::vector<std::string > vtkSlicerVirtualFractureReconstructionLogic::CreateSca
 
 void vtkSlicerVirtualFractureReconstructionLogic::UpdateStep2Parameters(vtkSmartPointer<vtkMRMLCommandLineModuleNode> reconstructionNodeCLI)
 {
-    char* tempPath=this->CLIReconstructionPropertyNode->GetTempPath();
+    const char* tempPath=qSlicerCoreApplication::application()->temporaryPath().toUtf8().constData();
     reconstructionNodeCLI->SetParameterAsString("slicerTempPath",tempPath);
     qDebug()<<"SLICER TEMP LOGIG"<<reconstructionNodeCLI->GetParameterAsString("slicerTempPath").c_str();
 
@@ -503,7 +503,7 @@ void vtkSlicerVirtualFractureReconstructionLogic::UpdateStep2Parameters(vtkSmart
 
 void vtkSlicerVirtualFractureReconstructionLogic::UpdateStep1Parameters(vtkSmartPointer<vtkMRMLCommandLineModuleNode> reconstructionNodeCLI,vtkMRMLVirtualFractureReconstructionNode *reconstructionNode)
 {
-    char* tempPath=this->CLIReconstructionPropertyNode->GetTempPath();
+    const char* tempPath = qSlicerCoreApplication::application()->temporaryPath().toUtf8().constData();
     reconstructionNodeCLI->SetParameterAsString("slicerTempPath",tempPath);
     qDebug()<<"SLICER TEMP LOGIG"<<reconstructionNodeCLI->GetParameterAsString("slicerTempPath").c_str();
 

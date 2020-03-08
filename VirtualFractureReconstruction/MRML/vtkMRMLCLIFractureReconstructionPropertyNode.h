@@ -35,7 +35,7 @@
 #include "vtkSlicerVirtualFractureReconstructionModuleMRMLExport.h"
 
 /// \ingroup Slicer_QtModules_VirtualFractureReconstruction
-class Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT vtkMRMLCLIFractureReconstructionPropertyNode : public vtkMRMLNode
+class VTK_SLICER_VIRTUALFRACTURERECONSTRUCTION_MODULE_MRML_EXPORT vtkMRMLCLIFractureReconstructionPropertyNode : public vtkMRMLNode
 {
 
   public:
@@ -98,8 +98,8 @@ class Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT vtkMRMLCLIFracture
     vtkSetStringMacro(OutputLabelMapNodeID);
     vtkGetStringMacro(OutputLabelMapNodeID);
 
-    vtkSetStringMacro(TempPath);
-    vtkGetStringMacro(TempPath);
+    //vtkSetStringMacro(TempPath);
+    //vtkGetStringMacro(TempPath);
 
     vtkSetMacro(SigmaInf,float);
     vtkGetMacro(SigmaInf,float);

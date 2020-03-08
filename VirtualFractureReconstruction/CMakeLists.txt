@@ -1,69 +1,68 @@
 
-# Module name (usually identique to the directory name)
-set(qt_module_name "VirtualFractureReconstruction")
-set(qt_module_title "Virtual Fracture Reconstruction")
+#-----------------------------------------------------------------------------
+set(MODULE_NAME VirtualFractureReconstruction)
+set(MODULE_TITLE "Virtual Fracture Reconstruction")
 
-string(TOUPPER ${qt_module_name} MODULE_NAME_UPPER)
+string(TOUPPER ${MODULE_NAME} MODULE_NAME_UPPER)
 
-# Build module sub libraries
+#-----------------------------------------------------------------------------
 add_subdirectory(MRML)
 add_subdirectory(Logic)
 
+#-----------------------------------------------------------------------------
+set(MODULE_EXPORT_DIRECTIVE "Q_SLICER_QTMODULES_${MODULE_NAME_UPPER}_EXPORT")
 
-set(qt_module_export_directive "Q_SLICER_QTMODULES_${MODULE_NAME_UPPER}_EXPORT")
 
-# Additional includes - Current_{source,binary} and Slicer_{Libs,Base} already included
-set(qt_module_include_directories
-  ${CMAKE_CURRENT_SOURCE_DIR}/Widgets
-  ${CMAKE_CURRENT_BINARY_DIR}/Widgets
+# Current_{source,binary} and Slicer_{Libs,Base} already included
+set(MODULE_INCLUDE_DIRECTORIES
   ${CMAKE_CURRENT_SOURCE_DIR}/Logic
   ${CMAKE_CURRENT_BINARY_DIR}/Logic
+  ${CMAKE_CURRENT_SOURCE_DIR}/MRML
+  ${CMAKE_CURRENT_BINARY_DIR}/MRML
+  ${qSlicerSubjectHierarchyModuleWidgets_INCLUDE_DIRS}
   )
 
-# Source files
-set(qt_module_SRCS
-  qSlicer${qt_module_name}Module.cxx
-  qSlicer${qt_module_name}Module.h
-  qSlicer${qt_module_name}ModuleWidget.cxx
-  qSlicer${qt_module_name}ModuleWidget.h
+set(MODULE_SRCS
+  qSlicer${MODULE_NAME}Module.cxx
+  qSlicer${MODULE_NAME}Module.h
+  qSlicer${MODULE_NAME}ModuleWidget.cxx
+  qSlicer${MODULE_NAME}ModuleWidget.h
   )
 
-# Headers that should run through moc
-set(qt_module_MOC_SRCS
-  qSlicer${qt_module_name}Module.h
-  qSlicer${qt_module_name}ModuleWidget.h
+set(MODULE_MOC_SRCS
+  qSlicer${MODULE_NAME}Module.h
+  qSlicer${MODULE_NAME}ModuleWidget.h
   )
 
-# UI files
-set(qt_module_UI_SRCS
-  Resources/UI/qSlicer${qt_module_name}Module.ui
+set(MODULE_UI_SRCS
+  Resources/UI/qSlicer${MODULE_NAME}ModuleWidget.ui
   )
 
-# Additional Target libraries
-set(qt_module_target_libraries
-  vtkSlicer${qt_module_name}ModuleMRML
-  vtkSlicer${qt_module_name}ModuleLogic
-
+set(MODULE_TARGET_LIBRARIES
+  vtkSlicer${MODULE_NAME}ModuleMRML
+  vtkSlicer${MODULE_NAME}ModuleLogic
+  qSlicerSubjectHierarchyModuleWidgets
   )
 
-# Resources
-set(qt_module_resources
-  Resources/qSlicer${qt_module_name}Module.qrc
+set(MODULE_RESOURCES
+  Resources/qSlicer${MODULE_NAME}Module.qrc
   )
 
-slicerMacroBuildQtModule(
-  NAME ${qt_module_name}
-  TITLE ${qt_module_title}
-  EXPORT_DIRECTIVE ${qt_module_export_directive}
-  INCLUDE_DIRECTORIES ${qt_module_include_directories}
-  SRCS ${qt_module_SRCS}
-  MOC_SRCS ${qt_module_MOC_SRCS}
-  UI_SRCS ${qt_module_UI_SRCS}
-  TARGET_LIBRARIES ${qt_module_target_libraries}
-  RESOURCES ${qt_module_resources}
+#-----------------------------------------------------------------------------
+slicerMacroBuildLoadableModule(
+  NAME ${MODULE_NAME}
+  TITLE ${MODULE_TITLE}
+  EXPORT_DIRECTIVE ${MODULE_EXPORT_DIRECTIVE}
+  INCLUDE_DIRECTORIES ${MODULE_INCLUDE_DIRECTORIES}
+  SRCS ${MODULE_SRCS}
+  MOC_SRCS ${MODULE_MOC_SRCS}
+  UI_SRCS ${MODULE_UI_SRCS}
+  TARGET_LIBRARIES ${MODULE_TARGET_LIBRARIES}
+  RESOURCES ${MODULE_RESOURCES}
+  WITH_GENERIC_TESTS
   )
 
-
+#-----------------------------------------------------------------------------
 if(BUILD_TESTING)
   add_subdirectory(Testing)
 endif()

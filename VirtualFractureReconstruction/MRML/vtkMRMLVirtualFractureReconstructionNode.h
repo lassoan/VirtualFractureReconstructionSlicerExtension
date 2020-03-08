@@ -49,7 +49,7 @@ typedef struct
 }ModelDataContainer;
 
 /// \ingroup Slicer_QtModules_VirtualFractureReconstruction
-class Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT vtkMRMLVirtualFractureReconstructionNode : public vtkMRMLNode
+class VTK_SLICER_VIRTUALFRACTURERECONSTRUCTION_MODULE_MRML_EXPORT vtkMRMLVirtualFractureReconstructionNode : public vtkMRMLNode
 {
 
   public:   

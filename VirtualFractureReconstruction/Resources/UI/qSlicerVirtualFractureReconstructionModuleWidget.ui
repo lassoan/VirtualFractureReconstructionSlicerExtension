@@ -589,7 +589,7 @@
            </widget>
           </item>
           <item>
-           <widget class="qMRMLTreeView" name="InputDataTree">
+           <widget class="qMRMLSubjectHierarchyTreeView" name="InputDataTree">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -625,12 +625,6 @@
               <string>vtkMRMLTransformableNode</string>
              </stringlist>
             </property>
-            <property name="fitSizeToVisibleIndexes">
-             <bool>true</bool>
-            </property>
-            <property name="showRootNode">
-             <bool>true</bool>
-            </property>
            </widget>
           </item>
           <item>
@@ -657,7 +651,7 @@
          </attribute>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="5" column="0">
-           <widget class="qMRMLTreeView" name="FragmentModelsTree">
+           <widget class="qMRMLSubjectHierarchyTreeView" name="FragmentModelsTree">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -682,20 +676,11 @@
             <property name="headerHidden">
              <bool>true</bool>
             </property>
-            <property name="sceneModelType">
-             <string>ModelHierarchy</string>
-            </property>
             <property name="nodeTypes">
              <stringlist>
               <string>vtkMRMLModelNode</string>
               <string>vtkMRMLModelHierarchyNode</string>
              </stringlist>
-            </property>
-            <property name="fitSizeToVisibleIndexes">
-             <bool>true</bool>
-            </property>
-            <property name="showScene">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1613,7 +1598,7 @@
            </widget>
           </item>
           <item>
-           <widget class="qMRMLTreeView" name="ResultModelsTree1">
+           <widget class="qMRMLSubjectHierarchyTreeView" name="ResultModelsTree1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -1646,9 +1631,6 @@
               <string>vtkMRMLModelNode</string>
               <string>vtkMRMLModelHierarchyNode</string>
              </stringlist>
-            </property>
-            <property name="fitSizeToVisibleIndexes">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1743,7 +1725,7 @@
            </widget>
           </item>
           <item>
-           <widget class="qMRMLTreeView" name="ResultModelsTree2">
+           <widget class="qMRMLSubjectHierarchyTreeView" name="ResultModelsTree2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -1773,9 +1755,6 @@
               <string>vtkMRMLModelNode</string>
               <string>vtkMRMLModelHierarchyNode</string>
              </stringlist>
-            </property>
-            <property name="fitSizeToVisibleIndexes">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -2603,9 +2582,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>qMRMLTreeView</class>
+   <class>qMRMLSubjectHierarchyTreeView</class>
    <extends>QTreeView</extends>
-   <header>qMRMLTreeView.h</header>
+   <header>qMRMLSubjectHierarchyTreeView.h</header>
    <slots>
     <slot>setSceneModel(int)</slot>
    </slots>

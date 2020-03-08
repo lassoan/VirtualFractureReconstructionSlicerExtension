@@ -1,36 +1,38 @@
-project(vtkSlicer${qt_module_name}ModuleMRML)
+project(vtkSlicer${MODULE_NAME}ModuleMRML)
 
-#
-# See CMake/SlicerMacroBuildModuleMRML.cmake for details
-#
+set(KIT ${PROJECT_NAME})
 
-set(module_mrml_name "${PROJECT_NAME}")
+set(${KIT}_EXPORT_DIRECTIVE "VTK_SLICER_${MODULE_NAME_UPPER}_MODULE_MRML_EXPORT")
 
-# The header '${module_mrml_name}Export.h' will be automatically configured.
-set(module_mrml_export_directive "Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT")
-
-# Additional directories to include
-set(module_mrml_include_directories
+set(${KIT}_INCLUDE_DIRECTORIES
+  ${Slicer_Base_INCLUDE_DIRS}
   )
 
-# Source files
-set(module_mrml_SRCS
-  vtkMRML${qt_module_name}Node.cxx
-  vtkMRML${qt_module_name}Node.h
+# --------------------------------------------------------------------------
+# Sources
+
+set(${KIT}_SRCS
+  vtkMRML${MODULE_NAME}Node.cxx
+  vtkMRML${MODULE_NAME}Node.h
   vtkMRMLCLIFractureReconstructionPropertyNode.cxx
   vtkMRMLCLIFractureReconstructionPropertyNode.h
   )
 
-# Additional Target libraries
-set(module_mrml_target_libraries
-  ${ITK_LIBRARIES}
+SET (${KIT}_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+
+# --------------------------------------------------------------------------
+# Build the library
+
+set(${KIT}_TARGET_LIBRARIES
   ${MRML_LIBRARIES}
+  SlicerBaseLogic
+  #${ITK_LIBRARIES}
   )
 
 SlicerMacroBuildModuleMRML(
-  NAME ${module_mrml_name}
-  EXPORT_DIRECTIVE ${module_mrml_export_directive}
-  INCLUDE_DIRECTORIES ${module_mrml_include_directories}
-  SRCS ${module_mrml_SRCS}
-  TARGET_LIBRARIES ${module_mrml_target_libraries}
+  NAME ${KIT}
+  EXPORT_DIRECTIVE ${${KIT}_EXPORT_DIRECTIVE}
+  INCLUDE_DIRECTORIES ${${KIT}_INCLUDE_DIRECTORIES}
+  SRCS ${${KIT}_SRCS}
+  TARGET_LIBRARIES ${${KIT}_TARGET_LIBRARIES}
   )

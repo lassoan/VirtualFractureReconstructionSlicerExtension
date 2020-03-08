@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <executable>
-  <category>Work in Progress</category>
+  <category>Virtual fracture reconstruction.Advanced</category>
   <index>1</index>
-  <title>Fracture reconstruction SL </title>
-  <description><![CDATA[TODO: provide description]]></description>
+  <title>Fracture reconstruction SL</title>
+  <description><![CDATA[Provides algorithmic core functionality for bone fragment alignment process.]]></description>
   <version>0.1.0.</version>
-  <documentation-url>TODO: provide docu URL</documentation-url>
+  <documentation-url>https://www.slicer.org/wiki/Documentation/Nightly/Extensions/VirtualFractureReconstruction</documentation-url>
   <license/>
   <contributor>Karl D. Fritscher</contributor>
   <acknowledgements><![CDATA[funded by Austrian Science Fund]]></acknowledgements>

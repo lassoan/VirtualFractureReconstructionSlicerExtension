@@ -39,7 +39,7 @@ class vtkMRMLLinearTransformNode;
 class vtkMRMLTransformableNode;
 class vtkMRMLModelHierarchyNode;
 class vtkMRMLScalarVolumeNode;
-class qMRMLTreeView;
+class qMRMLSubjectHierarchyTreeView;
 
 /// \ingroup Slicer_QtModules_VirtualFractureReconstruction
 class Q_SLICER_QTMODULES_VIRTUALFRACTURERECONSTRUCTION_EXPORT qSlicerVirtualFractureReconstructionModuleWidget :
@@ -88,12 +88,12 @@ protected:
 
   void setMRMLScene(vtkMRMLScene* scene);
   void checkReconstructionNode(vtkMRMLScene* scene);
-  void SetupTreeView(qMRMLTreeView* tree, QString hierarchyName="ModelHierarchy");
+  void SetupTreeView(qMRMLSubjectHierarchyTreeView* tree, QString hierarchyName="ModelHierarchy");
   virtual void setup();
   void enter();
   void WatcherUpdate();
 
-  vtkMRMLTransformableNode* GetNodeFromIndex(const QModelIndex indices);
+  //vtkMRMLTransformableNode* GetNodeFromIndex(const QModelIndex indices);
 
   vtkMRMLLinearTransformNode*  InitializeTransform(bool reference=false,std::string infix="",std::string modelID="");
   vtkMRMLLinearTransformNode*  InitializeTransform2(std::string infix,std::string modelID);

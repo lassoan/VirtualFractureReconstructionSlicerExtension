@@ -19,7 +19,6 @@
 #include <qSlicerModuleManager.h>
 
 // Qt includes
-#include <QtPlugin>
 #include <QDebug>
 
 // VirtualFractureReconstruction Logic includes
@@ -32,7 +31,10 @@
 #include "qSlicerVirtualFractureReconstructionModuleWidget.h"
 
 //-----------------------------------------------------------------------------
+#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
+#include <QtPlugin>
 Q_EXPORT_PLUGIN2(qSlicerVirtualFractureReconstructionModule, qSlicerVirtualFractureReconstructionModule);
+#endif
 
 //-----------------------------------------------------------------------------
 /// \ingroup Slicer_QtModules_VirtualFractureReconstruction
@@ -64,7 +66,7 @@ qSlicerVirtualFractureReconstructionModule::qSlicerVirtualFractureReconstruction
 //-----------------------------------------------------------------------------
 QStringList qSlicerVirtualFractureReconstructionModule::categories()const
 {
-  return QStringList() << "Developer Tools";
+  return QStringList() << "Virtual fracture reconstruction";
 }
 
 //-----------------------------------------------------------------------------
